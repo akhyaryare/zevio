@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zevio — AI Automation Platform</title>
+
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0f;
+      --surface:   #13131f;
+      --surface2:  #1c1c2e;
+      --border:    #2a2a40;
+      --violet:    #7c3aed;
+      --violet-lt: #a855f7;
+      --cyan:      #06b6d4;
+      --cyan-lt:   #67e8f9;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --success:   #10b981;
+      --danger:    #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOADING SPLASH ─────────────────────────────────────── */
+    #loading-splash {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; flex-direction: column; gap: 1rem;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--violet);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LOGIN ─────────────────────────────────────────────── */
+    #login-screen {
+      display: none;
+      align-items: center; justify-content: center;
+      min-height: 100vh; padding: 1rem;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 60%, rgba(124,58,237,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 30%, rgba(6,182,212,.14) 0%, transparent 70%),
+        var(--bg);
+    }
+
+    .login-card {
+      width: 100%; max-width: 420px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: 2rem;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; color: #fff;
+    }
+    .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: -.5px; }
+    .logo-text span { color: var(--violet-lt); }
+
+    .login-card h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: .4rem; }
+    .login-card p  { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; }
+
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: .4rem; }
+    .form-group input {
+      width: 100%;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: .75rem 1rem;
+      color: var(--text); font-size: .95rem; outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus { border-color: var(--violet); }
+
+    .btn-primary {
+      width: 100%; padding: .8rem;
+      background: linear-gradient(135deg, var(--violet), #6d28d9);
+      border: none; border-radius: 8px;
+      color: #fff; font-size: .95rem; font-weight: 600;
+      cursor: pointer; transition: opacity .2s, transform .1s;
+      margin-top: .5rem; display: flex; align-items: center;
+      justify-content: center; gap: .5rem;
+    }
+    .btn-primary:hover  { opacity: .9; }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+    .error-msg {
+      display: none;
+      background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3);
+      border-radius: 8px; padding: .7rem 1rem;
+      color: #fca5a5; font-size: .85rem; margin-bottom: 1rem;
+    }
+
+    /* ── DASHBOARD ─────────────────────────────────────────── */
+    #dashboard { display: none; min-height: 100vh; }
+
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: 240px; height: 100vh;
+      background: var(--surface); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      padding: 1.5rem 1rem; z-index: 100;
+    }
+    .sidebar .logo { margin-bottom: 2rem; }
+
+    .nav-section { margin-bottom: 1.5rem; }
+    .nav-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 0 .75rem; margin-bottom: .5rem;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .6rem .75rem; border-radius: 8px;
+      font-size: .9rem; cursor: pointer; color: var(--muted);
+      transition: background .15s, color .15s; user-select: none;
+    }
+    .nav-item:hover  { background: var(--surface2); color: var(--text); }
+    .nav-item.active { background: rgba(124,58,237,.2); color: var(--violet-lt); }
+    .nav-item .icon  { font-size: 1rem; width: 20px; text-align: center; }
+
+    .sidebar-user {
+      margin-top: auto; border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .user-row {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .5rem .75rem; border-radius: 8px; margin-bottom: .25rem;
+    }
+    .user-email { font-size: .8rem; color: var(--muted); word-break: break-all; }
+
+    .main { margin-left: 240px; min-height: 100vh; padding: 2rem; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .topbar h1 { font-size: 1.4rem; font-weight: 700; }
+    .topbar-right { display: flex; align-items: center; gap: 1rem; }
+
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: .3rem .75rem; border-radius: 20px;
+      font-size: .8rem; font-weight: 600;
+    }
+    .badge-violet { background: rgba(124,58,237,.2); color: var(--violet-lt); }
+    .badge-cyan   { background: rgba(6,182,212,.15); color: var(--cyan-lt); }
+    .badge-green  { background: rgba(16,185,129,.15); color: #6ee7b7; }
+    .badge-red    { background: rgba(239,68,68,.15);  color: #fca5a5; }
+
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .85rem;
+    }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+    }
+    .stat-card .label { font-size: .8rem; color: var(--muted); margin-bottom: .4rem; }
+    .stat-card .value { font-size: 1.8rem; font-weight: 700; margin-bottom: .2rem; }
+    .stat-card .sub   { font-size: .8rem; color: var(--muted); }
+    .stat-card .value.violet { color: var(--violet-lt); }
+    .stat-card .value.cyan   { color: var(--cyan); }
+    .stat-card .value.green  { color: var(--success); }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+    }
+    .card-header h3 { font-size: 1rem; font-weight: 600; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .85rem 1.5rem; text-align: left; }
+    th {
+      font-size: .75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted); border-bottom: 1px solid var(--border);
+    }
+    td { font-size: .9rem; border-bottom: 1px solid rgba(42,42,64,.5); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,.02); }
+
+    .status-dot {
+      display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem;
+    }
+    .status-dot::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--success); box-shadow: 0 0 6px var(--success);
+    }
+    .status-dot.paused::before    { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+    .status-dot.cancelled::before { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+
+    .empty-state {
+      padding: 3rem; text-align: center; color: var(--muted); font-size: .9rem;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .btn-sm {
+      padding: .35rem .8rem; border-radius: 6px; font-size: .8rem;
+      font-weight: 600; border: none; cursor: pointer; transition: opacity .2s;
+    }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--violet); color: var(--violet-lt); }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: .75rem 1.25rem;
+      font-size: .85rem; color: var(--text);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .25s, transform .25s;
+      z-index: 999; pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.success { border-color: rgba(16,185,129,.4); color: #6ee7b7; }
+    #toast.error   { border-color: rgba(239,68,68,.4);  color: #fca5a5; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .main { margin-left: 0; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ LOADING ══════════════════ -->
+<div id="loading-splash">
+  <div class="spinner"></div>
+  <span style="color:var(--muted);font-size:.85rem;">Loading Zevio…</span>
+</div>
+
+<!-- ══════════════════ LOGIN ══════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="logo">
+      <div class="logo-icon">Z</div>
+      <div class="logo-text">Ze<span>vio</span></div>
+    </div>
+    <h2>Welcome back</h2>
+    <p>Sign in to your Zevio dashboard</p>
+
+    <div class="error-msg" id="login-error"></div>
+
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" id="login-email" placeholder="you@zevio.com" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="••••••••" />
+    </div>
+    <button class="btn-primary" id="login-btn">
+      <span id="login-btn-text">Sign in</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════ DASHBOARD ══════════════════ -->
+<div id="dashboard">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">Z</div>
+      <div class="logo-text">Ze<span>vio</span></div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Main</div>
+      <div class="nav-item active" data-page="overview">
+        <span class="icon">▦</span> Overview
+      </div>
+      <div class="nav-item" data-page="clients">
+        <span class="icon">👥</span> Clients
+      </div>
+      <div class="nav-item" data-page="whatsapp">
+        <span class="icon">💬</span> WhatsApp
+      </div>
+      <div class="nav-item" data-page="billing">
+        <span class="icon">💳</span> Billing
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Settings</div>
+      <div class="nav-item" data-page="settings">
+        <span class="icon">⚙️</span> Settings
+      </div>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-row">
+        <div class="avatar" id="sidebar-avatar">A</div>
+        <div class="user-email" id="sidebar-email">—</div>
+      </div>
+      <div class="nav-item" id="logout-btn">
+        <span class="icon">→</span> Sign out
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ── OVERVIEW ── -->
+    <div class="page active" id="page-overview">
+      <div class="topbar">
+        <h1>Overview</h1>
+        <div class="topbar-right">
+          <span class="badge badge-green">● Live</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">Monthly Revenue</div>
+          <div class="value green" id="stat-mrr">—</div>
+          <div class="sub" id="stat-mrr-sub">Loading…</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Active Clients</div>
+          <div class="value violet" id="stat-clients">—</div>
+          <div class="sub" id="stat-clients-sub">Loading…</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">WhatsApp Messages</div>
+          <div class="value cyan" id="stat-messages">—</div>
+          <div class="sub">Connect 360Dialog to track</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Platform Status</div>
+          <div class="value green">OK</div>
+          <div class="sub">All systems operational</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Active Clients</h3>
+          <span class="badge badge-violet" id="overview-client-count">0 clients</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Business</th><th>Plan</th><th>MRR</th><th>Status</th></tr>
+          </thead>
+          <tbody id="overview-clients-tbody">
+            <tr><td colspan="4" class="empty-state">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── CLIENTS ── -->
+    <div class="page" id="page-clients">
+      <div class="topbar">
+        <h1>Clients</h1>
+        <div class="topbar-right">
+          <button class="btn-sm btn-outline" id="refresh-clients-btn">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>All Clients</h3>
+          <span class="badge badge-violet" id="clients-count-badge">—</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Business</th><th>Type</th><th>Plan</th><th>MRR</th><th>Joined</th><th>Status</th></tr>
+          </thead>
+          <tbody id="clients-tbody">
+            <tr><td colspan="6" class="empty-state">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── WHATSAPP ── -->
+    <div class="page" id="page-whatsapp">
+      <div class="topbar"><h1>WhatsApp</h1></div>
+      <div class="card">
+        <div class="card-header"><h3>360Dialog Integration</h3></div>
+        <div style="padding:2rem; color:var(--muted); font-size:.9rem;">
+          Connect your 360Dialog account to enable WhatsApp automation for your clients.<br><br>
+          <button class="btn-sm btn-outline">Connect 360Dialog →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BILLING ── -->
+    <div class="page" id="page-billing">
+      <div class="topbar"><h1>Billing</h1></div>
+      <div class="card">
+        <div class="card-header"><h3>Stripe Integration</h3></div>
+        <div style="padding:2rem; color:var(--muted); font-size:.9rem;">
+          Connect Stripe to manage client subscriptions and payments.<br><br>
+          <button class="btn-sm btn-outline">Connect Stripe →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="page" id="page-settings">
+      <div class="topbar"><h1>Settings</h1></div>
+      <div class="card">
+        <div class="card-header"><h3>Platform Settings</h3></div>
+        <div style="padding:2rem; color:var(--muted); font-size:.9rem;">
+          API keys and platform configuration will be managed here.
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  Supabase init
+// ══════════════════════════════════════════════════════
+const SUPABASE_URL = 'https://iovybemaglyntzbohpps.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_j8aV9MQ3jFIbYrxZU0-tiA_y9qkZEdz';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ══════════════════════════════════════════════════════
+//  DOM refs
+// ══════════════════════════════════════════════════════
+const loadingSplash = document.getElementById('loading-splash');
+const loginScreen   = document.getElementById('login-screen');
+const dashboard     = document.getElementById('dashboard');
+const loginBtn      = document.getElementById('login-btn');
+const loginBtnText  = document.getElementById('login-btn-text');
+const loginError    = document.getElementById('login-error');
+
+// ══════════════════════════════════════════════════════
+//  Toast helper
+// ══════════════════════════════════════════════════════
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.className = ''; }, 3000);
+}
+
+// ══════════════════════════════════════════════════════
+//  Auth state — runs on every load
+// ══════════════════════════════════════════════════════
+sb.auth.onAuthStateChange(async (event, session) => {
+  loadingSplash.style.display = 'none';
+
+  if (session) {
+    showDashboard(session.user);
+    await loadAllData();
+  } else {
+    hideDashboard();
+  }
+});
+
+// ══════════════════════════════════════════════════════
+//  Login
+// ══════════════════════════════════════════════════════
+loginBtn.addEventListener('click', handleLogin);
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleLogin();
+});
+
+async function handleLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+
+  if (!email || !pass) {
+    showLoginError('Please enter your email and password.');
+    return;
+  }
+
+  setLoginLoading(true);
+  loginError.style.display = 'none';
+
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+  setLoginLoading(false);
+
+  if (error) {
+    showLoginError(error.message || 'Invalid email or password.');
+  }
+  // success handled by onAuthStateChange
+}
+
+function showLoginError(msg) {
+  loginError.textContent  = msg;
+  loginError.style.display = 'block';
+}
+
+function setLoginLoading(loading) {
+  loginBtn.disabled  = loading;
+  loginBtnText.textContent = loading ? 'Signing in…' : 'Sign in';
+}
+
+// ══════════════════════════════════════════════════════
+//  Logout
+// ══════════════════════════════════════════════════════
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  await sb.auth.signOut();
+  toast('Signed out', 'success');
+});
+
+// ══════════════════════════════════════════════════════
+//  Show / hide dashboard
+// ══════════════════════════════════════════════════════
+function showDashboard(user) {
+  loginScreen.style.display  = 'none';
+  dashboard.style.display    = 'block';
+
+  const initial = (user.email || 'A')[0].toUpperCase();
+  document.getElementById('sidebar-avatar').textContent = initial;
+  document.getElementById('sidebar-email').textContent  = user.email || '';
+}
+
+function hideDashboard() {
+  loginScreen.style.display  = 'flex';
+  dashboard.style.display    = 'none';
+  document.getElementById('login-email').value    = '';
+  document.getElementById('login-password').value = '';
+}
+
+// ══════════════════════════════════════════════════════
+//  Load data from Supabase
+// ══════════════════════════════════════════════════════
+async function loadAllData() {
+  await Promise.all([loadClients()]);
+}
+
+async function loadClients() {
+  const { data: clients, error } = await sb
+    .from('clients')
+    .select('*')
+    .order('joined_at', { ascending: true });
+
+  if (error) {
+    console.error('Error loading clients:', error);
+    toast('Failed to load clients: ' + error.message, 'error');
+    setClientsError();
+    return;
+  }
+
+  renderOverviewStats(clients);
+  renderOverviewTable(clients);
+  renderClientsTable(clients);
+}
+
+// ── Stats ──
+function renderOverviewStats(clients) {
+  const active = clients.filter(c => c.status === 'active');
+  const mrr    = active.reduce((sum, c) => sum + (c.mrr || 0), 0);
+  const mrrGbp = '£' + (mrr / 100).toLocaleString('en-GB');
+
+  document.getElementById('stat-mrr').textContent        = mrrGbp;
+  document.getElementById('stat-mrr-sub').textContent    = active.length + ' active client' + (active.length !== 1 ? 's' : '');
+  document.getElementById('stat-clients').textContent    = active.length;
+  document.getElementById('stat-clients-sub').textContent = clients.length + ' total client' + (clients.length !== 1 ? 's' : '');
+  document.getElementById('overview-client-count').textContent = active.length + ' client' + (active.length !== 1 ? 's' : '');
+}
+
+// ── Overview table ──
+function renderOverviewTable(clients) {
+  const active = clients.filter(c => c.status === 'active');
+  const tbody  = document.getElementById('overview-clients-tbody');
+
+  if (!active.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No active clients.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = active.map(c => `
+    <tr>
+      <td>${escHtml(c.name)}</td>
+      <td>${planBadge(c.plan)}</td>
+      <td>£${(c.mrr / 100).toFixed(0)}</td>
+      <td>${statusDot(c.status)}</td>
+    </tr>
+  `).join('');
+}
+
+// ── Full clients table ──
+function renderClientsTable(clients) {
+  const tbody = document.getElementById('clients-tbody');
+  document.getElementById('clients-count-badge').textContent =
+    clients.length + ' client' + (clients.length !== 1 ? 's' : '');
+
+  if (!clients.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No clients found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = clients.map(c => `
+    <tr>
+      <td>${escHtml(c.name)}</td>
+      <td style="text-transform:capitalize">${escHtml(c.type || '—')}</td>
+      <td>${planBadge(c.plan)}</td>
+      <td>£${(c.mrr / 100).toFixed(0)}</td>
+      <td>${c.joined_at ? new Date(c.joined_at).toLocaleDateString('en-GB') : '—'}</td>
+      <td>${statusDot(c.status)}</td>
+    </tr>
+  `).join('');
+}
+
+function setClientsError() {
+  const msg = '<tr><td colspan="6" class="empty-state" style="color:var(--danger)">Could not load clients.</td></tr>';
+  document.getElementById('overview-clients-tbody').innerHTML = msg;
+  document.getElementById('clients-tbody').innerHTML = msg;
+}
+
+// ── Refresh button ──
+document.getElementById('refresh-clients-btn').addEventListener('click', async () => {
+  toast('Refreshing…');
+  await loadClients();
+  toast('Clients refreshed', 'success');
+});
+
+// ══════════════════════════════════════════════════════
+//  Navigation
+// ══════════════════════════════════════════════════════
+const navItems = document.querySelectorAll('.nav-item[data-page]');
+const pages    = document.querySelectorAll('.page');
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navItems.forEach(n => n.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById('page-' + item.dataset.page).classList.add('active');
+  });
+});
+
+// ══════════════════════════════════════════════════════
+//  Helpers
+// ══════════════════════════════════════════════════════
+function escHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function planBadge(plan) {
+  const cls = plan === 'Pro' ? 'badge-cyan' : plan === 'Enterprise' ? 'badge-green' : 'badge-violet';
+  return `<span class="badge ${cls}">${escHtml(plan)}</span>`;
+}
+
+function statusDot(status) {
+  const cls  = status === 'active' ? '' : status;
+  const label = status.charAt(0).toUpperCase() + status.slice(1);
+  return `<span class="status-dot ${cls}">${label}</span>`;
+}
+</script>
+</body>
+</html>

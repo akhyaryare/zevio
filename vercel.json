@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "zevio",
   "builds": [
     {
       "src": "index.html",

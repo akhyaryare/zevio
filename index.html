@@ -1273,6 +1273,15 @@ document.addEventListener('DOMContentLoaded', applyLogos);
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+window.onerror=function(msg,src,line,col,err){
+  var d=document.createElement('div');
+  d.style='position:fixed;top:0;left:0;right:0;background:#f05252;color:white;padding:12px;z-index:9999;font-family:monospace;font-size:13px';
+  d.textContent='JS ERROR line '+line+': '+msg;
+  document.body.appendChild(d);
+  return false;
+};
+</script>
+<script>
 // ═══════════════════════════
 // LOGO HANDLING
 // ═══════════════════════════
@@ -1536,12 +1545,20 @@ let currentUser=null, currentBiz=null, cart=[], orderType='Delivery', payMethod=
 let postType='promotion or special offer';
 
 function qLogin(who){
-  const m={admin:'admin@zevio.com',damal:'admin@damalrestaurant.uk',najma:'info@najmarestaurant.co.uk',stars:'info@starbarbers.co.uk'};
-  const p={admin:'',damal:'damal123',najma:'najma123',stars:'stars123'};
-  document.getElementById('li-email').value=m[who];
-  document.getElementById('li-pass').value=p[who];
-  if(who==='admin'){document.getElementById('li-pass').focus();}
-  else{doLogin();}
+  // Admin — fill email, user types password
+  if(who==='admin'){
+    document.getElementById('li-email').value='admin@zevio.com';
+    document.getElementById('li-pass').value='';
+    document.getElementById('li-pass').focus();
+    return;
+  }
+  // Demo clients — go directly to dashboard, no auth needed
+  try{
+    currentUser={email:who};
+    enterBiz(who);
+  }catch(e){
+    alert('Login error: '+e.message);
+  }
 }
 
 async function doLogin(){

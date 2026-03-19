@@ -1517,8 +1517,14 @@ function updateBizLogo(input) {
 // ═══════════════════════════
 const SUPABASE_URL = 'https://iovybemaglyntzbohpps.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvdnliZW1hZ2x5bnR6Ym9ocHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3ODI1NzgsImV4cCI6MjA4OTM1ODU3OH0.g8X_avEFfhulHmqiDv3Gz_NJZX_yx2hx5rOwJorFSCs';
-const { createClient } = supabase;
-const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb = null;
+function getSb(){
+  if(!sb){
+    try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }
+    catch(e){ console.error('Supabase init failed:', e); }
+  }
+  return sb;
+}
 
 const DEMO_ACCOUNTS = {
   'admin@damalrestaurant.uk':   {pass:'damal123', id:'damal'},
@@ -1556,7 +1562,7 @@ async function doLogin(){
   // Admin — real Supabase auth
   const btn=document.querySelector('.btn-login');
   btn.textContent='Signing in…';btn.disabled=true;
-  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  const {data,error}=await getSb().auth.signInWithPassword({email,password:pass});
   btn.textContent='Sign In →';btn.disabled=false;
   if(error){errEl.style.display='block';errEl.textContent=error.message;return;}
   errEl.style.display='none';
@@ -1565,7 +1571,7 @@ async function doLogin(){
 }
 
 async function logout(){
-  if(currentUser&&currentUser.email==='admin@zevio.com') await sb.auth.signOut();
+  if(currentUser&&currentUser.email==='admin@zevio.com'){ const s=getSb(); if(s) await s.auth.signOut(); }
   currentUser=null;currentBiz=null;showScreen('login');
 }
 
@@ -2458,12 +2464,12 @@ document.addEventListener('keydown', function(e){
 });
 
 // Check existing Supabase session on load
-sb.auth.getSession().then(({data:{session}})=>{
-  if(session){
-    currentUser={email:session.user.email};
-    showScreen('admin');renderAdmin();
-  }
-});
+try{
+  const _sb=getSb();
+  if(_sb) _sb.auth.getSession().then(({data:{session}})=>{
+    if(session){ currentUser={email:session.user.email}; showScreen('admin'); renderAdmin(); }
+  });
+}catch(e){ console.warn('Session check failed:', e); }
 </script>
 </body>
 </html>

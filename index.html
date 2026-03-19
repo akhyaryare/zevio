@@ -2459,7 +2459,10 @@ document.addEventListener('keydown', function(e){
 
 // Check existing Supabase session on load
 sb.auth.getSession().then(({data:{session}})=>{
-  if(session) handleAuth(session.user);
+  if(session){
+    currentUser={email:session.user.email};
+    showScreen('admin');renderAdmin();
+  }
 });
 </script>
 </body>

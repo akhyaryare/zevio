@@ -2123,11 +2123,6 @@ async function runBulkGen(){toast('🔜 AI coming soon — check back shortly');
 // CLAUDE API
 // ═══════════════════════════
 async function ai(prompt){return 'AI coming soon';}
-,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})});
-    const d=await r.json();
-    return d.content?.[0]?.text||'Error generating. Try again.';
-  }catch(e){return 'Connection error. Try again.';}
-}
 
 function setOut(id,text){
   const el=document.getElementById(id);if(!el)return;

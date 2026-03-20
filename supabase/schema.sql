@@ -117,3 +117,28 @@ $$ language plpgsql;
 create trigger clients_updated_at
   before update on clients
   for each row execute function handle_updated_at();
+
+-- ── LEADS (waitlist / enquiries) ────────────────────────────
+create table if not exists leads (
+  id            uuid primary key default uuid_generate_v4(),
+  name          text not null,
+  email         text not null,
+  phone         text,
+  business_name text,
+  business_type text,                                -- 'restaurant','barber','salon','other'
+  plan          text,                                -- plan they clicked from pricing
+  message       text,
+  status        text not null default 'new' check (status in ('new','contacted','converted','lost')),
+  source        text default 'website',
+  created_at    timestamptz default now()
+);
+
+alter table leads enable row level security;
+
+-- Anyone can insert a lead (public form)
+create policy "Public can insert leads"
+  on leads for insert with check (true);
+
+-- Only authenticated users can read leads
+create policy "Authenticated users can read leads"
+  on leads for select using (auth.role() = 'authenticated');

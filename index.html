@@ -135,7 +135,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   </div>
   <div class="nav-cta">
     <a href="/app" class="btn-login">Client Login</a>
-    <a href="mailto:hello@zevio.co.uk" class="btn-demo">Book a Demo</a>
+    <a href="#contact" class="btn-demo">Book a Demo</a>
   </div>
 </nav>
 
@@ -147,7 +147,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
     <h1>Your business on <em>autopilot.</em><br>Powered by <span class="c">AI.</span></h1>
     <p class="hero-sub">Zevio handles your WhatsApp messages, Google reviews, social media, bookings and online orders — automatically. So you can focus on what you do best.</p>
     <div class="hero-btns">
-      <a href="mailto:hello@zevio.co.uk" class="btn-p">Book a Free Demo &rarr;</a>
+      <a href="#contact" class="btn-p">Book a Free Demo &rarr;</a>
       <a href="#services" class="btn-s">See what we do</a>
     </div>
     <div class="hero-stats">
@@ -254,7 +254,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
           <li class="no"><span class="cross">&#215;</span> Social media calendar</li>
           <li class="no"><span class="cross">&#215;</span> Online ordering</li>
         </ul>
-        <a href="mailto:hello@zevio.co.uk?subject=Starter Plan Enquiry" class="pb pb-o">Get started &rarr;</a>
+        <a href="#contact" onclick="document.getElementById('lead-plan').value='Starter'" class="pb pb-o">Get started &rarr;</a>
       </div>
       <div class="plan featured">
         <div class="pp">Most popular</div>
@@ -270,7 +270,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
           <li><span class="tick">&#10003;</span> Priority support</li>
           <li class="no"><span class="cross">&#215;</span> Online ordering system</li>
         </ul>
-        <a href="mailto:hello@zevio.co.uk?subject=Growth Plan Enquiry" class="pb pb-f">Get started &rarr;</a>
+        <a href="#contact" onclick="document.getElementById('lead-plan').value='Growth'" class="pb pb-f">Get started &rarr;</a>
       </div>
       <div class="plan">
         <div class="pn">Pro</div>
@@ -285,30 +285,92 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
           <li><span class="tick">&#10003;</span> Dedicated account manager</li>
           <li><span class="tick">&#10003;</span> Custom AI workflows</li>
         </ul>
-        <a href="mailto:hello@zevio.co.uk?subject=Pro Plan Enquiry" class="pb pb-o">Get started &rarr;</a>
+        <a href="#contact" onclick="document.getElementById('lead-plan').value='Pro'" class="pb pb-o">Get started &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="cta-s">
-  <div class="container">
-    <h2 class="cta-t">Ready to put your business<br>on <em>autopilot?</em></h2>
-    <p style="font-size:1rem;color:var(--muted);margin-bottom:2.5rem">Book a free 30-minute demo. We'll show you exactly how Zevio works for your business — no commitment required.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="mailto:hello@zevio.co.uk" class="btn-p">Book a Free Demo &rarr;</a>
-      <a href="/app" class="btn-s">Client Login</a>
-    </div>
-    <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--muted)">hello@zevio.co.uk &nbsp;&middot;&nbsp; Based in the UK &nbsp;&middot;&nbsp; Setup within 24 hours</p>
+<div class="cta-s" id="contact">
+  <div class="container" style="max-width:560px">
+    <h2 class="cta-t">Book your free demo.</h2>
+    <p style="font-size:1rem;color:var(--muted);margin-bottom:2rem">We'll show you exactly how Zevio works for your business. No commitment, no pressure. Setup within 24 hours.</p>
+
+    <form id="lead-form" style="display:flex;flex-direction:column;gap:0.85rem;text-align:left">
+      <input id="lead-plan" type="hidden" value="" />
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem">
+        <input id="lead-name" type="text" placeholder="Your name *" required style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--cream);padding:0.75rem 1rem;font-size:0.9rem;font-family:inherit;outline:none;border-radius:2px" />
+        <input id="lead-email" type="email" placeholder="Email address *" required style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--cream);padding:0.75rem 1rem;font-size:0.9rem;font-family:inherit;outline:none;border-radius:2px" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem">
+        <input id="lead-phone" type="tel" placeholder="Phone / WhatsApp" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--cream);padding:0.75rem 1rem;font-size:0.9rem;font-family:inherit;outline:none;border-radius:2px" />
+        <input id="lead-business" type="text" placeholder="Business name" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--cream);padding:0.75rem 1rem;font-size:0.9rem;font-family:inherit;outline:none;border-radius:2px" />
+      </div>
+      <select id="lead-type" style="background:#0C1018;border:1px solid var(--border);color:var(--muted);padding:0.75rem 1rem;font-size:0.9rem;font-family:inherit;outline:none;border-radius:2px">
+        <option value="">Business type...</option>
+        <option value="restaurant">Restaurant / Takeaway</option>
+        <option value="barber">Barber Shop</option>
+        <option value="salon">Hair / Beauty Salon</option>
+        <option value="cafe">Café / Coffee Shop</option>
+        <option value="other">Other</option>
+      </select>
+      <button type="submit" id="lead-btn" class="btn-p" style="width:100%;justify-content:center;border:none;font-size:1rem;padding:1rem">Book My Free Demo &rarr;</button>
+      <div id="lead-msg" style="display:none;padding:0.75rem;border-radius:2px;font-size:0.88rem;text-align:center"></div>
+    </form>
+
+    <p style="margin-top:1.2rem;font-size:0.75rem;color:var(--muted);text-align:center">
+      +44 7877 262518 &nbsp;&middot;&nbsp; akhyar@zevio.co.uk &nbsp;&middot;&nbsp; Based in the UK
+    </p>
   </div>
 </div>
+
+<script>
+document.getElementById('lead-form').addEventListener('submit', async function(e) {
+  e.preventDefault()
+  const btn = document.getElementById('lead-btn')
+  const msg = document.getElementById('lead-msg')
+  btn.textContent = 'Sending...'
+  btn.disabled = true
+
+  try {
+    const res = await fetch('https://iovybemaglyntzbohpps.supabase.co/functions/v1/submit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('lead-name').value,
+        email: document.getElementById('lead-email').value,
+        phone: document.getElementById('lead-phone').value,
+        business_name: document.getElementById('lead-business').value,
+        business_type: document.getElementById('lead-type').value,
+        plan: document.getElementById('lead-plan').value || null,
+      })
+    })
+    if (!res.ok) throw new Error()
+    msg.style.display = 'block'
+    msg.style.background = 'rgba(52,209,122,0.1)'
+    msg.style.border = '1px solid rgba(52,209,122,0.3)'
+    msg.style.color = '#34D17A'
+    msg.textContent = "You're in! I'll be in touch within 24 hours. Check your email."
+    document.getElementById('lead-form').reset()
+  } catch {
+    msg.style.display = 'block'
+    msg.style.background = 'rgba(255,80,80,0.1)'
+    msg.style.border = '1px solid rgba(255,80,80,0.3)'
+    msg.style.color = '#ff5050'
+    msg.textContent = 'Something went wrong. Please email akhyar@zevio.co.uk directly.'
+  } finally {
+    btn.textContent = 'Book My Free Demo →'
+    btn.disabled = false
+  }
+})
+</script>
 
 <footer>
   <div class="fb">Zevi<span>o</span></div>
   <div class="fl">
     <a href="#services">Services</a>
     <a href="#pricing">Pricing</a>
-    <a href="mailto:hello@zevio.co.uk">Contact</a>
+    <a href="#contact">Contact</a>
     <a href="/app">Client Login</a>
   </div>
   <div class="fc">&copy; 2026 Zevio. All rights reserved. Registered in England &amp; Wales.</div>

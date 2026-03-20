@@ -21,3 +21,6 @@ verify_jwt = false
 
 [functions.provision-stripe-customer]
 verify_jwt = false
+
+[functions.submit-lead]
+verify_jwt = false

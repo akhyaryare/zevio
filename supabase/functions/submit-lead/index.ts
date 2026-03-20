@@ -187,18 +187,39 @@ Deno.serve(async (req) => {
 
     await supabase.from('email_queue').insert(emails)
 
-    // Send notification to Akhyar immediately
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
     if (RESEND_API_KEY) {
-      // Trigger send-followup to process email 1 (send_after = now)
-      const baseUrl = Deno.env.get('SUPABASE_URL')!
-      fetch(`${baseUrl}/functions/v1/send-followup`, {
+      const first = name.split(' ')[0]
+
+      // Welcome email to the customer
+      await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!}`,
-          'Content-Type': 'application/json',
-        }
-      }).catch(() => {})
+        headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: 'Akhyar at Zevio <akhyar@zevio.co.uk>',
+          to: [email],
+          subject: `Thanks ${first} — I'll be in touch within 24 hours`,
+          html: `
+<div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111;padding:24px">
+  <h2 style="font-size:22px;margin-bottom:12px">Hi ${first}, thanks for reaching out.</h2>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-bottom:12px">
+    I've received your enquiry and will personally be in touch within 24 hours to book a free 20-minute demo and show you exactly how Zevio works for your business.
+  </p>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-bottom:8px"><strong>What happens next:</strong></p>
+  <ul style="font-size:15px;line-height:2;color:#444;padding-left:20px">
+    <li>I'll WhatsApp or call you to book a quick demo</li>
+    <li>We look at your specific business and show you live results</li>
+    <li>If it's a fit, I set everything up for you — you don't touch a thing</li>
+  </ul>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-top:16px">
+    Talk soon,<br/><strong>Akhyar</strong><br/>Founder, Zevio<br/>
+    <a href="tel:+447877262518">+44 7877 262518</a>
+  </p>
+  <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
+  <p style="font-size:12px;color:#999">Zevio · AI Automation for Local Businesses · <a href="https://zevio.co.uk">zevio.co.uk</a></p>
+</div>`
+        })
+      })
 
       // Notify Akhyar
       await fetch('https://api.resend.com/emails', {

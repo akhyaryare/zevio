@@ -209,7 +209,7 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify({
           from: 'Zevio <akhyar@zevio.co.uk>',
-          to: ['akhyar@zevio.co.uk'],
+          to: ['abdisamadahmed114@gmail.com'],
           subject: `🔥 New lead: ${name} — ${business_type || 'Unknown'} — ${plan || 'No plan'}`,
           html: `
 <div style="font-family:sans-serif;padding:24px;max-width:560px">

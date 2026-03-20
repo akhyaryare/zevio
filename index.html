@@ -267,7 +267,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   </div>
   <div class="nav-cta">
     <a href="/app" class="btn-login">Client Login</a>
-    <a href="#waitlist" class="btn-demo">Get Early Access</a>
+    <a href="#waitlist" class="btn-demo">Book a Demo</a>
   </div>
   <button class="ham" id="ham" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -280,7 +280,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   <a href="#pricing" onclick="closeNav()">Pricing</a>
   <a href="#faq" onclick="closeNav()">FAQ</a>
   <a href="/app" onclick="closeNav()">Client Login</a>
-  <a href="#waitlist" onclick="closeNav()" style="color:var(--violet-ll);font-weight:700">Get Early Access →</a>
+  <a href="#waitlist" onclick="closeNav()" style="color:var(--violet-ll);font-weight:700">Book a Demo →</a>
 </div>
 
 <!-- ══ HERO ══════════════════════════════════════════════════════ -->
@@ -292,20 +292,9 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
     <h1>Stop doing everything<br/><em>manually.</em><br/>Let <span class="c">AI</span> handle it.</h1>
     <p class="hero-sub">Zevio automates your WhatsApp messages, Google reviews, social media, bookings and orders — so you can actually run your business instead of drowning in it.</p>
 
-    <div class="hero-form-wrap" id="hero-form-area">
-      <span class="hf-label">Join 40+ businesses on the waitlist — get early access &amp; founding member pricing</span>
-      <div id="hf-err" class="hf-error"></div>
-      <div class="hf-row">
-        <input class="hf-input" id="hf-name" type="text" placeholder="Your name *" />
-        <input class="hf-input" id="hf-email" type="email" placeholder="Email address *" />
-      </div>
-      <div class="hf-row">
-        <input class="hf-input" id="hf-phone" type="tel" placeholder="WhatsApp number" />
-        <input class="hf-input" id="hf-business" type="text" placeholder="Business name" />
-      </div>
-      <button class="hf-submit" id="hf-btn" onclick="submitHero()">Claim My Early Access Spot &rarr;</button>
-      <div class="hf-note">No commitment · Free 20-min demo · Setup within 24 hours</div>
-      <div id="hf-ok" class="hf-success">You're in! I'll WhatsApp you within a few hours. Check your inbox too.</div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem">
+      <a href="#waitlist" class="btn-p">Book My Free Demo &rarr;</a>
+      <a href="#services" class="btn-s">See what we do</a>
     </div>
 
     <div class="hero-stats">
@@ -614,46 +603,6 @@ async function submitLead(name, email, phone, business_name, business_type, plan
     body: JSON.stringify({ name, email, phone, business_name, business_type, plan })
   })
   if (!res.ok) throw new Error()
-}
-
-// Hero form
-async function submitHero() {
-  const btn = document.getElementById('hf-btn')
-  const errEl = document.getElementById('hf-err')
-  const okEl = document.getElementById('hf-ok')
-  const name = document.getElementById('hf-name').value.trim()
-  const email = document.getElementById('hf-email').value.trim()
-  if (!name || !email) {
-    errEl.textContent = 'Please enter your name and email.'
-    errEl.style.display = 'block'
-    return
-  }
-  errEl.style.display = 'none'
-  btn.textContent = 'Joining...'
-  btn.disabled = true
-  try {
-    await submitLead(
-      name, email,
-      document.getElementById('hf-phone').value.trim(),
-      document.getElementById('hf-business').value.trim(),
-      '', ''
-    )
-    document.querySelector('#hero-form-area form, #hero-form-area .hf-row, #hero-form-area .hf-submit, #hero-form-area .hf-note')
-    document.getElementById('hf-name').value = ''
-    document.getElementById('hf-email').value = ''
-    document.getElementById('hf-phone').value = ''
-    document.getElementById('hf-business').value = ''
-    btn.style.display = 'none'
-    document.querySelectorAll('.hf-row').forEach(r => r.style.display = 'none')
-    document.querySelector('.hf-note').style.display = 'none'
-    document.querySelector('.hf-label').textContent = "You're on the list!"
-    okEl.style.display = 'block'
-  } catch {
-    errEl.textContent = "Something went wrong. Email akhyar@zevio.co.uk directly."
-    errEl.style.display = 'block'
-    btn.textContent = 'Claim My Early Access Spot →'
-    btn.disabled = false
-  }
 }
 
 // Pricing plan pre-fill

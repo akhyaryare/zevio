@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akhyar. UK Business Automation</title>
+<meta name="description" content="I help UK local businesses automate their WhatsApp, reviews, social media and bookings using AI. Built Zevio. Based in the UK.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#050709;color:#EEF0FF;overflow-x:hidden}
+:root{--ink:#050709;--s1:#080B10;--s2:#0C1018;--violet:#5B3FD4;--violet-l:#7C63E8;--violet-ll:#A090F5;--violet-dim:rgba(91,63,212,0.14);--cyan:#00E5C8;--border:rgba(124,99,232,0.18);--cream:#EEF0FF;--muted:rgba(238,240,255,0.42);--success:#34D17A}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(5,7,9,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-brand{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--cream)}
+.nav-brand span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--muted);font-size:0.85rem;text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:var(--cream)}
+.nav-cta{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:0.5rem 1.2rem;text-decoration:none;transition:all 0.15s;letter-spacing:0.04em}
+.nav-cta:hover{background:var(--violet-l)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.ham span{display:block;width:22px;height:2px;background:var(--cream);transition:all 0.25s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(5,7,9,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:1.2rem}
+.mobile-nav a{color:var(--muted);font-size:1rem;text-decoration:none;padding:0.4rem 0;border-bottom:1px solid var(--border)}
+.mobile-nav a:last-child{border-bottom:none;color:var(--violet-ll);font-weight:700}
+.mobile-nav.open{display:flex}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem;text-align:center}
+.hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(91,63,212,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(0,229,200,0.06) 0%,transparent 50%),linear-gradient(160deg,#050709,#080B14,#050709)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,63,212,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(91,63,212,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%)}
+.hero-inner{position:relative;z-index:2;max-width:780px;margin:0 auto}
+.hero-tag{display:inline-block;background:var(--violet-dim);border:1px solid var(--border);padding:0.3rem 0.9rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:2rem}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;line-height:1.07;letter-spacing:-0.03em;margin-bottom:1rem}
+h1 em{font-style:normal;color:var(--violet-ll)}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--muted);line-height:1.8;max-width:580px;margin:0 auto 2.5rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;transition:all 0.2s;letter-spacing:0.04em;display:inline-block}
+.btn-p:hover{background:var(--violet-l);transform:translateY(-1px)}
+.btn-s{background:transparent;color:var(--cream);font-size:0.9rem;padding:0.85rem 2rem;border:1px solid var(--border);cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-block}
+.btn-s:hover{border-color:var(--violet-ll);color:var(--violet-ll)}
+
+section{padding:5rem 2rem}
+.container{max-width:1000px;margin:0 auto}
+.stag{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:0.8rem}
+.stitle{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
+.stitle em{font-style:normal;color:var(--violet-ll)}
+.ssub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:620px;margin-bottom:2.5rem}
+
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:1rem}
+.what-text p{font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+.what-text p strong{color:var(--cream)}
+.services-list{display:flex;flex-direction:column;gap:0.8rem}
+.si{display:flex;align-items:flex-start;gap:1rem;background:var(--s1);border:1px solid var(--border);padding:1.1rem 1.2rem}
+.si-tick{color:var(--success);font-size:1rem;flex-shrink:0;margin-top:0.1rem}
+.si-text{font-size:0.85rem;color:var(--muted);line-height:1.5}
+.si-text strong{color:var(--cream);display:block;margin-bottom:0.1rem}
+
+.built-section{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.built-card{background:var(--ink);border:1px solid var(--border);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:2.5rem}
+.built-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:0.5rem}
+.built-name{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--cream);margin-bottom:0.3rem}
+.built-url{font-size:0.85rem;color:var(--violet-ll);text-decoration:none;margin-bottom:1.2rem;display:inline-block}
+.built-url:hover{color:var(--cyan)}
+.built-desc{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.built-clients{display:flex;flex-direction:column;gap:0.4rem}
+.bc{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem}
+.bc span{color:var(--success)}
+.built-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.bstat{background:var(--s1);border:1px solid var(--border);padding:1.2rem;text-align:center}
+.bstat-v{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--violet-ll)}
+.bstat-l{font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.2rem}
+
+.how-section{background:var(--ink)}
+.steps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:2.5rem}
+.step-card{background:var(--s1);border:1px solid var(--border);padding:1.8rem;position:relative}
+.step-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:var(--violet-dim);position:absolute;top:1rem;right:1.2rem;line-height:1}
+.step-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:0.6rem}
+.step-desc{font-size:0.85rem;color:var(--muted);line-height:1.7}
+
+.cta-section{background:linear-gradient(135deg,rgba(91,63,212,0.12),rgba(0,229,200,0.05));border-top:1px solid var(--border);text-align:center;padding:5rem 2rem}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
+.cta-title em{color:var(--violet-ll);font-style:normal}
+.cta-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:500px;margin:0 auto 2rem}
+.cta-contact{margin-top:1.5rem;font-size:0.82rem;color:var(--muted)}
+.cta-contact a{color:var(--violet-ll);text-decoration:none}
+.wa-btn{display:inline-flex;align-items:center;gap:0.6rem;background:#25D366;color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;text-decoration:none;transition:all 0.2s;letter-spacing:0.03em}
+.wa-btn:hover{background:#1ebe5d;transform:translateY(-1px)}
+
+footer{padding:2rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fb{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--cream)}
+.fb span{color:var(--cyan)}
+.fl a{font-size:0.78rem;color:var(--muted);text-decoration:none;margin-left:1.5rem}
+.fl a:hover{color:var(--cream)}
+.fc{font-size:0.72rem;color:rgba(238,240,255,0.2)}
+
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem}
+  .nav-links,.nav-cta{display:none}
+  .ham{display:flex}
+  section{padding:3.5rem 1.2rem}
+  .cta-section{padding:3.5rem 1.2rem}
+  .what-grid,.built-card,.steps-grid{grid-template-columns:1fr;gap:2rem}
+  .built-stats{grid-template-columns:repeat(3,1fr)}
+  footer{flex-direction:column;text-align:center}
+  .fl a{margin:0 0.75rem}
+  h1{font-size:2.4rem}
+}
+@media(max-width:400px){
+  .built-stats{grid-template-columns:1fr 1fr}
+  h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Akhyar<span>.</span></div>
+  <div class="nav-links">
+    <a href="#what">What I do</a>
+    <a href="#built">What I've built</a>
+    <a href="#how">How I work</a>
+  </div>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+  <button class="ham" id="ham" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#what" onclick="closeNav()">What I do</a>
+  <a href="#built" onclick="closeNav()">What I've built</a>
+  <a href="#how" onclick="closeNav()">How I work</a>
+  <a href="#contact" onclick="closeNav()">Get in touch</a>
+</div>
+
+<div class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">UK-based entrepreneur</div>
+    <h1>Hi, I'm <em>Akhyar.</em></h1>
+    <p class="hero-sub">I help UK local businesses stop wasting time on things AI can do for them. WhatsApp, reviews, social media, bookings. I automate it so you can focus on what actually makes you money.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-p">Let's talk</a>
+      <a href="#built" class="btn-s">See what I've built</a>
+    </div>
+  </div>
+</div>
+
+<section id="what">
+  <div class="container">
+    <div class="stag">What I do</div>
+    <h2 class="stitle">I don't sell software.<br/><em>I solve business problems.</em></h2>
+    <div class="what-grid">
+      <div class="what-text">
+        <p>Most business owners I speak to are spending 3 to 4 hours every day on things that should take 10 minutes. Replying to the same WhatsApp questions. Copy-pasting responses to Google reviews. Scrambling for something to post on Instagram.</p>
+        <p>I come in, identify exactly what is wasting your time, and automate it. Not a generic tool you have to figure out yourself. <strong>I build it, I set it up, and I make sure it works for your business specifically.</strong></p>
+        <p>When you work with me you deal with me directly. No account managers, no call centres, no tickets. Just someone who genuinely wants your business to win.</p>
+      </div>
+      <div class="services-list">
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>WhatsApp replies handled instantly, 24/7</strong>Every customer message answered automatically, even at 2am</div></div>
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>Google Reviews responded to automatically</strong>Professional, personalised responses to every review</div></div>
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>Social media posts generated in one click</strong>A full month of content ready in minutes</div></div>
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>Bookings confirmed with deposits and reminders</strong>No-shows cut, revenue protected</div></div>
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>Online orders taken via WhatsApp with payments</strong>Stripe built in, no extra apps needed</div></div>
+        <div class="si"><div class="si-tick">✓</div><div class="si-text"><strong>Staff shift schedules sent automatically</strong>Reminders to every team member via WhatsApp</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="built-section" id="built">
+  <div class="container">
+    <div class="stag">Proof of work</div>
+    <h2 class="stitle">The best way to judge what I can do<br/><em>is to look at what I've already done.</em></h2>
+    <div class="built-card">
+      <div>
+        <div class="built-label">Live project</div>
+        <div class="built-name">Zevio</div>
+        <a href="https://zevio.co.uk" target="_blank" class="built-url">zevio.co.uk</a>
+        <div class="built-desc">An AI automation platform built for UK restaurants, barbers and salons. 9 tools in one platform. Live customers. Real businesses paying monthly. Built entirely by me — from the backend to the AI to the interface. Go visit it. That is my work.</div>
+        <div class="built-clients">
+          <div class="bc"><span>✓</span> Damal Restaurant, London</div>
+          <div class="bc"><span>✓</span> Najma Restaurant, London</div>
+          <div class="bc"><span>✓</span> Star Barbers, Hayes</div>
+        </div>
+      </div>
+      <div class="built-stats">
+        <div class="bstat"><div class="bstat-v">9</div><div class="bstat-l">AI tools built</div></div>
+        <div class="bstat"><div class="bstat-v">24h</div><div class="bstat-l">Setup time</div></div>
+        <div class="bstat"><div class="bstat-v">24/7</div><div class="bstat-l">Always running</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="stag">How I work</div>
+    <h2 class="stitle">Simple. Fast.<br/><em>No tech headaches.</em></h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">You tell me the problem</div>
+        <div class="step-desc">What is eating your time? What is costing you customers? What do you wish was just handled automatically? We talk through it together, no jargon.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">I show you what is possible</div>
+        <div class="step-desc">Free 20 minute call. I show you exactly what automation looks like for your specific business. No sales pitch, just a live look at what your business could run like.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">I build and set it up for you</div>
+        <div class="step-desc">You do not touch a thing. I configure everything around your business. Your WhatsApp, your branding, your menu, your tone. It is built for you, not a template.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">You see results from day one</div>
+        <div class="step-desc">Most businesses are live within 24 hours. From that point the AI is handling your messages, reviews and social while you focus on running the business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section" id="contact">
+  <div class="container" style="max-width:560px">
+    <h2 class="cta-title">Got a business problem<br/>you want <em>automated?</em></h2>
+    <p class="cta-sub">Whether you run a restaurant, a salon, a takeaway or a shop. If you are wasting time on something that should be automatic, let's talk.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="https://zevio.co.uk/#waitlist" class="btn-p">Book a free call</a>
+      <a href="https://wa.me/447877262518" class="wa-btn">WhatsApp me</a>
+    </div>
+    <div class="cta-contact" style="margin-top:1.5rem">
+      <a href="mailto:akhyar@zevio.co.uk">akhyar@zevio.co.uk</a> &nbsp;&nbsp; Based in the UK &nbsp;&nbsp; Usually replies within a few hours
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fb">Akhyar<span>.</span></div>
+  <div class="fl">
+    <a href="#what">What I do</a>
+    <a href="#built">What I've built</a>
+    <a href="#how">How I work</a>
+    <a href="https://zevio.co.uk">Zevio</a>
+  </div>
+  <div class="fc">me.zevio.co.uk</div>
+</footer>
+
+<script>
+function toggleNav(){
+  document.getElementById('ham').classList.toggle('open')
+  document.getElementById('mobile-nav').classList.toggle('open')
+}
+function closeNav(){
+  document.getElementById('ham').classList.remove('open')
+  document.getElementById('mobile-nav').classList.remove('open')
+}
+</script>
+</body>
+</html>

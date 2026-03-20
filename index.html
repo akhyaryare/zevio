@@ -2068,7 +2068,17 @@ function selPEtype(btn,type){
   pePostType=type;
 }
 
-async function genCalPost(){toast('🔜 AI coming soon — check back shortly');}
+async function genCalPost(){
+  const details=document.getElementById('pe-details').value;
+  const aout=document.getElementById('pe-ai-out');
+  aout.style.display='block';
+  aout.classList.add('empty');
+  setOut('pe-ai-out','Writing caption...');
+  const plats=selectedPlatforms.join(' + ')||'Instagram';
+  const r=await ai(`Write a social media caption for ${currentBiz.name}, a ${currentBiz.industry} in ${currentBiz.city}. Post type: ${pePostType}. Platforms: ${plats}. Details: ${details||'none'}. Include emojis, 5–7 hashtags, call to action. Engaging and authentic. No markdown.`);
+  setOut('pe-ai-out',r);
+  document.getElementById('pe-caption').value=r.replace('Zevio AI','').trim();
+}
 
 function savePost(){
   const key=document.getElementById('pe-date').value||editingPostKey;
@@ -2117,7 +2127,44 @@ function openBulkGen(){
 }
 function closeBulk(){document.getElementById('bulk-editor').classList.remove('open');}
 
-async function runBulkGen(){toast('🔜 AI coming soon — check back shortly');}
+async function runBulkGen(){
+  const freq=parseInt(document.getElementById('bulk-freq').value);
+  const platform=document.getElementById('bulk-platform').value;
+  const focus=document.getElementById('bulk-focus').value;
+  const tone=document.getElementById('bulk-tone').value;
+  const btn=document.getElementById('bulk-gen-btn');
+  const progress=document.getElementById('bulk-progress');
+  const bar=document.getElementById('bulk-bar');
+  const status=document.getElementById('bulk-status');
+  btn.disabled=true;btn.textContent='Generating...';
+  progress.style.display='block';
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const postTypes=['promotion or special offer','behind the scenes','customer appreciation','new product or service','daily special or deal','seasonal content'];
+  const postDays=[];
+  if(freq===3){for(let w=0;w<5;w++){postDays.push(w*7+1,w*7+3,w*7+5);}}
+  else if(freq===5){for(let w=0;w<5;w++){postDays.push(w*7+1,w*7+2,w*7+4,w*7+5,w*7+7);}}
+  else{for(let d=1;d<=30;d++)postDays.push(d);}
+  const validDays=[...new Set(postDays.filter(d=>d>=1&&d<=daysInMonth))].slice(0,freq===7?30:freq===5?20:12);
+  if(!calPosts[currentBiz.id]) calPosts[currentBiz.id]={};
+  for(let i=0;i<validDays.length;i++){
+    const d=validDays[i];
+    const key=getPostKey(calYear,calMonth,d);
+    const type=postTypes[i%postTypes.length];
+    const pct=Math.round(((i+1)/validDays.length)*100);
+    bar.style.width=pct+'%';
+    status.textContent='Generating post '+(i+1)+' of '+validDays.length+'...';
+    const plats=platform==='All platforms'?['Instagram','TikTok','Facebook']:platform==='Instagram + TikTok'?['Instagram','TikTok']:platform==='Instagram only'?['Instagram']:['TikTok'];
+    const r=await ai('Write a short social media caption for '+currentBiz.name+', a '+currentBiz.industry+' in '+currentBiz.city+'. Post type: '+type+'. Tone: '+tone+'. '+(focus?'Focus: '+focus:'')+' Platforms: '+plats.join(', ')+'. Include 3-4 emojis, 4-5 hashtags, short call to action. Max 150 words. No markdown.');
+    if(!calPosts[currentBiz.id][key]) calPosts[currentBiz.id][key]=[];
+    calPosts[currentBiz.id][key].push({caption:r,platforms:plats,type,time:'6:00pm',status:'scheduled'});
+  }
+  btn.disabled=false;btn.textContent='⚡ Generate Full Month';
+  progress.style.display='none';
+  bar.style.width='0%';
+  closeBulk();
+  renderCalendar();
+  toast('✅ '+validDays.length+' posts generated and scheduled!');
+}
 
 // ═══════════════════════════
 // CLAUDE API
@@ -2160,7 +2207,15 @@ function selChat(el,name,idx){
   document.getElementById('msgs').innerHTML=conv?`<div class="msg in"><div class="bub">${conv.msg}</div><div class="mt">Just now</div></div>`:'';
 }
 
-async function genReply(){toast('🔜 AI coming soon — check back shortly');}
+async function genReply(){
+  const name=document.getElementById('ch-name').textContent;
+  const last=document.querySelector('#msgs .msg.in:last-child .bub')?.textContent||'';
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+  const r=await ai('You are an AI assistant for '+currentBiz.name+', a '+currentBiz.industry+' in '+currentBiz.city+'. Customer '+name+' said: "'+last+'". Write a warm, friendly, professional reply. Helpful. Concise. No markdown.');
+  btn.disabled=false;btn.innerHTML='🤖';
+  document.getElementById('ch-reply').value=r;
+}
 
 function sendMsg(){
   const txt=document.getElementById('ch-reply').value.trim();if(!txt)return;
@@ -2176,12 +2231,48 @@ function toggleDeposit(cb){
   document.getElementById('bk-deposit-fields').style.display = cb.checked ? 'block' : 'none';
 }
 
-async function genConfirm(){toast('🔜 AI coming soon — check back shortly');}
+async function genConfirm(){
+  const name=document.getElementById('bk-name').value||'Valued Customer';
+  const date=document.getElementById('bk-date').value||'Saturday';
+  const time=document.getElementById('bk-time').value;
+  const size=document.getElementById('bk-size').value;
+  const special=document.getElementById('bk-special').value;
+  const depositRequired=document.getElementById('bk-deposit-toggle').checked;
+  const depositAmount=document.getElementById('bk-deposit-amount').value||'10';
+  const service=document.getElementById('bk-service')?.value||'';
+  setOut('bk-out','Generating...');
+  let prompt;
+  if(depositRequired){
+    const ref='ZV-DEP-'+Math.floor(Math.random()*9000+1000);
+    const payLink='https://pay.zevio.com/'+currentBiz.id+'/'+ref.toLowerCase();
+    prompt='Write a WhatsApp booking message for '+currentBiz.name+' in '+currentBiz.city+'. Client: '+name+', Service: '+service+', Date: '+date+', Time: '+time+(special?', Special: '+special:'')+'. Requires £'+depositAmount+' deposit. Payment link: '+payLink+'. Friendly but clear. No markdown.';
+    const r=await ai(prompt);
+    setOut('bk-out','Payment Link: '+payLink+' | Deposit: \u00a3'+depositAmount+'\n\n'+r);
+    toast('💳 Deposit message generated!');
+  } else {
+    prompt='Write a WhatsApp booking confirmation for '+currentBiz.name+' in '+currentBiz.city+'. Name: '+name+', Date: '+date+', Time: '+time+', Party: '+size+(special?', Special: '+special:'')+'. Warm, professional. No markdown.';
+    const r=await ai(prompt);
+    setOut('bk-out',r);
+  }
+}
 
-async function genRv(idx,sentiment,summary){toast('🔜 AI coming soon — check back shortly');}
+async function genRv(idx,sentiment,summary){
+  document.getElementById('rv'+idx).style.display='block';
+  setOut('rv'+idx,'Writing response...');
+  const tones={positive:'warm, grateful, encourage return visit',mixed:'apologetic about issue, appreciative, invite back',negative:'sincerely apologetic, take responsibility, offer to resolve'};
+  const r=await ai('Google review response for '+currentBiz.name+' in '+currentBiz.city+'. Sentiment: '+sentiment+'. Summary: '+summary+'. Tone: '+tones[sentiment]+'. 3-4 sentences. Professional and warm. Sign off "'+currentBiz.name+' Team". No markdown.');
+  setOut('rv'+idx,r);
+}
 
 function selPT(btn,type){document.querySelectorAll('.pt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');postType=type;}
-async function genPost(){toast('🔜 AI coming soon — check back shortly');}
+async function genPost(){
+  const details=document.getElementById('soc-d').value;
+  const tone=document.getElementById('soc-t').value;
+  const plat=document.getElementById('soc-p').value;
+  setOut('soc-out','Writing caption...');
+  const r=await ai('Social media post for '+currentBiz.name+', a '+currentBiz.industry+' in '+currentBiz.city+'. Post type: '+postType+'. Platform: '+plat+'. Tone: '+tone+'. Details: '+(details||'none')+'. Include emojis, 6-8 hashtags, call to action. No markdown.');
+  setOut('soc-out',r);
+}
 
 // ORDERS
 function renderMenu(filter){
@@ -2269,8 +2360,19 @@ function connectStripe(){
   },2000);
 }
 
-async function genShift(){toast('🔜 AI coming soon — check back shortly');}
-async function genLoyalty(){toast('🔜 AI coming soon — check back shortly');}
+async function genShift(){
+  const staff=document.getElementById('shift-staff').value;
+  setOut('shift-out','Generating...');
+  const r=await ai('Friendly WhatsApp shift reminder from '+currentBiz.name+' manager to '+staff+'. Tomorrow shift reminder. Warm, professional, brief. Ask to confirm. No markdown.');
+  setOut('shift-out',r);
+}
+async function genLoyalty(){
+  const cust=document.getElementById('loy-c').value;
+  const type=document.getElementById('loy-t').value;
+  setOut('loy-out','Generating...');
+  const r=await ai('WhatsApp loyalty message from '+currentBiz.name+' to customer '+cust+'. Message type: '+type+'. Warm, personal, genuine. Reference their loyalty. No markdown.');
+  setOut('loy-out',r);
+}
 function copyOut(id){
   const el=document.getElementById(id);if(!el)return;
   const text=el.textContent.replace('Zevio AI','').trim();

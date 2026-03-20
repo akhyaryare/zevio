@@ -7,9 +7,9 @@ const corsHeaders = {
 }
 
 const PRICE_IDS: Record<string, string> = {
-  Growth:     'price_1TCSoO2M6EZCq9bA6llpHeOS',
-  Pro:        'price_1TCSoO2M6EZCq9bAQRmVqc6K',
-  Enterprise: 'price_1TCSoO2M6EZCq9bA2wzKn4ul',
+  Growth:     'price_1TCZCqRyKSji3VLOU3TNHZon',
+  Pro:        'price_1TCZCqRyKSji3VLO4TJxemFu',
+  Enterprise: 'price_1TCZCrRyKSji3VLOsSrORdZc',
 }
 
 Deno.serve(async (req) => {
@@ -61,7 +61,6 @@ Deno.serve(async (req) => {
     httpClient: Stripe.createFetchHttpClient(),
   })
 
-  // Check if business already has a Stripe customer
   const supabaseAdmin = createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -72,17 +71,12 @@ Deno.serve(async (req) => {
     .eq('id', business_id)
     .single()
 
-  let customerId = business?.stripe_customer_id
+  const customerId = business?.stripe_customer_id
   if (!customerId) {
-    const customer = await stripe.customers.create({
-      email: user.email,
-      name: business?.name,
-      metadata: { business_id, user_id: user.id },
+    return new Response(JSON.stringify({ error: 'Stripe customer not provisioned. Call /provision-stripe-customer first.' }), {
+      status: 409,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
-    customerId = customer.id
-    await supabaseAdmin.from('businesses')
-      .update({ stripe_customer_id: customerId })
-      .eq('id', business_id)
   }
 
   const session = await stripe.checkout.sessions.create({

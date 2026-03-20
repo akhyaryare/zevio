@@ -1,0 +1,23 @@
+[functions.me]
+verify_jwt = false
+
+[functions.create-checkout-session]
+verify_jwt = false
+
+[functions.get-conversations]
+verify_jwt = false
+
+[functions.get-messages]
+verify_jwt = false
+
+[functions.send-message]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.whatsapp-webhook]
+verify_jwt = false
+
+[functions.provision-stripe-customer]
+verify_jwt = false

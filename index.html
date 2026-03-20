@@ -246,6 +246,8 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   .fl{justify-content:center}
 }
 
+  #about [style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column;gap:2rem}
+
 /* ── SMALL MOBILE (≤400px) ── */
 @media(max-width:400px){
   .who-grid{grid-template-columns:1fr}
@@ -312,7 +314,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
     <div class="proof-item">⭐⭐⭐⭐⭐ <strong>"Saves us hours every day"</strong> — Damal Restaurant, London</div>
     <div class="proof-item">🔒 <strong>No long contracts</strong> — cancel anytime</div>
     <div class="proof-item">⚡ <strong>Live in 24 hours</strong> — we handle the entire setup</div>
-    <div class="proof-item">🇬🇧 <strong>UK-based founder</strong> — real support, real person</div>
+    <div class="proof-item">🇬🇧 <strong>Built by Akhyar</strong> — a UK business owner who solved these problems himself</div>
   </div>
 </div>
 
@@ -419,6 +421,68 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
         <div class="tc-text">"The social media calendar alone is worth every penny. I used to dread posting. Now Zevio gives me 30 posts in one click and I just review and schedule. Game changer for a small business."</div>
         <div class="tc-name">Shop Owner</div>
         <div class="tc-biz">Star Barbers, Hayes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOUNDER STORY ════════════════════════════════════════════ -->
+<section style="background:var(--ink);border-top:1px solid var(--border)" id="about">
+  <div class="container" style="max-width:820px">
+    <div class="stag">The person behind Zevio</div>
+    <h2 class="stitle">Not a tech company.<br/><em>A problem solver.</em></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:2.5rem">
+      <div>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem">
+          I'm <strong style="color:var(--cream)">Akhyar</strong> — a UK-based entrepreneur who watched local business owners drown in WhatsApp messages, get buried under Google reviews, and struggle with social media while trying to actually run their business.
+        </p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem">
+          I didn't build Zevio as a developer. I built it because I understood the problem — and I wasn't going to wait for someone else to solve it. Every tool inside Zevio exists because a real business owner needed it.
+        </p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8">
+          When you sign up, you deal with me directly. No account managers, no call centres, no tickets. Just someone who genuinely wants your business to win.
+        </p>
+        <div style="margin-top:1.8rem;display:flex;align-items:center;gap:1rem">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--cream)">Akhyar</div>
+            <div style="font-size:0.78rem;color:var(--muted)">Founder, Zevio · <a href="tel:+447877262518" style="color:var(--violet-ll);text-decoration:none">+44 7877 262518</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="background:var(--s1);border:1px solid var(--border);padding:1.4rem">
+          <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:0.8rem">What I've built</div>
+          <div style="display:flex;flex-direction:column;gap:0.7rem">
+            <div style="display:flex;align-items:flex-start;gap:0.7rem">
+              <span style="color:var(--success);font-weight:700;flex-shrink:0">✓</span>
+              <div>
+                <div style="font-size:0.85rem;color:var(--cream);font-weight:600">Zevio — <a href="https://zevio.co.uk" style="color:var(--violet-ll);text-decoration:none">zevio.co.uk</a></div>
+                <div style="font-size:0.78rem;color:var(--muted)">The full platform you're on right now — live, real, paying clients</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:0.7rem">
+              <span style="color:var(--success);font-weight:700;flex-shrink:0">✓</span>
+              <div>
+                <div style="font-size:0.85rem;color:var(--cream);font-weight:600">9 AI tools running in production</div>
+                <div style="font-size:0.78rem;color:var(--muted)">WhatsApp automation, reviews, social content, bookings — all live today</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:0.7rem">
+              <span style="color:var(--success);font-weight:700;flex-shrink:0">✓</span>
+              <div>
+                <div style="font-size:0.85rem;color:var(--cream);font-weight:600">Real UK clients, real results</div>
+                <div style="font-size:0.78rem;color:var(--muted)">Damal Restaurant, Najma Restaurant, Star Barbers — all on the platform now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,rgba(91,63,212,0.1),rgba(0,229,200,0.04));border:1px solid var(--border);padding:1.4rem">
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.7;font-style:italic">"The proof isn't in what I say — it's in what's already running. Go to <a href="https://zevio.co.uk" style="color:var(--violet-ll);text-decoration:none">zevio.co.uk</a>, book a demo, and I'll show you exactly what your business looks like on Zevio."</div>
+          <div style="margin-top:0.8rem;font-size:0.78rem;color:var(--cream);font-weight:600">— Akhyar, Founder</div>
+        </div>
       </div>
     </div>
   </div>

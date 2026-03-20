@@ -2173,7 +2173,7 @@ async function ai(prompt){
   try{
     const resp = await fetch('https://iovybemaglyntzbohpps.supabase.co/functions/v1/ai-generate', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvdnliZW1hZ2x5bnR6Ym9ocHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3ODI1NzgsImV4cCI6MjA4OTM1ODU3OH0.g8X_avEFfhulHmqiDv3Gz_NJZX_yx2hx5rOwJorFSCs' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvdnliZW1hZ2x5bnR6Ym9ocHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3ODI1NzgsImV4cCI6MjA4OTM1ODU3OH0.g8X_avEFfhulHmqiDv3Gz_NJZX_yx2hx5rOwJorFSCs' },
       body: JSON.stringify({ prompt })
     });
     const data = await resp.json();

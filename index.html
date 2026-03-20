@@ -1566,17 +1566,7 @@ async function doLogin(){
   const pass=document.getElementById('li-pass').value;
   const errEl=document.getElementById('li-err');
 
-  // Demo client accounts — instant login, no Supabase needed
-  if(DEMO_ACCOUNTS[email]){
-    const acc=DEMO_ACCOUNTS[email];
-    if(acc.pass!==pass){errEl.style.display='block';errEl.textContent='Incorrect password';return;}
-    errEl.style.display='none';
-    currentUser={email};
-    enterBiz(acc.id);
-    return;
-  }
-
-  // Admin — real Supabase auth
+  // All users — real Supabase auth
   const btn=document.querySelector('.btn-login');
   btn.textContent='Signing in…';btn.disabled=true;
   const {data,error}=await getSb().auth.signInWithPassword({email,password:pass});
@@ -1584,7 +1574,12 @@ async function doLogin(){
   if(error){errEl.style.display='block';errEl.textContent=error.message;return;}
   errEl.style.display='none';
   currentUser={email:data.user.email};
-  showScreen('admin');renderAdmin();
+  if(email==='admin@zevio.com'){showScreen('admin');renderAdmin();}
+  else{
+    const biz=businesses.find(b=>b.email&&b.email.toLowerCase()===email);
+    if(biz){enterBiz(biz.id);}
+    else{showScreen('admin');renderAdmin();}
+  }
 }
 
 async function logout(){

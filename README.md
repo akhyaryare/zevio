@@ -6,26 +6,31 @@
 
 ---
 
-## What It Is
+## The Problem It Solves
 
-Zevio removes 3–4 hours of daily manual work from UK restaurants, barbers and salons.
+UK restaurant and salon owners were drowning in manual work every single day — while trying to actually run their business.
 
-Business owners waste hours every day replying to WhatsApp messages, responding to Google reviews, and trying to keep up with social media — on top of running their business. Zevio automates all of it and goes live within 24 hours.
+**Before Zevio:**
 
----
+| Problem | Impact |
+|---------|--------|
+| 30–50 WhatsApp messages replied to manually every morning | 2–3 hours lost before service even starts |
+| Bookings confirmed late or missed entirely | Customers went to competitors |
+| Google reviews left unanswered | Rating slowly dropped, reputation damaged |
+| Social media ignored — no time or consistency | Invisible online while competitors grew |
+| No deposit system — tables booked and never showed | Direct revenue lost every week |
 
-## Real Results
+**After Zevio:**
 
-| Client | Type | What Zevio handles |
-|--------|------|-------------------|
-| Damal Restaurant, London | Restaurant | WhatsApp, reviews, bookings |
-| Najma Restaurant, London | Restaurant | WhatsApp, reviews, social media |
-| Star Barbers, Hayes | Barber | Appointments, reminders, loyalty |
+| What changed | Result |
+|-------------|--------|
+| Every WhatsApp message answered instantly, 24/7 | Zero manual effort on messages |
+| Bookings confirmed automatically with deposits collected | No-show rates cut significantly |
+| Every review responded to professionally | Rating improved from 4.1 → 4.7 within 2 months |
+| A full month of social content generated in one click | Consistent online presence without effort |
+| Business owner out of the daily grind | 3–5 hours saved per day |
 
-- 3–4 hours of daily manual work removed per business
-- Google ratings improved from 4.1 → 4.7 within 2 months
-- No-show rates cut significantly through automated deposit collection
-- Businesses live within 24 hours of onboarding
+**Live clients:** Damal Restaurant · Najma Restaurant · Star Barbers London — all live within 24 hours of onboarding.
 
 ---
 

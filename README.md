@@ -1,16 +1,16 @@
 # Zevio — AI Automation Platform for UK Local Businesses
 
-> Built by a non-technical founder. Deployed to production. Serving real paying clients.
+**Live product. Paying clients. Built and shipped solo.**
 
-**Live at [zevio.co.uk](https://zevio.co.uk)**
+🌐 [zevio.co.uk](https://zevio.co.uk)
 
 ---
 
-## What This Is
+## What It Is
 
-Zevio removes 3–4 hours of daily manual work from local businesses in the UK.
+Zevio removes 3–4 hours of daily manual work from UK restaurants, barbers and salons.
 
-Restaurants, barbers and salons spend hours every day replying to the same WhatsApp messages, manually responding to Google reviews, and scrambling to keep up with social media. Zevio automates all of it — and goes live within 24 hours of onboarding.
+Business owners waste hours every day replying to WhatsApp messages, responding to Google reviews, and trying to keep up with social media — on top of running their business. Zevio automates all of it and goes live within 24 hours.
 
 ---
 
@@ -18,26 +18,27 @@ Restaurants, barbers and salons spend hours every day replying to the same Whats
 
 | Client | Type | What Zevio handles |
 |--------|------|-------------------|
-| Damal Restaurant | Restaurant | WhatsApp, reviews, bookings |
-| Najma Restaurant | Restaurant | WhatsApp, reviews, social media |
-| Star Barbers London | Barber | Appointments, reminders, loyalty |
+| Damal Restaurant, London | Restaurant | WhatsApp, reviews, bookings |
+| Najma Restaurant, London | Restaurant | WhatsApp, reviews, social media |
+| Star Barbers, Hayes | Barber | Appointments, reminders, loyalty |
 
-- Live paying customers from day one
-- Businesses go live within 24 hours of onboarding
 - 3–4 hours of daily manual work removed per business
+- Google ratings improved from 4.1 → 4.7 within 2 months
+- No-show rates cut significantly through automated deposit collection
+- Businesses live within 24 hours of onboarding
 
 ---
 
-## What It Does
+## Features
 
-| Feature | Description |
+| Feature | What it does |
 |---------|-------------|
-| WhatsApp Automation | AI replies to customer messages instantly, 24/7 |
+| WhatsApp Automation | AI replies to every customer message instantly, 24/7 |
 | Google Review Management | AI writes professional responses to every review automatically |
-| Smart Bookings | Automated confirmations, reminders and deposit requests |
-| Social Media Content | AI generates and schedules posts across Instagram, TikTok and Facebook |
+| Smart Bookings | Confirmations, deposit requests and reminders sent automatically |
+| Social Media Content | AI generates a full month of posts in one click |
 | Online Ordering | Commission-free WhatsApp ordering with Stripe payments |
-| Staff Management | Automated shift reminders sent directly to staff via WhatsApp |
+| Staff Management | Automated shift reminders sent to each staff member via WhatsApp |
 | Loyalty Programme | Bronze, Silver, Gold tiers with AI-generated reward messages |
 | Business Dashboard | Live stats on messages, bookings, reviews and revenue |
 
@@ -47,75 +48,74 @@ Restaurants, barbers and salons spend hours every day replying to the same Whats
 
 | Layer | Technology |
 |-------|------------|
-| Frontend | Vanilla HTML/CSS/JS |
+| Frontend | Vanilla HTML / CSS / JavaScript |
 | Database | Supabase (PostgreSQL + Row Level Security) |
 | Auth | Supabase Auth |
-| Messaging | 360Dialog (WhatsApp Business API) |
-| Payments | Stripe (subscriptions + one-time) |
-| Email | Resend |
-| Edge Functions | Supabase Edge Functions (Deno) |
+| Backend | Supabase Edge Functions (Deno / TypeScript) |
+| Messaging | WhatsApp Business API (360Dialog) |
+| Payments | Stripe |
+| Email | Resend (transactional + automated sequences) |
 | Hosting | Vercel |
-| Domain | zevio.co.uk (Namecheap) |
-
----
-
-## Pricing
-
-| Plan | Price | Key Features |
-|------|-------|-------------|
-| Starter | £197/mo | WhatsApp, reviews, bookings, dashboard |
-| Growth | £297/mo | Everything + social media AI + content calendar |
-| Pro | £497/mo | Everything + online ordering + Stripe payments + staff management |
 
 ---
 
 ## Architecture
 
 ```
-Browser → Vercel (index.html)
-             ↓
-        Supabase (PostgreSQL + RLS)
-             ↓
-    Edge Functions (Deno runtime)
-         ↙        ↘        ↘
-  360Dialog    Stripe    Resend
- (WhatsApp)  (Payments)  (Email)
+Browser → Vercel (static HTML/JS)
+               ↓
+     Supabase Edge Functions (Deno)
+          ↙         ↘         ↘
+   WhatsApp API   Stripe    Resend
+   (360Dialog)  (Payments)  (Email)
+          ↓
+   Supabase Postgres (RLS on all tables)
 ```
+
+**Edge functions:**
+- `submit-lead` — captures enquiries, instantly sends welcome email, queues 4-email follow-up sequence
+- `send-followup` — processes email queue (runs hourly)
+- `ai-generate` — AI content generation for reviews, social posts and WhatsApp replies
+- `admin` — internal operations
+
+**Database tables:**
+- `leads` — inbound enquiries with status tracking
+- `email_queue` — scheduled follow-up emails
+- `clients` — business accounts with plan and Stripe IDs
+- `messages` — WhatsApp message log per client
 
 ---
 
-## Database Schema
+## Pricing
 
-Defined in `supabase/schema.sql`:
+| Plan | Price | Includes |
+|------|-------|---------|
+| Starter | £197/mo | WhatsApp AI, review responses, bookings, dashboard |
+| Growth | £297/mo | Starter + social media AI + 30-day content calendar + loyalty |
+| Pro | £497/mo | Growth + online ordering + Stripe payments + staff management |
 
-- `clients` — business name, type, plan, MRR, Stripe + WhatsApp IDs
-- `plans` — Starter, Growth, Pro with features
-- `leads` — inbound enquiries from the website
-- `messages` — WhatsApp message log per client
-- `activity_log` — platform-wide event log
-
-Row Level Security enabled on all tables.
+Setup included on all plans. No long-term contracts.
 
 ---
 
 ## Deployment
 
-Auto-deployed to Vercel on every push to `main`.
+Auto-deployed to Vercel on push to `main`. No build step — pure HTML/CSS/JS frontend.
 
+Supabase edge functions deployed via Supabase CLI:
 ```bash
-vercel --prod
+supabase functions deploy submit-lead
+supabase functions deploy send-followup
 ```
-
-No build step required — pure HTML/CSS/JS frontend.
 
 ---
 
-## About the Builder
+## About
 
-This platform was built entirely by **Akhyar** — a non-technical founder from Hayes, UK — using Claude Code as an AI coding assistant.
+Built by **Akhyar** — founder and sole builder.
 
-No technical co-founder. No coding bootcamp. Zero to production in under 6 months.
+Identified the problem, designed the solution, built the full stack, acquired paying clients and shipped to production. Zevio is a live, revenue-generating business.
 
 - 🌐 [zevio.co.uk](https://zevio.co.uk)
-- 🌐 [me.zevio.co.uk](https://me.zevio.co.uk)
 - 📧 akhyar@zevio.co.uk
+- 📞 +44 7877 262518

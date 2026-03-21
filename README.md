@@ -1,65 +1,121 @@
-# Zevio — AI Automation Platform
+# Zevio — AI Automation Platform for UK Local Businesses
 
-Zevio is a SaaS platform that delivers AI-powered automation to UK local businesses — including WhatsApp messaging, review management, and client analytics — all managed through a clean, real-time dashboard.
+> Built by a non-technical founder. Deployed to production. Serving real paying clients.
 
-## Live Platform
+**Live at [zevio.co.uk](https://zevio.co.uk)**
 
-[zevio.co.uk](https://zevio.co.uk)
+---
+
+## What This Is
+
+Zevio removes 3–4 hours of daily manual work from local businesses in the UK.
+
+Restaurants, barbers and salons spend hours every day replying to the same WhatsApp messages, manually responding to Google reviews, and scrambling to keep up with social media. Zevio automates all of it — and goes live within 24 hours of onboarding.
+
+---
+
+## Real Results
+
+| Client | Type | What Zevio handles |
+|--------|------|-------------------|
+| Damal Restaurant | Restaurant | WhatsApp, reviews, bookings |
+| Najma Restaurant | Restaurant | WhatsApp, reviews, social media |
+| Star Barbers London | Barber | Appointments, reminders, loyalty |
+
+- Live paying customers from day one
+- Businesses go live within 24 hours of onboarding
+- 3–4 hours of daily manual work removed per business
+
+---
 
 ## What It Does
 
-- **WhatsApp Automation** — AI-powered messaging via 360Dialog for client businesses
-- **Client Management** — Track clients, plans, MRR, and statuses in one place
-- **Billing** — Stripe-powered subscription management (Growth / Pro / Enterprise)
-- **Real-time Dashboard** — Live stats on revenue, active clients, and platform health
+| Feature | Description |
+|---------|-------------|
+| WhatsApp Automation | AI replies to customer messages instantly, 24/7 |
+| Google Review Management | AI writes professional responses to every review automatically |
+| Smart Bookings | Automated confirmations, reminders and deposit requests |
+| Social Media Content | AI generates and schedules posts across Instagram, TikTok and Facebook |
+| Online Ordering | Commission-free WhatsApp ordering with Stripe payments |
+| Staff Management | Automated shift reminders sent directly to staff via WhatsApp |
+| Loyalty Programme | Bronze, Silver, Gold tiers with AI-generated reward messages |
+| Business Dashboard | Live stats on messages, bookings, reviews and revenue |
+
+---
 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| Frontend | Vanilla HTML/CSS/JS (single-file SPA) |
-| Auth & Database | Supabase (PostgreSQL + RLS) |
+|-------|------------|
+| Frontend | Vanilla HTML/CSS/JS |
+| Database | Supabase (PostgreSQL + Row Level Security) |
+| Auth | Supabase Auth |
 | Messaging | 360Dialog (WhatsApp Business API) |
-| Payments | Stripe |
+| Payments | Stripe (subscriptions + one-time) |
+| Email | Resend |
+| Edge Functions | Supabase Edge Functions (Deno) |
 | Hosting | Vercel |
-| Domain | Namecheap → zevio.co.uk |
+| Domain | zevio.co.uk (Namecheap) |
 
-## Plans
+---
 
-| Plan | Price/mo |
-|------|----------|
-| Growth | £297 |
-| Pro | £497 |
-| Enterprise | £997 |
+## Pricing
+
+| Plan | Price | Key Features |
+|------|-------|-------------|
+| Starter | £197/mo | WhatsApp, reviews, bookings, dashboard |
+| Growth | £297/mo | Everything + social media AI + content calendar |
+| Pro | £497/mo | Everything + online ordering + Stripe payments + staff management |
+
+---
+
+## Architecture
+
+```
+Browser → Vercel (index.html)
+             ↓
+        Supabase (PostgreSQL + RLS)
+             ↓
+    Edge Functions (Deno runtime)
+         ↙        ↘        ↘
+  360Dialog    Stripe    Resend
+ (WhatsApp)  (Payments)  (Email)
+```
+
+---
 
 ## Database Schema
 
 Defined in `supabase/schema.sql`:
 
-- `clients` — business name, type, plan, MRR, status, WhatsApp/Stripe IDs
-- `plans` — Growth, Pro, Enterprise with features
+- `clients` — business name, type, plan, MRR, Stripe + WhatsApp IDs
+- `plans` — Starter, Growth, Pro with features
+- `leads` — inbound enquiries from the website
 - `messages` — WhatsApp message log per client
-- `activity_log` — platform event log
+- `activity_log` — platform-wide event log
 
-Row Level Security is enabled on all tables — only authenticated users can read or write.
+Row Level Security enabled on all tables.
+
+---
 
 ## Deployment
 
-Deployed automatically to Vercel on every push to `main`.
+Auto-deployed to Vercel on every push to `main`.
 
 ```bash
-# Deploy manually
 vercel --prod
 ```
 
-## Local Development
+No build step required — pure HTML/CSS/JS frontend.
 
-No build step required — open `index.html` directly in a browser or serve with any static server.
+---
 
-```bash
-npx serve .
-```
+## About the Builder
 
-## Environment
+This platform was built entirely by **Akhyar** — a non-technical founder from Hayes, UK — using Claude Code as an AI coding assistant.
 
-Supabase credentials are embedded as a publishable key in `index.html` (safe for client-side use). No `.env` file needed for the frontend.
+No technical co-founder. No coding bootcamp. Zero to production in under 6 months.
+
+- 🌐 [zevio.co.uk](https://zevio.co.uk)
+- 🌐 [me.zevio.co.uk](https://me.zevio.co.uk)
+- 📧 akhyar@zevio.co.uk

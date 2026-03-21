@@ -178,6 +178,12 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
 .fl a:hover{color:var(--cream)}
 .fc{font-size:0.72rem;color:rgba(238,240,255,0.2)}
 
+/* ── HERO BUTTONS ── */
+.btn-p{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.6rem;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
+.btn-p:hover{background:var(--violet-l)}
+.btn-s{background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;padding:0.75rem 1.6rem;border:1px solid var(--border);cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
+.btn-s:hover{border-color:var(--violet-l);color:var(--cream)}
+
 /* ── HAMBURGER ── */
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .ham span{display:block;width:22px;height:2px;background:var(--cream);transition:all 0.25s}
@@ -244,9 +250,13 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   /* footer */
   footer{flex-direction:column;text-align:center;padding:2rem 1.2rem}
   .fl{justify-content:center}
-}
 
+  /* about grid */
   #about [style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column;gap:2rem}
+
+  /* hero buttons stack */
+  .btn-p,.btn-s{width:100%;text-align:center}
+}
 
 /* ── SMALL MOBILE (≤400px) ── */
 @media(max-width:400px){

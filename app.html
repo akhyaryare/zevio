@@ -64,7 +64,7 @@ h1,h2,h3,.login-brand,.admin-nav-brand,.sb-biz,.dash-title{font-family:'Syne',sa
 .lf label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.35rem}
 .lf input{background:var(--s1);border:1px solid var(--border);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;padding:0.7rem 1rem;width:100%;outline:none;transition:border-color 0.15s}
 .lf input:focus{border-color:var(--violet-l)}
-.lf input::placeholder{color:rgba(238,240,255,0.2)}
+.lf input::placeholder{color:var(--muted)}
 .btn-login{width:100%;background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;letter-spacing:0.04em;padding:0.88rem;border:none;cursor:pointer;transition:all 0.15s;margin-top:0.5rem}
 .btn-login:hover{background:var(--violet-l)}
 .login-err{color:var(--danger);font-size:0.75rem;margin-top:0.6rem;display:none}
@@ -146,7 +146,7 @@ body.admin-mode #scr-admin{display:flex!important}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem}
 .mf{margin-bottom:0.8rem}
 .mf label{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.3rem}
-.mf input,.mf select{background:rgba(238,240,255,0.04);border:1px solid var(--border);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.85rem;padding:0.62rem 0.9rem;width:100%;outline:none;transition:border-color 0.15s}
+.mf input,.mf select{background:var(--s2);border:1px solid var(--border);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.85rem;padding:0.62rem 0.9rem;width:100%;outline:none;transition:border-color 0.15s}
 .mf input:focus,.mf select:focus{border-color:var(--violet-l)}
 .mf select option{background:var(--s2)}
 .btn-modal{width:100%;background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;padding:0.82rem;border:none;cursor:pointer;transition:all 0.15s;margin-top:0.3rem}
@@ -216,7 +216,7 @@ body.admin-mode #scr-admin{display:flex!important}
 .f label{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.3rem}
 .f input,.f select,.f textarea{background:var(--s2);border:1px solid var(--border);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.83rem;padding:0.58rem 0.85rem;width:100%;outline:none;transition:border-color 0.15s;resize:vertical}
 .f input:focus,.f select:focus,.f textarea:focus{border-color:var(--violet-l)}
-.f input::placeholder,.f textarea::placeholder{color:rgba(238,240,255,0.18)}
+.f input::placeholder,.f textarea::placeholder{color:var(--muted)}
 .f select option{background:var(--s2)}
 .btn{display:inline-flex;align-items:center;gap:0.3rem;padding:0.45rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.77rem;font-weight:500;border:none;cursor:pointer;transition:all 0.15s}
 .btn-v{background:var(--violet);color:white}.btn-v:hover{background:var(--violet-l)}
@@ -361,7 +361,7 @@ body.admin-mode #scr-admin{display:flex!important}
 .rv-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.38rem}
 .rv-stars{color:var(--gold);font-size:0.8rem}
 .rv-meta{font-size:0.65rem;color:var(--muted)}
-.rv-text{font-size:0.8rem;line-height:1.6;color:rgba(238,240,255,0.7);margin-bottom:0.72rem;font-style:italic}
+.rv-text{font-size:0.8rem;line-height:1.6;color:var(--cream);margin-bottom:0.72rem;font-style:italic}
 .rv-resp{background:var(--s2);border:1px solid var(--border);padding:0.72rem;font-size:0.78rem;line-height:1.6;display:none;margin-bottom:0.62rem;position:relative}
 
 /* PAYMENT SUCCESS */
@@ -375,7 +375,7 @@ body.admin-mode #scr-admin{display:flex!important}
 .pay-ref{font-family:monospace;font-size:0.78rem;background:var(--s2);border:1px solid var(--border);padding:0.45rem 1rem;color:var(--cyan);margin-bottom:1.3rem;display:inline-block}
 
 /* LOGO UPLOAD */
-.logo-upload-box{border:1px dashed rgba(124,99,232,0.35);padding:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;background:rgba(238,240,255,0.02)}
+.logo-upload-box{border:1px dashed rgba(124,99,232,0.35);padding:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;background:var(--s1)}
 .logo-upload-box:hover{border-color:var(--violet-l);background:var(--violet-dim)}
 .logo-upload-box input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .logo-upload-preview{width:100%;height:64px;object-fit:contain;display:none;margin-bottom:0.4rem}
@@ -545,7 +545,21 @@ document.addEventListener('DOMContentLoaded', applyLogos);
     <div class="ring-core"></div>
   </div>
   <div class="login-box">
-    <a href="/"><img data-logo="1" src="" style="height:48px;object-fit:contain;margin-bottom:0.4rem;display:block"/></a>
+    <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;margin-bottom:0.4rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" style="height:42px;width:42px;flex-shrink:0">
+        <defs>
+          <linearGradient id="zslash2" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00D4B8"/>
+            <stop offset="100%" stop-color="#0099DD"/>
+          </linearGradient>
+        </defs>
+        <rect x="3" y="2" width="38" height="11" fill="#7C5EF0"/>
+        <polygon points="41,13 41,20 3,32 3,25" fill="#7C5EF0"/>
+        <rect x="3" y="31" width="38" height="11" fill="#7C5EF0"/>
+        <polygon points="28,13 41,13 16,32 3,32" fill="url(#zslash2)"/>
+      </svg>
+      <span class="login-brand" style="margin-bottom:0">zevio</span>
+    </a>
     <div class="login-tag">AI Automation Platform — Any Business</div>
     <div class="login-card">
       <div class="login-mode">
@@ -568,13 +582,21 @@ document.addEventListener('DOMContentLoaded', applyLogos);
 <div class="screen" id="scr-admin">
   <div class="admin-nav">
     <div style="display:flex;align-items:center;gap:0.8rem">
-      <img data-logo="1" src="" id="admin-logo" style="display:block!important" style="height:28px;object-fit:contain;display:none"/>
+      <div style="display:flex;align-items:center;gap:0.4rem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" style="height:28px;width:28px;flex-shrink:0">
+          <defs><linearGradient id="zslash3" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00D4B8"/><stop offset="100%" stop-color="#0099DD"/></linearGradient></defs>
+          <rect x="3" y="2" width="38" height="11" fill="#7C5EF0"/>
+          <polygon points="41,13 41,20 3,32 3,25" fill="#7C5EF0"/>
+          <rect x="3" y="31" width="38" height="11" fill="#7C5EF0"/>
+          <polygon points="28,13 41,13 16,32 3,32" fill="url(#zslash3)"/>
+        </svg>
+        <span class="admin-nav-brand">zevio</span>
+      </div>
       <div style="display:flex;align-items:center;gap:0.6rem">
         <button class="admin-tab active" onclick="showAdminTab('accounts',this)">🏢 Accounts</button>
         <button class="admin-tab" onclick="showAdminTab('crm',this)">📊 CRM Pipeline</button>
       </div>
     </div>
-      <img data-logo="1" src="" style="height:28px;object-fit:contain;display:block"/>
       <div class="admin-nav-tag">Admin Console</div>
     </div>
     <div class="admin-nav-right">
@@ -738,7 +760,7 @@ document.addEventListener('DOMContentLoaded', applyLogos);
         <img id="sb-logo-img" class="sb-logo-img"/>
         <div id="sb-logo-emoji" class="sb-logo-emoji">🏢</div>
         <div>
-          <img data-logo="1" src="" style="height:22px;object-fit:contain;display:block;margin-bottom:0.2rem"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" style="height:20px;width:20px;display:block;margin-bottom:0.2rem;flex-shrink:0"><defs><linearGradient id="zslash4" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00D4B8"/><stop offset="100%" stop-color="#0099DD"/></linearGradient></defs><rect x="3" y="2" width="38" height="11" fill="#7C5EF0"/><polygon points="41,13 41,20 3,32 3,25" fill="#7C5EF0"/><rect x="3" y="31" width="38" height="11" fill="#7C5EF0"/><polygon points="28,13 41,13 16,32 3,32" fill="url(#zslash4)"/></svg>
           <div class="sb-biz" id="sb-biz-name">Loading...</div>
         </div>
       </div>
@@ -2057,7 +2079,7 @@ function renderCalList(){
     const [y,m,d]=key.split('-');
     const dateStr=`${d} ${MONTH_NAMES[parseInt(m)-1].substring(0,3)} ${y}`;
     return `<div class="post-list-item">
-      <div class="pli-date">${dateStr}<br><span style="font-size:0.62rem;color:rgba(238,240,255,0.3)">${post.time||'6:00pm'}</span></div>
+      <div class="pli-date">${dateStr}<br><span style="font-size:0.62rem;color:var(--muted)">${post.time||'6:00pm'}</span></div>
       <div class="pli-platforms">${post.platforms.map(p=>`<span class="pli-plat">${platformEmoji(p)} ${p}</span>`).join('')}</div>
       <div class="pli-content">${post.caption}</div>
       <div class="pli-status"><span class="badge ${post.status==='posted'?'bg':post.status==='scheduled'?'bv':'bc'}">${post.status}</span></div>

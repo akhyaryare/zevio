@@ -132,7 +132,7 @@ section{padding:5rem 2rem}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
 .plan{background:var(--s1);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:transform 0.2s}
 .plan:hover{transform:translateY(-2px)}
-.plan.featured{border-color:var(--violet-l);background:linear-gradient(135deg,rgba(91,63,212,0.10),var(--s1))}
+.plan.featured{border-color:var(--border);background:var(--s1)}
 .pp{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--violet);color:white;font-size:0.6rem;padding:0.2rem 1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700}
 .pn{font-family:'Syne',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;margin-top:0.5rem}
 .pr{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--cream);line-height:1;margin-bottom:0.2rem}
@@ -183,8 +183,8 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
 /* ── HERO BUTTONS ── */
 .btn-p{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.6rem;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
 .btn-p:hover{background:var(--violet-l)}
-.btn-s{background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;padding:0.75rem 1.6rem;border:1px solid var(--border);cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
-.btn-s:hover{border-color:var(--violet-l);color:var(--cream)}
+.btn-s{background:transparent;color:var(--violet);font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.6rem;border:2px solid var(--violet);cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
+.btn-s:hover{background:var(--violet-dim);border-color:var(--violet-l)}
 
 /* ── HAMBURGER ── */
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
@@ -446,7 +446,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
     <div class="stag">Case example</div>
     <h2 class="stitle">Before and <em>after.</em></h2>
     <div class="pgrid" style="margin-top:2rem">
-      <div style="background:rgba(240,82,82,0.04);border:1px solid rgba(240,82,82,0.2);padding:1.8rem">
+      <div style="background:var(--s1);border:1px solid var(--border);padding:1.8rem">
         <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#F05252;font-weight:700;margin-bottom:1.2rem">Before</div>
         <div class="pains" style="margin-top:0">
           <div class="pain" style="background:transparent;border-color:rgba(240,82,82,0.12)"><div class="p-text">2 to 3 hours of daily admin every morning</div></div>
@@ -455,7 +455,7 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
           <div class="pain" style="background:transparent;border-color:rgba(240,82,82,0.12)"><div class="p-text">Constant interruptions during service</div></div>
         </div>
       </div>
-      <div class="answer">
+      <div style="background:var(--s1);border:1px solid var(--border);padding:1.8rem">
         <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--success);font-weight:700;margin-bottom:1.2rem">After</div>
         <div class="checks">
           <div class="check">&#10003; Automation handles everything</div>

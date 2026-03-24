@@ -547,30 +547,7 @@ document.addEventListener('DOMContentLoaded', applyLogos);
       <div class="lf"><label>Email</label><input id="li-email" type="email" placeholder="you@business.com"/></div>
       <div class="lf"><label>Password</label><input id="li-pass" type="password" placeholder="••••••••"/></div>
       <button class="btn-login" id="login-btn" onclick="doLogin()">Sign In →</button>
-      <div class="login-err" id="li-err">Incorrect credentials. Use a quick login below.</div>
-    </div>
-    <div class="quick-wrap">
-      <p>Quick Access — Demo Accounts</p>
-      <div class="ql" onclick="qLogin('admin')">
-        <div class="ql-dot" style="background:var(--gold)"></div>
-        <div class="ql-info"><div class="ql-name">Akhyar — Zevio Admin</div><div class="ql-email">admin@zevio.com</div></div>
-        <div class="ql-role">Super Admin</div>
-      </div>
-      <div class="ql" onclick="qLogin('damal')">
-        <div class="ql-dot" style="background:var(--success)"></div>
-        <div class="ql-info"><div class="ql-name">Damal Restaurant</div><div class="ql-email">admin@damalrestaurant.uk</div></div>
-        <div class="ql-role">Restaurant</div>
-      </div>
-      <div class="ql" onclick="qLogin('najma')">
-        <div class="ql-dot" style="background:var(--cyan)"></div>
-        <div class="ql-info"><div class="ql-name">Najma Restaurant</div><div class="ql-email">info@najmarestaurant.co.uk</div></div>
-        <div class="ql-role">Restaurant · Pro</div>
-      </div>
-      <div class="ql" onclick="qLogin('stars')">
-        <div class="ql-dot" style="background:var(--violet-ll)"></div>
-        <div class="ql-info"><div class="ql-name">Star Barbers Hayes</div><div class="ql-email">info@starbarbers.co.uk</div></div>
-        <div class="ql-role">Barbers · Growth</div>
-      </div>
+      <div class="login-err" id="li-err">Incorrect email or password.</div>
     </div>
   </div>
 </div>
@@ -1535,55 +1512,44 @@ function getSb(){
   return sb;
 }
 
-const DEMO_ACCOUNTS = {
-  'admin@damalrestaurant.uk':   {pass:'damal123', id:'damal'},
-  'info@najmarestaurant.co.uk': {pass:'najma123', id:'najma'},
-  'info@starbarbers.co.uk':     {pass:'stars123', id:'stars'},
-};
-
 let currentUser=null, currentBiz=null, cart=[], orderType='Delivery', payMethod='card';
 let postType='promotion or special offer';
 
-function qLogin(who){
-  // Admin — fill email, user types password
-  if(who==='admin'){
-    document.getElementById('li-email').value='admin@zevio.com';
-    document.getElementById('li-pass').value='';
-    document.getElementById('li-pass').focus();
-    return;
-  }
-  // Demo clients — go directly to dashboard, no auth needed
-  try{
-    currentUser={email:who};
-    enterBiz(who);
-  }catch(e){
-    alert('Login error: '+e.message);
-  }
-}
+const ADMIN_EMAIL = 'akhyar@zevio.co.uk';
 
 async function doLogin(){
   const email=document.getElementById('li-email').value.trim().toLowerCase();
   const pass=document.getElementById('li-pass').value;
   const errEl=document.getElementById('li-err');
+  errEl.style.display='none';
 
-  // All users — real Supabase auth
   const btn=document.querySelector('.btn-login');
   btn.textContent='Signing in…';btn.disabled=true;
   const {data,error}=await getSb().auth.signInWithPassword({email,password:pass});
   btn.textContent='Sign In →';btn.disabled=false;
-  if(error){errEl.style.display='block';errEl.textContent=error.message;return;}
-  errEl.style.display='none';
-  currentUser={email:data.user.email};
-  if(email==='admin@zevio.com'){showScreen('admin');renderAdmin();}
-  else{
+
+  if(error){errEl.style.display='block';errEl.textContent='Incorrect email or password.';return;}
+
+  currentUser={email:data.user.email,id:data.user.id};
+
+  if(email===ADMIN_EMAIL){
+    showScreen('admin');renderAdmin();
+  } else {
     const biz=businesses.find(b=>b.email&&b.email.toLowerCase()===email);
-    if(biz){enterBiz(biz.id);}
-    else{showScreen('admin');renderAdmin();}
+    if(biz){
+      enterBiz(biz.id);
+    } else {
+      errEl.style.display='block';
+      errEl.textContent='No account found for this email. Contact Akhyar at akhyar@zevio.co.uk.';
+      await getSb().auth.signOut();
+      currentUser=null;
+    }
   }
 }
 
 async function logout(){
-  if(currentUser&&currentUser.email==='admin@zevio.com'){ const s=getSb(); if(s) await s.auth.signOut(); }
+  const s=getSb();
+  if(s) await s.auth.signOut();
   currentUser=null;currentBiz=null;showScreen('login');
 }
 

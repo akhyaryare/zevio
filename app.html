@@ -1355,6 +1355,7 @@ let businesses = [
     id:'najma',name:'Najma Restaurant',owner:'Najma Team',email:'info@najmarestaurant.co.uk',
     phone:'020 3261 2016',city:'Hayes, West London',emoji:'🥘',industry:'Somali Restaurant',
     plan:'Pro — £497/mo',planShort:'Pro',status:'active',
+    googlePlaceId:'ChIJESV_cYRydkgRg6NsjMI-hwE',
     revenue:'£4,847',
     stats:{msgs:312,bookings:104,orders:23,rev:'£4,847',stars:'4.8★'},
     loyalty:{total:89,gold:28,silver:34,bronze:27},
@@ -1519,6 +1520,69 @@ function getSb(){
     catch(e){ console.error('Supabase init failed:', e); }
   }
   return sb;
+}
+
+const GOOGLE_PLACES_KEY='AIzaSyADZGREIBCDk02pW8uWBVVzxZOtfdNdCA4';
+
+async function fetchGoogleReviews(placeId){
+  try{
+    const res=await fetch(`https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_KEY}`,{
+      headers:{'X-Goog-FieldMask':'reviews,rating,userRatingCount'}
+    });
+    if(!res.ok) return null;
+    return await res.json();
+  }catch(e){ return null; }
+}
+
+function renderGoogleReviews(data){
+  const wrap=document.getElementById('reviews-wrap');
+  if(!data||!data.reviews||!data.reviews.length){
+    wrap.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted)">No reviews found</div>';
+    return;
+  }
+  // Update overview star rating
+  if(data.rating) document.getElementById('ov-stars').textContent=data.rating.toFixed(1)+'★';
+  wrap.innerHTML=data.reviews.map((rv,i)=>{
+    const name=rv.authorAttribution?.displayName||'Anonymous';
+    const stars=rv.rating||5;
+    const text=rv.text?.text||'';
+    const time=rv.relativePublishTimeDescription||'';
+    const photoUri=rv.authorAttribution?.photoUri||'';
+    return `<div class="rv-card">
+      <div class="rv-hdr">
+        <div style="display:flex;align-items:center;gap:0.55rem">
+          ${photoUri?`<img src="${photoUri}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0"/>`:''}
+          <div>
+            <div style="font-weight:600;font-size:0.84rem">${name}</div>
+            <div class="rv-stars">${'★'.repeat(stars)}${'☆'.repeat(5-stars)}</div>
+          </div>
+        </div>
+        <div class="rv-meta">${time}</div>
+      </div>
+      <div class="rv-text">${text}</div>
+      <div class="rv-resp" id="grv${i}"><span class="ai-badge">Zevio AI</span><span id="grv${i}t"></span></div>
+      <div style="display:flex;gap:0.45rem">
+        <button class="btn btn-v" style="font-size:0.7rem;padding:0.3rem 0.65rem" onclick="genGoogleRv(${i},'${stars>=4?'positive':stars>=3?'neutral':'negative'}','${encodeURIComponent(text.slice(0,80))}')">🤖 Generate Response</button>
+        <button class="btn btn-out" style="font-size:0.7rem;padding:0.3rem 0.65rem" onclick="copyOut('grv${i}')">Copy</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function genGoogleRv(i,sentiment,encodedSummary){
+  const summary=decodeURIComponent(encodedSummary);
+  const el=document.getElementById('grv'+i+'t');
+  const card=document.getElementById('grv'+i);
+  card.style.display='flex';
+  el.textContent='Generating…';
+  const prompt=`Write a short, professional and warm Google review response for a ${currentBiz?.industry||'restaurant'}. The review sentiment is ${sentiment}. Review summary: "${summary}". Keep it under 60 words. Sign off as the ${currentBiz?.name||'team'} team.`;
+  try{
+    const sb=getSb();
+    const {data,error}=await sb.functions.invoke('ai-generate',{body:{prompt}});
+    el.textContent=data?.text||'Thank you so much for your kind review! We really appreciate your support and hope to see you again soon.';
+  }catch(e){
+    el.textContent='Thank you so much for taking the time to leave a review! We really appreciate your support.';
+  }
 }
 
 let currentUser=null, currentBiz=null, cart=[], orderType='Delivery', payMethod='card';
@@ -1860,6 +1924,12 @@ function dgo(id,el){
   document.querySelectorAll('.sb-item').forEach(s=>s.classList.remove('active'));
   document.getElementById('dp-'+id).classList.add('active');
   el.classList.add('active');
+  // Load live Google reviews when reviews tab is opened
+  if(id==='reviews' && currentBiz?.googlePlaceId){
+    const wrap=document.getElementById('reviews-wrap');
+    wrap.innerHTML='<div style="padding:2rem;text-align:center;color:var(--muted)">Loading reviews…</div>';
+    fetchGoogleReviews(currentBiz.googlePlaceId).then(renderGoogleReviews);
+  }
   const t={overview:'Welcome back — <em>here\'s today</em>',messaging:'AI Customer <em>Messaging</em>',bookings:'Booking <em>Management</em>',reviews:'Google Review <em>Responses</em>',social:'Social Media <em>Content</em>',calendar:'Social Media <em>Calendar</em>',orders:'WhatsApp <em>Orders</em>',payments:'Payments <em>Dashboard</em>',staff:'Staff & <em>Shifts</em>',loyalty:'Customer <em>Loyalty</em>'};
   document.getElementById('dash-title').innerHTML=t[id];
   if(id==='calendar') renderCalendar();

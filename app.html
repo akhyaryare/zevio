@@ -1591,8 +1591,13 @@ async function logout(){
 }
 
 function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('scr-'+id).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s=>{
+    s.classList.remove('active');
+    s.style.display='none';
+  });
+  const el=document.getElementById('scr-'+id);
+  el.classList.add('active');
+  el.style.display='flex';
 }
 
 // ═══════════════════════════
@@ -1672,6 +1677,12 @@ function enterBiz(id){
   if(!currentBiz)return;
   showScreen('dash');
   cart=[];
+  // Hard-block admin screen for non-admin users
+  if(currentUser?.role!=='admin'){
+    const a=document.getElementById('scr-admin');
+    a.style.display='none';
+    a.classList.remove('active');
+  }
   // Hide "← Back to Admin" for non-admin users
   document.getElementById('sb-back-btn').style.display=currentUser?.role==='admin'?'flex':'none';
 

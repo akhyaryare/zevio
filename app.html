@@ -1761,12 +1761,8 @@ function enterBiz(id){
   if(!currentBiz)return;
   showScreen('dash');
   cart=[];
-  // Hard-block admin screen for non-admin users
-  if(currentUser?.role!=='admin'){
-    const a=document.getElementById('scr-admin');
-    a.style.display='none';
-    a.classList.remove('active');
-  }
+  // Always remove admin-mode so CSS doesn't force #scr-admin back visible
+  document.body.classList.remove('admin-mode');
   // Hide "← Back to Admin" for non-admin users
   document.getElementById('sb-back-btn').style.display=currentUser?.role==='admin'?'flex':'none';
 
@@ -2702,7 +2698,7 @@ try{
       const meta=user.user_metadata||{};
       const role=meta.role||'client';
       currentUser={email:user.email,id:user.id,role};
-      if(role==='admin'){ showScreen('admin'); renderAdmin(); }
+      if(role==='admin'){ document.body.classList.add('admin-mode'); showScreen('admin'); renderAdmin(); }
       else {
         const bizId=meta.business_id;
         const biz=bizId?businesses.find(b=>b.id===bizId):null;

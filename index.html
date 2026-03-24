@@ -3,305 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zevio. AI Automation for UK Restaurants & Local Businesses</title>
+<title>Zevio — AI Automation for UK Restaurants & Local Businesses</title>
 <meta name="description" content="Zevio automates your WhatsApp messages, Google reviews, social media, bookings and online orders. Built for UK restaurants, barbers and salons.">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#FFFFFF;color:#0F1117;overflow-x:hidden}
-:root{--ink:#FFFFFF;--s1:#F5F6FF;--s2:#ECEEFF;--violet:#6C4FE8;--violet-l:#8B72F0;--violet-ll:#4A30C8;--violet-dim:rgba(108,79,232,0.08);--cyan:#00A896;--border:rgba(108,79,232,0.14);--cream:#0F1117;--muted:rgba(15,17,23,0.48);--success:#16A34A;--gold:#D97706;--warn:#EA580C}
-h1,h2,h3,.nav-brand{font-family:'Syne',sans-serif}
+body{font-family:'Manrope',sans-serif;background:#f9f9ff;color:#191c22;overflow-x:hidden}
+
+/* ── TOKENS ── */
+:root{
+  --primary:#5331cf;
+  --primary-c:#6c4fe8;
+  --primary-fixed:#e6deff;
+  --primary-fixed-dim:#c9beff;
+  --surface:#f9f9ff;
+  --surface-low:#f2f3fc;
+  --surface-mid:#ecedf6;
+  --surface-high:#e6e8f0;
+  --surface-highest:#e1e2eb;
+  --surface-lowest:#ffffff;
+  --on-surface:#191c22;
+  --on-surface-v:#484555;
+  --secondary:#006b5f;
+  --secondary-c:#76f4e0;
+  --on-secondary-c:#006f63;
+  --outline:rgba(121,117,134,0.3);
+  --shadow:0 24px 48px -12px rgba(25,28,34,0.07);
+  --shadow-lg:0 32px 64px -16px rgba(25,28,34,0.1);
+  --success:#006b5f;
+  --warn:#ea580c;
+  --danger:#ba1a1a;
+}
+
+h1,h2,h3,h4,.brand{font-family:'Epilogue',sans-serif}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-brand{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--violet);letter-spacing:-0.03em}
-.nav-brand span{color:var(--cyan)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(255,255,255,0.75);box-shadow:0 1px 0 rgba(25,28,34,0.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none}
+.brand{font-size:1.4rem;font-weight:900;color:var(--on-surface);letter-spacing:-0.03em;line-height:1}
 .nav-links{display:flex;align-items:center;gap:2rem}
-.nav-links a{color:var(--muted);font-size:0.85rem;text-decoration:none;transition:color 0.15s}
-.nav-links a:hover{color:var(--cream)}
+.nav-links a{color:var(--on-surface-v);font-size:0.9rem;font-weight:500;text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:var(--primary)}
 .nav-cta{display:flex;gap:0.75rem;align-items:center}
-.btn-login{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.82rem;padding:0.45rem 1rem;cursor:pointer;text-decoration:none;transition:all 0.15s}
-.btn-login:hover{border-color:var(--violet-l);color:var(--cream)}
-.btn-demo{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:0.5rem 1.2rem;border:none;cursor:pointer;text-decoration:none;transition:all 0.15s;letter-spacing:0.04em}
-.btn-demo:hover{background:var(--violet-l)}
-
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem;text-align:center}
-.hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 40%,rgba(91,63,212,0.14) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,229,200,0.07) 0%,transparent 50%),linear-gradient(160deg,#F5F6FF,#ECEEFF,#F5F6FF)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,63,212,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(91,63,212,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%)}
-.hero-inner{position:relative;z-index:2;max-width:920px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--violet-dim);border:1px solid var(--border);padding:0.35rem 0.9rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:1.8rem}
-.bdot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;line-height:1.07;letter-spacing:-0.03em;margin-bottom:1.4rem}
-h1 em{font-style:normal;color:var(--violet-ll)}
-h1 .c{color:var(--cyan)}
-.hero-sub{font-size:clamp(1rem,2vw,1.18rem);color:var(--muted);line-height:1.7;max-width:620px;margin:0 auto 2rem}
-
-/* inline lead form in hero */
-.hero-form-wrap{background:var(--s1);border:1px solid var(--border);padding:2rem;max-width:560px;margin:0 auto 2.5rem;text-align:left}
-.hf-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:1rem;text-align:center;display:block}
-.hf-row{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.7rem}
-.hf-input{background:var(--s2);border:1px solid var(--border);color:var(--cream);padding:0.7rem 1rem;font-size:0.88rem;font-family:inherit;outline:none;width:100%;transition:border-color 0.15s}
-.hf-input:focus{border-color:var(--violet-l)}
-.hf-input::placeholder{color:var(--muted)}
-.hf-submit{width:100%;background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;padding:0.9rem;border:none;cursor:pointer;letter-spacing:0.04em;transition:all 0.15s;margin-top:0.3rem}
-.hf-submit:hover{background:var(--violet-l)}
-.hf-submit:disabled{opacity:0.6;cursor:not-allowed}
-.hf-note{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.7rem}
-.hf-success{display:none;background:rgba(52,209,122,0.1);border:1px solid rgba(52,209,122,0.3);color:#34D17A;padding:1rem;font-size:0.88rem;text-align:center;border-radius:2px}
-.hf-error{display:none;background:rgba(255,80,80,0.1);border:1px solid rgba(255,80,80,0.3);color:#ff5050;padding:0.7rem;font-size:0.85rem;border-radius:2px;margin-bottom:0.5rem}
-
-.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
-.hs{text-align:center}
-.hs-v{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--violet-ll)}
-.hs-l{font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
-
-/* ── SOCIAL PROOF BAR ── */
-.proof-bar{background:var(--s2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.2rem 2rem;text-align:center}
-.proof-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
-.proof-item{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem}
-.proof-item strong{color:var(--cream)}
-
-/* ── SHARED ── */
-section{padding:5rem 2rem}
-.container{max-width:1100px;margin:0 auto}
-.stag{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--violet-ll);margin-bottom:0.8rem}
-.stitle{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
-.stitle em{font-style:normal;color:var(--violet-ll)}
-.ssub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:580px}
-
-/* ── PROBLEM ── */
-.problem{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:stretch}
-.pains{display:flex;flex-direction:column;gap:0.9rem;margin-top:0}
-.pain{display:flex;align-items:flex-start;gap:0.9rem;padding:1rem;background:var(--s2);border:1px solid var(--border)}
-.p-icon{font-size:1.2rem;flex-shrink:0;margin-top:0.1rem}
-.p-text{font-size:0.85rem;color:var(--muted);line-height:1.6}
-.p-text strong{color:var(--cream);display:block;margin-bottom:0.2rem}
-.answer{background:linear-gradient(135deg,rgba(91,63,212,0.08),rgba(0,229,200,0.04));border:1px solid var(--border);padding:2.5rem;position:relative;overflow:hidden}
-.answer::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--violet),var(--cyan))}
-.answer-h{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;line-height:1.5;margin-bottom:1rem}
-.answer-h em{color:var(--cyan);font-style:normal}
-.answer-p{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.3rem}
-.checks{display:flex;flex-direction:column;gap:0.9rem;margin-top:0}
-.check{font-size:0.82rem;color:var(--success);display:flex;align-items:flex-start;gap:0.9rem;padding:1rem;background:var(--s2);border:1px solid rgba(22,163,74,0.15)}
-
-/* ── SERVICES ── */
-.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-top:3rem}
-.sc{background:var(--s1);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;transition:all 0.2s}
-.sc:hover{border-color:var(--violet-l);transform:translateY(-2px)}
-.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--violet),transparent);opacity:0;transition:opacity 0.2s}
-.sc:hover::after{opacity:1}
-.s-icon{font-size:1.6rem;margin-bottom:0.9rem}
-.s-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.4rem}
-.s-desc{font-size:0.82rem;color:var(--muted);line-height:1.6}
-.sbadge{display:inline-block;font-size:0.58rem;padding:0.1rem 0.45rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-top:0.7rem}
-.sp{background:rgba(240,192,64,0.1);color:var(--gold);border:1px solid rgba(240,192,64,0.25)}
-.sa{background:var(--violet-dim);color:var(--violet-ll);border:1px solid var(--border)}
-
-/* ── HOW ── */
-.how{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;position:relative}
-.steps::before{content:'';position:absolute;top:2rem;left:16%;right:16%;height:1px;background:linear-gradient(to right,transparent,var(--violet),transparent)}
-.step{text-align:center;padding:1.5rem;background:var(--s1);border:1px solid var(--border);transition:all 0.2s}
-.step:hover{border-color:var(--violet-l)}
-.sn{width:48px;height:48px;background:var(--violet);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;margin:0 auto 1.2rem}
-.st{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem}
-.sd{font-size:0.82rem;color:var(--muted);line-height:1.6}
-
-/* ── WHO ── */
-.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:2.5rem}
-.wc{background:var(--s1);border:1px solid var(--border);padding:1.3rem;text-align:center;transition:all 0.2s}
-.wc:hover{border-color:var(--violet-l)}
-.w-icon{font-size:2rem;margin-bottom:0.6rem}
-.w-name{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;margin-bottom:0.3rem}
-.w-desc{font-size:0.75rem;color:var(--muted)}
-
-/* ── TESTIMONIALS ── */
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;margin-top:3rem}
-.tc{background:var(--s1);border:1px solid var(--border);padding:1.8rem;position:relative}
-.tc::before{content:'\201C';position:absolute;top:1rem;right:1.2rem;font-size:3rem;color:var(--violet-dim);font-family:'Syne',sans-serif;line-height:1}
-.tc-text{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;font-style:italic}
-.tc-name{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700}
-.tc-biz{font-size:0.75rem;color:var(--muted)}
-.stars{color:var(--gold);font-size:0.85rem;margin-bottom:0.7rem;letter-spacing:0.1em}
-
-/* ── PRICING ── */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
-.plan{background:var(--s1);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:transform 0.2s}
-.plan:hover{transform:translateY(-2px)}
-.plan.featured{border-color:var(--border);background:var(--s1)}
-.pp{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--violet);color:white;font-size:0.6rem;padding:0.2rem 1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700}
-.pn{font-family:'Syne',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;margin-top:0.5rem}
-.pr{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--cream);line-height:1;margin-bottom:0.2rem}
-.pr span{font-size:1rem;color:var(--muted);font-weight:400}
-.pd{font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
-.pf{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.8rem}
-.pf li{font-size:0.82rem;color:var(--muted);display:flex;align-items:center;gap:0.6rem}
-.pf li .tick{color:var(--success);font-weight:700;flex-shrink:0}
-.pf li .cross{color:var(--muted);flex-shrink:0}
-.pf li.no{color:var(--muted)}
-.pb{width:100%;padding:0.8rem;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;cursor:pointer;border:none;transition:all 0.15s;text-decoration:none;display:block;text-align:center}
-.pb-o{background:transparent;color:var(--violet-ll);border:1px solid var(--border)}
-.pb-o:hover{border-color:var(--violet-l);background:var(--violet-dim)}
-.pb-f{background:var(--violet);color:white}
-.pb-f:hover{background:var(--violet-l)}
-.pricing-note{text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted)}
-.guarantee-box{display:flex;align-items:flex-start;gap:1.5rem;background:linear-gradient(135deg,rgba(52,209,122,0.06),rgba(0,229,200,0.04));border:1px solid rgba(52,209,122,0.2);padding:1.8rem;margin-top:2.5rem}
-.guarantee-icon{font-size:2.5rem;flex-shrink:0}
-.guarantee-text h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.4rem;color:var(--success)}
-.guarantee-text p{font-size:0.82rem;color:var(--muted);line-height:1.6}
-
-/* ── FAQ ── */
-.faq{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.faq-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:0;max-width:760px}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-q{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;padding:1.2rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--cream);user-select:none}
-.faq-q:hover{color:var(--violet-ll)}
-.faq-arrow{color:var(--violet-ll);font-size:1rem;transition:transform 0.2s;flex-shrink:0}
-.faq-a{display:none;font-size:0.86rem;color:var(--muted);line-height:1.7;padding-bottom:1.2rem}
-.faq-item.open .faq-arrow{transform:rotate(180deg)}
-.faq-item.open .faq-a{display:block}
-
-/* ── WAITLIST CTA ── */
-.waitlist-s{background:linear-gradient(135deg,rgba(91,63,212,0.14),rgba(0,229,200,0.06));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 2rem;text-align:center}
-.cta-t{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
-.cta-t em{color:var(--violet-ll);font-style:normal}
-.urgency-pill{display:inline-block;background:rgba(255,107,53,0.12);border:1px solid rgba(255,107,53,0.35);color:var(--warn);font-size:0.72rem;padding:0.3rem 0.8rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;margin-bottom:1.2rem}
-
-/* ── FOOTER ── */
-footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.fb{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--violet-ll)}
-.fb span{color:var(--cyan)}
-.fl{display:flex;gap:1.5rem;flex-wrap:wrap}
-.fl a{font-size:0.78rem;color:var(--muted);text-decoration:none;transition:color 0.15s}
-.fl a:hover{color:var(--cream)}
-.fc{font-size:0.72rem;color:var(--muted)}
-
-/* ── HERO BUTTONS ── */
-.btn-p{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.6rem;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
-.btn-p:hover{background:var(--violet-l)}
-.btn-s{background:var(--violet);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.6rem;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:all 0.15s;display:inline-block}
-.btn-s:hover{background:var(--violet-l)}
+.btn-ghost{background:transparent;color:var(--on-surface-v);font-family:'Manrope',sans-serif;font-size:0.88rem;font-weight:600;padding:0.55rem 1.1rem;border:none;cursor:pointer;text-decoration:none;transition:color 0.15s}
+.btn-ghost:hover{color:var(--primary)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.88rem;padding:0.65rem 1.4rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s;box-shadow:0 4px 14px rgba(83,49,207,0.3);letter-spacing:0.01em}
+.btn-primary:hover{opacity:0.92;transform:translateY(-1px);box-shadow:0 8px 20px rgba(83,49,207,0.35)}
+.btn-primary:active{transform:translateY(0) scale(0.98)}
 
 /* ── HAMBURGER ── */
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.ham span{display:block;width:22px;height:2px;background:var(--cream);transition:all 0.25s}
+.ham span{display:block;width:22px;height:2px;background:var(--on-surface);transition:all 0.25s}
 .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0}
 .ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-nav{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:1.2rem}
-.mobile-nav a{color:var(--muted);font-size:1rem;text-decoration:none;padding:0.4rem 0;border-bottom:1px solid var(--border)}
-.mobile-nav a:last-child{border-bottom:none;color:var(--cream)}
+.mobile-nav{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);padding:1.5rem 2rem;z-index:99;flex-direction:column;gap:0;box-shadow:0 24px 48px -12px rgba(25,28,34,0.1)}
+.mobile-nav a{color:var(--on-surface-v);font-size:1rem;font-weight:500;text-decoration:none;padding:0.75rem 0;border-bottom:1px solid var(--outline)}
+.mobile-nav a:last-child{border-bottom:none;color:var(--primary);font-weight:700}
 .mobile-nav.open{display:flex}
 
-/* ── TABLET (≤1024px) ── */
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 5rem;position:relative;overflow:hidden;background:var(--surface)}
+.hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(83,49,207,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-10%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,107,95,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--secondary-c);color:var(--on-secondary-c);padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.6rem}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--secondary);animation:blink 1.5s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+h1{font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:900;line-height:0.95;letter-spacing:-0.03em;color:var(--on-surface);margin-bottom:1.4rem}
+h1 em{font-style:normal;color:var(--primary-c)}
+.hero-sub{font-size:1.15rem;color:var(--on-surface-v);line-height:1.7;max-width:480px;margin-bottom:1rem;font-weight:400}
+.hero-note{font-size:0.9rem;color:var(--secondary);font-weight:600;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-secondary{background:var(--surface-high);color:var(--on-surface);font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s}
+.btn-secondary:hover{background:var(--surface-highest)}
+.btn-hero-p{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s;box-shadow:0 4px 20px rgba(83,49,207,0.35);display:inline-flex;align-items:center;gap:0.4rem}
+.btn-hero-p:hover{opacity:0.92;transform:translateY(-1px)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.hs{text-align:center;background:var(--surface-low);padding:1rem 0.5rem;border-radius:0.75rem}
+.hs-v{font-family:'Epilogue',sans-serif;font-size:1.5rem;font-weight:800;color:var(--primary);line-height:1}
+.hs-l{font-size:0.68rem;color:var(--on-surface-v);letter-spacing:0.05em;text-transform:uppercase;margin-top:0.3rem;font-weight:600}
+.hero-visual{position:relative}
+.hero-card{background:var(--surface-lowest);border-radius:1.25rem;padding:0.75rem;box-shadow:var(--shadow-lg);border:1px solid rgba(25,28,34,0.06)}
+.hero-card-inner{background:var(--surface-low);border-radius:0.75rem;height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.hero-mockup{position:absolute;inset:0;background:linear-gradient(135deg,var(--surface-low) 0%,#eae8f8 100%);display:flex;flex-direction:column;gap:0.75rem;padding:1.5rem;justify-content:center}
+.hm-row{display:flex;align-items:center;gap:0.75rem;background:white;padding:0.75rem 1rem;border-radius:0.75rem;box-shadow:0 2px 8px rgba(25,28,34,0.04)}
+.hm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hm-text{font-size:0.78rem;font-weight:600;color:var(--on-surface)}
+.hm-bar-wrap{background:white;padding:1rem;border-radius:0.75rem;box-shadow:0 2px 8px rgba(25,28,34,0.04)}
+.hm-bar-label{font-size:0.68rem;font-weight:700;color:var(--on-surface-v);margin-bottom:0.5rem;letter-spacing:0.05em;text-transform:uppercase}
+.hm-bar-track{height:8px;background:var(--surface-mid);border-radius:9999px;overflow:hidden}
+.hm-bar-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-c));border-radius:9999px;width:88%}
+
+/* ── PROOF BAR ── */
+.proof-bar{background:var(--surface-low);padding:1.5rem 2rem}
+.proof-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.proof-item{font-size:0.82rem;color:var(--on-surface-v);font-weight:500;display:flex;align-items:center;gap:0.45rem}
+.proof-item strong{color:var(--on-surface);font-weight:700}
+
+/* ── SECTIONS SHARED ── */
+.section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.stag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:1rem}
+.stitle{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.02em;line-height:1.15;color:var(--on-surface);margin-bottom:1rem}
+.stitle em{font-style:normal;color:var(--primary-c)}
+.ssub{font-size:1rem;color:var(--on-surface-v);line-height:1.7;max-width:560px;font-weight:400}
+.section-underline{width:4rem;height:5px;background:linear-gradient(90deg,var(--primary),var(--primary-c));border-radius:9999px;margin-top:0.75rem}
+
+/* ── PROBLEM ── */
+.pains{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem}
+.pain{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--surface-lowest);border-radius:0.75rem;box-shadow:0 2px 8px rgba(25,28,34,0.04);font-size:0.9rem;font-weight:500;color:var(--on-surface)}
+.p-icon{font-size:1.2rem;flex-shrink:0}
+.answer-box{margin-top:2rem;background:linear-gradient(135deg,rgba(83,49,207,0.06),rgba(0,107,95,0.03));padding:2rem 2.5rem;border-radius:1rem;position:relative;overflow:hidden}
+.answer-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(to bottom,var(--primary),var(--secondary))}
+.answer-box p{font-family:'Epilogue',sans-serif;font-size:1.2rem;font-weight:700;line-height:1.5;color:var(--on-surface)}
+.answer-box em{font-style:normal;color:var(--primary-c)}
+
+/* ── SHIFT ── */
+.shift-section{background:var(--surface-low);text-align:center}
+
+/* ── SERVICES ── */
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.sc{background:var(--surface-lowest);border-radius:1rem;padding:2rem;box-shadow:var(--shadow);transition:transform 0.2s,box-shadow 0.2s}
+.sc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.sc-icon-wrap{width:52px;height:52px;border-radius:0.75rem;background:var(--primary-fixed);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem}
+.s-name{font-family:'Epilogue',sans-serif;font-size:1.05rem;font-weight:700;color:var(--on-surface);margin-bottom:0.5rem}
+.s-desc{font-size:0.85rem;color:var(--on-surface-v);line-height:1.65;font-weight:400}
+
+/* ── OUTCOMES ── */
+.outcomes-section{background:var(--surface-low)}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;margin-top:2.5rem}
+.wc{background:var(--surface-lowest);border-radius:1rem;padding:1.75rem;box-shadow:var(--shadow);text-align:center}
+.w-icon{font-size:1.8rem;margin-bottom:0.75rem}
+.w-name{font-family:'Epilogue',sans-serif;font-size:0.95rem;font-weight:700;color:var(--on-surface);line-height:1.4}
+
+/* ── PROOF STATS ── */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;margin-top:2.5rem}
+.tc{background:var(--surface-lowest);border-radius:1rem;padding:2rem 1.5rem;box-shadow:var(--shadow);text-align:center}
+.tc-val{font-family:'Epilogue',sans-serif;font-size:2.2rem;font-weight:900;color:var(--primary);line-height:1;margin-bottom:0.5rem}
+.tc-lbl{font-size:0.82rem;color:var(--on-surface-v);line-height:1.5;font-weight:500}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;position:relative}
+.steps::before{content:'';position:absolute;top:2.5rem;left:16%;right:16%;height:2px;background:linear-gradient(to right,transparent,var(--primary-fixed-dim),transparent)}
+.step{text-align:center;position:relative}
+.sn{width:48px;height:48px;background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Epilogue',sans-serif;font-weight:800;font-size:1.1rem;margin:0 auto 1rem;position:relative;z-index:1}
+.st{font-family:'Epilogue',sans-serif;font-size:1rem;font-weight:700;color:var(--on-surface);margin-bottom:0.5rem}
+.sd{font-size:0.83rem;color:var(--on-surface-v);line-height:1.6;font-weight:400}
+
+/* ── BEFORE / AFTER ── */
+.ba-section{background:var(--surface-low)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:stretch;margin-top:2.5rem}
+.ba-card{background:var(--surface-lowest);border-radius:1rem;padding:2rem;box-shadow:var(--shadow)}
+.ba-label{font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.25rem}
+.ba-items{display:flex;flex-direction:column;gap:0.7rem}
+.ba-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.85rem 1rem;border-radius:0.6rem;font-size:0.85rem;font-weight:500;line-height:1.5}
+.ba-item-before{background:rgba(240,82,82,0.06);color:var(--on-surface)}
+.ba-item-after{background:rgba(0,107,95,0.06);color:var(--on-surface)}
+.ba-icon{flex-shrink:0;font-weight:700;font-size:0.95rem}
+
+/* ── PRICING ── */
+.pricing-section{background:var(--surface)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.plan{background:var(--surface-lowest);border-radius:1.25rem;padding:2rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.plan.featured{background:linear-gradient(160deg,var(--primary) 0%,var(--primary-c) 100%);color:white;box-shadow:0 20px 40px rgba(83,49,207,0.35)}
+.pp{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.75rem}
+.pn{font-family:'Epilogue',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:0.5rem}
+.plan:not(.featured) .pn{color:var(--on-surface)}
+.pr{font-family:'Epilogue',sans-serif;font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:0.25rem}
+.plan:not(.featured) .pr{color:var(--on-surface)}
+.pr span{font-size:1rem;font-weight:400;opacity:0.6}
+.pd{font-size:0.82rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(25,28,34,0.08);line-height:1.5}
+.plan.featured .pd{border-color:rgba(255,255,255,0.15);opacity:0.85}
+.pf{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;flex:1}
+.pf li{font-size:0.82rem;display:flex;align-items:center;gap:0.55rem;font-weight:500}
+.plan:not(.featured) .pf li{color:var(--on-surface-v)}
+.plan.featured .pf li{color:rgba(255,255,255,0.9)}
+.tick{color:var(--secondary);font-weight:800}
+.plan.featured .tick{color:#79f7e3}
+.cross{color:var(--on-surface-v);opacity:0.35}
+.plan.featured .cross{color:rgba(255,255,255,0.35)}
+.pf li.no{opacity:0.5}
+.pb{display:block;width:100%;padding:0.9rem;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.03em;cursor:pointer;border:none;border-radius:0.75rem;text-decoration:none;text-align:center;transition:all 0.15s}
+.pb-f{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;box-shadow:0 4px 14px rgba(83,49,207,0.3)}
+.pb-f:hover{opacity:0.92;transform:translateY(-1px)}
+.plan.featured .pb-f{background:white;color:var(--primary);box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.urgency-pill{display:inline-block;background:rgba(234,88,12,0.08);color:var(--warn);font-size:0.75rem;font-weight:700;padding:0.45rem 1rem;border-radius:9999px;letter-spacing:0.05em;margin-bottom:1.5rem}
+.pricing-note{text-align:center;margin-top:1.5rem;font-size:0.82rem;color:var(--on-surface-v);font-weight:500}
+.guarantee-box{display:flex;align-items:flex-start;gap:1.5rem;background:rgba(0,107,95,0.06);border-radius:1rem;padding:1.75rem;margin-top:2.5rem}
+.guarantee-icon{font-size:2.2rem;flex-shrink:0}
+.guarantee-text h4{font-family:'Epilogue',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.4rem;color:var(--secondary)}
+.guarantee-text p{font-size:0.83rem;color:var(--on-surface-v);line-height:1.6;font-weight:400}
+
+/* ── CTA / WAITLIST ── */
+.waitlist-s{background:linear-gradient(135deg,var(--primary),var(--primary-c));padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.waitlist-s::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(255,255,255,0.08),transparent 60%)}
+.cta-t{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;color:white;letter-spacing:-0.02em;line-height:1.15;margin-bottom:1rem;position:relative;z-index:1}
+.cta-t em{font-style:normal;color:#c9beff}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:2.5rem;max-width:560px;margin-left:auto;margin-right:auto;position:relative;z-index:1;font-weight:400}
+.lead-form{display:flex;flex-direction:column;gap:0.85rem;text-align:left;max-width:560px;margin:0 auto;position:relative;z-index:1}
+.hf-input{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;padding:0.85rem 1rem;font-size:0.9rem;font-family:'Manrope',sans-serif;font-weight:500;outline:none;width:100%;transition:border-color 0.15s;border-radius:0.6rem}
+.hf-input:focus{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.18)}
+.hf-input::placeholder{color:rgba(255,255,255,0.55)}
+.hf-input option{background:#5331cf;color:white}
+.hf-submit{width:100%;background:white;color:var(--primary);font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;padding:1rem;border:none;cursor:pointer;border-radius:0.75rem;transition:all 0.15s;letter-spacing:0.01em;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+.hf-submit:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,0.25)}
+.hf-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.hf-row{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem}
+.form-contact{margin-top:1.2rem;font-size:0.78rem;color:rgba(255,255,255,0.6);text-align:center;font-weight:500;position:relative;z-index:1}
+
+/* ── FOOTER ── */
+footer{background:var(--on-surface);padding:3rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-brand{font-family:'Epilogue',sans-serif;font-size:1.2rem;font-weight:800;color:white;letter-spacing:-0.02em}
+.fl{display:flex;gap:1.5rem;flex-wrap:wrap}
+.fl a{font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s;font-weight:500}
+.fl a:hover{color:rgba(255,255,255,0.9)}
+.fc{font-size:0.72rem;color:rgba(255,255,255,0.35);line-height:1.6;font-weight:400}
+
+/* ── RESPONSIVE ── */
 @media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem;text-align:center}
+  .hero-sub{max-width:100%}
+  .hero-btns{justify-content:center}
+  .hero-stats{grid-template-columns:repeat(4,1fr)}
+  .hero-visual{display:none}
   .pricing-grid{grid-template-columns:1fr 1fr}
-  .pricing-grid .plan:last-child{grid-column:1/-1;max-width:400px;margin:0 auto}
-  .steps{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
   .steps::before{display:none}
-  .steps .step:last-child{grid-column:1/-1;max-width:320px;margin:0 auto}
+  .pgrid{grid-template-columns:1fr;gap:1.5rem}
+  .hero-note{margin:0 auto 2rem}
 }
-
-/* ── MOBILE (≤768px) ── */
 @media(max-width:768px){
-  /* nav */
-  nav{padding:0.9rem 1.2rem}
-  .nav-links{display:none}
-  .nav-cta{display:none}
+  .nav-links,.nav-cta{display:none}
   .ham{display:flex}
-
-  /* sections */
-  section{padding:3.5rem 1.2rem}
-  .proof-bar{padding:1rem 1.2rem}
-  .waitlist-s{padding:3.5rem 1.2rem}
-  .cta-s{padding:3.5rem 1.2rem}
-
-  /* hero */
-  .hero{padding:5rem 1.2rem 3rem}
-  .hero-form-wrap{padding:1.4rem 1.1rem;margin:0 0 2rem}
-  .hf-row{grid-template-columns:1fr}
-  .hero-stats{gap:1.5rem}
-  .hs-v{font-size:1.5rem}
-
-  /* proof bar */
-  .proof-inner{flex-direction:column;gap:0.9rem;text-align:left;align-items:flex-start}
-
-  /* layout grids */
-  .pgrid{grid-template-columns:1fr;gap:2rem}
-  .steps{grid-template-columns:1fr;gap:1.2rem}
-  .steps::before{display:none}
+  h1{font-size:2.4rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
   .pricing-grid{grid-template-columns:1fr}
-  .tgrid{grid-template-columns:1fr}
-  .who-grid{grid-template-columns:1fr 1fr}
   .sg{grid-template-columns:1fr}
-
-  /* guarantee */
-  .guarantee-box{flex-direction:column;gap:1rem;padding:1.4rem}
-
-  /* pricing */
-  .urgency-pill{font-size:0.65rem}
-  .plan.featured .pp{font-size:0.55rem}
-
-  /* waitlist form */
-  #lead-form [style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column}
-
-  /* footer */
-  footer{flex-direction:column;text-align:center;padding:2rem 1.2rem}
+  .proof-inner{flex-direction:column;align-items:flex-start;gap:1rem}
+  .footer-inner{flex-direction:column;text-align:center}
   .fl{justify-content:center}
-
-  /* about grid */
-  #about [style*="grid-template-columns:1fr 1fr"]{display:flex!important;flex-direction:column;gap:2rem}
-
-  /* hero buttons stack */
-  .btn-p,.btn-s{width:100%;text-align:center}
+  .hf-row{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr 1fr}
+  .tgrid{grid-template-columns:1fr 1fr}
+  .section{padding:4rem 1.5rem}
+  .hero{padding:5rem 1.5rem 4rem}
 }
-
-/* ── SMALL MOBILE (≤400px) ── */
-@media(max-width:400px){
+@media(max-width:480px){
+  h1{font-size:2rem}
+  .stitle{font-size:1.75rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
   .who-grid{grid-template-columns:1fr}
-  h1{font-size:2.1rem}
-  .hero-badge{font-size:0.62rem}
-  .nav-brand{font-size:1.3rem}
+  .tgrid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" onclick="location.reload();return false;" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" style="height:36px;width:36px;flex-shrink:0">
-      <defs>
-        <linearGradient id="zslash" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#00D4B8"/>
-          <stop offset="100%" stop-color="#0099DD"/>
-        </linearGradient>
-      </defs>
-      <!-- Z body (purple) -->
-      <rect x="3" y="2" width="38" height="11" fill="#7C5EF0"/>
-      <polygon points="41,13 41,20 3,32 3,25" fill="#7C5EF0"/>
-      <rect x="3" y="31" width="38" height="11" fill="#7C5EF0"/>
-      <!-- Cyan slash accent -->
-      <polygon points="28,13 41,13 16,32 3,32" fill="url(#zslash)"/>
-    </svg>
-    <span class="nav-brand" style="line-height:1">zevio</span>
-  </a>
-  <div class="nav-links">
-    <a href="#problem">The problem</a>
-    <a href="#solution">What I build</a>
-    <a href="#how">How it works</a>
-    <a href="#pricing">Pricing</a>
+  <div class="nav-inner">
+    <a href="/" onclick="location.reload();return false;" class="nav-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" style="height:34px;width:34px;flex-shrink:0">
+        <defs><linearGradient id="zsl" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00D4B8"/><stop offset="100%" stop-color="#0099DD"/></linearGradient></defs>
+        <rect x="3" y="2" width="38" height="11" fill="#5331cf"/>
+        <polygon points="41,13 41,20 3,32 3,25" fill="#5331cf"/>
+        <rect x="3" y="31" width="38" height="11" fill="#5331cf"/>
+        <polygon points="28,13 41,13 16,32 3,32" fill="url(#zsl)"/>
+      </svg>
+      <span class="brand">zevio</span>
+    </a>
+    <div class="nav-links">
+      <a href="#problem">The problem</a>
+      <a href="#solution">What I build</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/app" class="btn-ghost">Client Login</a>
+      <a href="#waitlist" class="btn-primary">Book a Free Call</a>
+    </div>
+    <button class="ham" id="ham" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <div class="nav-cta">
-    <a href="/app" class="btn-login">Client Login</a>
-    <a href="#waitlist" class="btn-demo">Book a Free Call</a>
-  </div>
-  <button class="ham" id="ham" onclick="toggleNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <div class="mobile-nav" id="mobile-nav">
@@ -310,105 +298,133 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   <a href="#how" onclick="closeNav()">How it works</a>
   <a href="#pricing" onclick="closeNav()">Pricing</a>
   <a href="/app" onclick="closeNav()">Client Login</a>
-  <a href="#waitlist" onclick="closeNav()" style="color:var(--violet-ll);font-weight:700">Book a Free Call →</a>
+  <a href="#waitlist" onclick="closeNav()">Book a Free Call →</a>
 </div>
 
 <!-- ══ HERO ══════════════════════════════════════════════════════ -->
 <div class="hero">
-  <div class="hero-mesh"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
   <div class="hero-inner">
-    <div class="hero-badge"><div class="bdot"></div> AI automation for UK local businesses</div>
-    <h1>I remove hours of daily admin<br/>from your <em>business.</em></h1>
-    <p class="hero-sub">Stop chasing WhatsApp messages, bookings, reviews, and follow-ups. Everything runs automatically so you can focus on your business.</p>
-    <p style="font-size:0.9rem;color:var(--success);margin-bottom:2rem">Most businesses save 10 to 15 hours per week and respond to customers instantly.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem">
-      <a href="#waitlist" class="btn-p">Book a free call &rarr;</a>
-      <a href="#solution" class="btn-s">See what I build</a>
+    <div>
+      <div class="hero-badge"><div class="bdot"></div> AI automation for UK local businesses</div>
+      <h1>I remove hours of<br/>daily admin from<br/>your <em>business.</em></h1>
+      <p class="hero-sub">Stop chasing WhatsApp messages, bookings, reviews, and follow-ups. Everything runs automatically so you can focus on what matters.</p>
+      <p class="hero-note">Most businesses save 10–15 hours per week and respond to customers instantly.</p>
+      <div class="hero-btns">
+        <a href="#waitlist" class="btn-hero-p">Book a free call &rarr;</a>
+        <a href="#solution" class="btn-secondary">See what I build</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-v">10h+</div><div class="hs-l">Saved/week</div></div>
+        <div class="hs"><div class="hs-v">Instant</div><div class="hs-l">Replies</div></div>
+        <div class="hs"><div class="hs-v">24h</div><div class="hs-l">Live &amp; running</div></div>
+        <div class="hs"><div class="hs-v">🇬🇧</div><div class="hs-l">UK based</div></div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hs"><div class="hs-v">10h+</div><div class="hs-l">Saved per week</div></div>
-      <div class="hs"><div class="hs-v">Instant</div><div class="hs-l">Customer replies</div></div>
-      <div class="hs"><div class="hs-v">24h</div><div class="hs-l">Live and running</div></div>
-      <div class="hs"><div class="hs-v">UK</div><div class="hs-l">Built &amp; based here</div></div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-mockup">
+            <div class="hm-row">
+              <div class="hm-dot" style="background:#5331cf"></div>
+              <div class="hm-text">WhatsApp reply sent — Damal Restaurant</div>
+            </div>
+            <div class="hm-row">
+              <div class="hm-dot" style="background:#006b5f"></div>
+              <div class="hm-text">Booking confirmed — Najma Restaurant</div>
+            </div>
+            <div class="hm-row">
+              <div class="hm-dot" style="background:#006b5f"></div>
+              <div class="hm-text">Google review responded — Star Barbers</div>
+            </div>
+            <div class="hm-bar-wrap">
+              <div class="hm-bar-label">Active automation: Lead Engine</div>
+              <div class="hm-bar-track"><div class="hm-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ PROOF BAR ═════════════════════════════════════════════════ -->
+<!-- ══ PROOF BAR ══════════════════════════════════════════════════ -->
 <div class="proof-bar">
   <div class="proof-inner">
-    <div class="proof-item">⭐⭐⭐⭐⭐ <strong>"3 hours of WhatsApp replies gone every morning"</strong> &nbsp; Restaurant Owner, London</div>
+    <div class="proof-item">⭐⭐⭐⭐⭐ <strong>"3 hours of WhatsApp replies — gone every morning"</strong></div>
     <div class="proof-item">🔒 <strong>No long contracts</strong>, cancel anytime</div>
-    <div class="proof-item">⚡ <strong>Live within 24 hours</strong>, we handle everything</div>
-    <div class="proof-item">🇬🇧 <strong>Built for UK local businesses</strong></div>
+    <div class="proof-item">⚡ <strong>Live within 24 hours</strong></div>
+    <div class="proof-item">🇬🇧 <strong>Built for UK businesses</strong></div>
   </div>
 </div>
 
 <!-- ══ PROBLEM ═══════════════════════════════════════════════════ -->
-<section class="problem" id="problem">
-  <div class="container" style="max-width:860px">
+<section class="section" id="problem">
+  <div class="container" style="max-width:760px">
     <div class="stag">The problem</div>
     <h2 class="stitle">Running a business today means <em>constant interruptions.</em></h2>
-    <div class="pains" style="margin-top:2rem">
-      <div class="pain"><div class="p-icon">💬</div><div class="p-text">Messages coming in all day</div></div>
-      <div class="pain"><div class="p-icon">🔁</div><div class="p-text">Customers asking the same questions</div></div>
-      <div class="pain"><div class="p-icon">📅</div><div class="p-text">Missed bookings because you were busy</div></div>
-      <div class="pain"><div class="p-icon">⭐</div><div class="p-text">Reviews not being collected</div></div>
-      <div class="pain"><div class="p-icon">📱</div><div class="p-text">Social media left behind</div></div>
+    <div class="section-underline"></div>
+    <div class="pains">
+      <div class="pain"><div class="p-icon">💬</div>Messages coming in all day, every day</div>
+      <div class="pain"><div class="p-icon">🔁</div>Customers asking the same questions over and over</div>
+      <div class="pain"><div class="p-icon">📅</div>Missed bookings because you were too busy to respond</div>
+      <div class="pain"><div class="p-icon">⭐</div>Reviews not being collected or responded to</div>
+      <div class="pain"><div class="p-icon">📱</div>Social media left behind while competitors grow</div>
     </div>
-    <div class="answer" style="margin-top:2rem">
-      <div class="answer-h">This is not just frustrating.<br/><em>It is costing you time, customers, and growth.</em></div>
+    <div class="answer-box">
+      <p>This is not just frustrating.<br/><em>It is costing you time, customers, and growth.</em></p>
     </div>
   </div>
 </section>
 
-<!-- ══ SHIFT ═════════════════════════════════════════════════════ -->
-<section style="text-align:center">
-  <div class="container" style="max-width:700px">
+<!-- ══ SHIFT ══════════════════════════════════════════════════════ -->
+<section class="section shift-section">
+  <div class="container" style="max-width:680px;text-align:center">
     <div class="stag">The shift</div>
     <h2 class="stitle">You do not need to work faster.<br/><em>You need the work gone.</em></h2>
     <p class="ssub" style="margin:0 auto">The businesses growing right now are not managing these tasks better. They have removed them completely.</p>
   </div>
 </section>
 
-<!-- ══ SOLUTION ══════════════════════════════════════════════════ -->
-<section class="problem" id="solution">
-  <div class="container" style="max-width:860px">
+<!-- ══ SOLUTION ═══════════════════════════════════════════════════ -->
+<section class="section" id="solution">
+  <div class="container">
     <div class="stag">What I build</div>
-    <h2 class="stitle">I build simple systems that handle your daily admin <em>automatically.</em></h2>
-    <p class="ssub" style="margin-bottom:2.5rem">No complicated software. No staff needed. Just systems that run in the background while you focus on the business.</p>
-    <div class="sg" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">
+    <h2 class="stitle">Simple systems that handle your daily admin <em>automatically.</em></h2>
+    <div class="section-underline"></div>
+    <p class="ssub" style="margin-top:1rem">No complicated software. No staff needed. Just systems that run in the background while you focus on the business.</p>
+    <div class="sg">
       <div class="sc">
-        <div class="s-icon">💬</div>
-        <div class="s-name">WhatsApp and message automation</div>
-        <div class="s-desc">Your customers get instant replies around the clock. Bookings, questions, menu enquiries. All handled without you touching your phone.</div>
+        <div class="sc-icon-wrap">💬</div>
+        <div class="s-name">WhatsApp & Message Automation</div>
+        <div class="s-desc">Your customers get instant replies around the clock. Bookings, questions, menu enquiries — all handled without you touching your phone.</div>
       </div>
       <div class="sc">
-        <div class="s-icon">📅</div>
-        <div class="s-name">Booking system</div>
+        <div class="sc-icon-wrap">📅</div>
+        <div class="s-name">Booking System</div>
         <div class="s-desc">Clients book themselves automatically. Confirmations sent instantly. Reminders before appointments. No more back and forth.</div>
       </div>
       <div class="sc">
-        <div class="s-icon">⭐</div>
-        <div class="s-name">Review collection</div>
-        <div class="s-desc">Customers leave reviews without being chased. Every review gets a professional response. Your reputation builds on autopilot.</div>
+        <div class="sc-icon-wrap">⭐</div>
+        <div class="s-name">Review Collection & Responses</div>
+        <div class="s-desc">Customers leave reviews without being chased. Every review gets a professional AI response. Your reputation builds on autopilot.</div>
       </div>
       <div class="sc">
-        <div class="s-icon">🔄</div>
-        <div class="s-name">Follow-ups</div>
-        <div class="s-desc">Customers come back automatically. Loyalty messages, re-engagement and reminders. The system keeps them coming back.</div>
+        <div class="sc-icon-wrap">🔄</div>
+        <div class="s-name">Follow-ups & Loyalty</div>
+        <div class="s-desc">Customers come back automatically. Loyalty messages, re-engagement and reminders keep them coming back without any effort.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ OUTCOME ═══════════════════════════════════════════════════ -->
-<section style="text-align:center">
-  <div class="container" style="max-width:860px">
+<!-- ══ OUTCOMES ════════════════════════════════════════════════════ -->
+<section class="section outcomes-section">
+  <div class="container" style="text-align:center">
     <div class="stag">What changes</div>
     <h2 class="stitle">Here is what actually <em>changes.</em></h2>
-    <div class="who-grid" style="margin-top:2rem">
+    <div class="who-grid">
       <div class="wc"><div class="w-icon">⏱</div><div class="w-name">More time back in your day</div></div>
       <div class="wc"><div class="w-icon">⚡</div><div class="w-name">Faster responses to every customer</div></div>
       <div class="wc"><div class="w-icon">📈</div><div class="w-name">More bookings without more effort</div></div>
@@ -417,39 +433,27 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   </div>
 </section>
 
-<!-- ══ PROOF ══════════════════════════════════════════════════════ -->
-<section style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="container" style="max-width:860px">
+<!-- ══ PROOF STATS ════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--surface)">
+  <div class="container">
     <div class="stag">Proof</div>
     <h2 class="stitle">Numbers that <em>matter.</em></h2>
-    <div class="tgrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-top:2rem">
-      <div class="tc" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet-ll);margin-bottom:0.5rem">10 to 15h</div>
-        <div style="font-size:0.85rem;color:var(--muted)">Saved every week per business</div>
-      </div>
-      <div class="tc" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet-ll);margin-bottom:0.5rem">Instant</div>
-        <div style="font-size:0.85rem;color:var(--muted)">Customer reply time</div>
-      </div>
-      <div class="tc" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet-ll);margin-bottom:0.5rem">More</div>
-        <div style="font-size:0.85rem;color:var(--muted)">Bookings with zero extra effort</div>
-      </div>
-      <div class="tc" style="text-align:center">
-        <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--violet-ll);margin-bottom:0.5rem">Zero</div>
-        <div style="font-size:0.85rem;color:var(--muted)">Missed customers</div>
-      </div>
+    <div class="tgrid">
+      <div class="tc"><div class="tc-val">10–15h</div><div class="tc-lbl">Saved every week per business</div></div>
+      <div class="tc"><div class="tc-val">Instant</div><div class="tc-lbl">Customer reply time, 24/7</div></div>
+      <div class="tc"><div class="tc-val">More</div><div class="tc-lbl">Bookings with zero extra effort</div></div>
+      <div class="tc"><div class="tc-val">Zero</div><div class="tc-lbl">Missed customers or reviews</div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ HOW IT WORKS ══════════════════════════════════════════════ -->
-<section class="how" id="how">
+<!-- ══ HOW IT WORKS ═══════════════════════════════════════════════ -->
+<section class="section shift-section" id="how">
   <div class="container" style="max-width:860px">
     <div class="stag">How it works</div>
     <h2 class="stitle">Simple. <em>Three steps.</em></h2>
     <div class="steps">
-      <div class="step"><div class="sn">1</div><div class="st">We review your current setup</div><div class="sd">I look at how you currently handle messages, bookings, reviews and follow-ups. We identify exactly what is costing you the most time.</div></div>
+      <div class="step"><div class="sn">1</div><div class="st">We review your current setup</div><div class="sd">I look at how you handle messages, bookings, reviews and follow-ups. We identify exactly what is costing you the most time.</div></div>
       <div class="step"><div class="sn">2</div><div class="st">I build your automation system</div><div class="sd">I configure and set up everything for your specific business. You do not need to learn any software or change how you work.</div></div>
       <div class="step"><div class="sn">3</div><div class="st">Everything runs automatically</div><div class="sd">From day one, your system handles the daily admin. Customers get instant responses. Bookings come in. Reviews get answered.</div></div>
     </div>
@@ -457,84 +461,85 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
 </section>
 
 <!-- ══ BEFORE / AFTER ════════════════════════════════════════════ -->
-<section style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<section class="section ba-section">
   <div class="container" style="max-width:860px">
     <div class="stag">Case example</div>
     <h2 class="stitle">Before and <em>after.</em></h2>
-    <div class="pgrid" style="margin-top:2rem">
-      <div style="background:var(--s1);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#F05252;font-weight:700;margin-bottom:1.2rem">Before</div>
-        <div class="pains">
-          <div class="pain" style="background:var(--s2);border-color:rgba(240,82,82,0.15)"><span style="color:#F05252;font-weight:700;flex-shrink:0">&#215;</span><div class="p-text">2 to 3 hours of daily admin every morning</div></div>
-          <div class="pain" style="background:var(--s2);border-color:rgba(240,82,82,0.15)"><span style="color:#F05252;font-weight:700;flex-shrink:0">&#215;</span><div class="p-text">Bookings missed or confirmed late</div></div>
-          <div class="pain" style="background:var(--s2);border-color:rgba(240,82,82,0.15)"><span style="color:#F05252;font-weight:700;flex-shrink:0">&#215;</span><div class="p-text">Reviews left unanswered</div></div>
-          <div class="pain" style="background:var(--s2);border-color:rgba(240,82,82,0.15)"><span style="color:#F05252;font-weight:700;flex-shrink:0">&#215;</span><div class="p-text">Constant interruptions during service</div></div>
+    <div class="pgrid">
+      <div class="ba-card">
+        <div class="ba-label" style="color:#e53935">Before</div>
+        <div class="ba-items">
+          <div class="ba-item ba-item-before"><span class="ba-icon" style="color:#e53935">✕</span>2–3 hours of daily admin every morning</div>
+          <div class="ba-item ba-item-before"><span class="ba-icon" style="color:#e53935">✕</span>Bookings missed or confirmed late</div>
+          <div class="ba-item ba-item-before"><span class="ba-icon" style="color:#e53935">✕</span>Reviews left unanswered</div>
+          <div class="ba-item ba-item-before"><span class="ba-icon" style="color:#e53935">✕</span>Constant interruptions during service</div>
         </div>
       </div>
-      <div style="background:var(--s1);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--success);font-weight:700;margin-bottom:1.2rem">After</div>
-        <div class="checks">
-          <div class="check"><span style="color:var(--success);font-weight:700;flex-shrink:0">&#10003;</span><div>Automation handles everything</div></div>
-          <div class="check"><span style="color:var(--success);font-weight:700;flex-shrink:0">&#10003;</span><div>Bookings confirmed automatically with reminders</div></div>
-          <div class="check"><span style="color:var(--success);font-weight:700;flex-shrink:0">&#10003;</span><div>Every review gets a professional response</div></div>
-          <div class="check"><span style="color:var(--success);font-weight:700;flex-shrink:0">&#10003;</span><div>Owner focused on the business</div></div>
+      <div class="ba-card">
+        <div class="ba-label" style="color:var(--secondary)">After</div>
+        <div class="ba-items">
+          <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Automation handles everything instantly</div>
+          <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Bookings confirmed automatically with reminders</div>
+          <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Every review gets a professional response</div>
+          <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Owner fully focused on the business</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ PRICING ══════════════════════════════════════════════════ -->
-<section style="background:var(--ink);border-top:1px solid var(--border)" id="pricing">
+<!-- ══ PRICING ════════════════════════════════════════════════════ -->
+<section class="section pricing-section" id="pricing">
   <div class="container">
     <div class="stag">Pricing</div>
     <h2 class="stitle">Simple pricing. <em>No contracts.</em></h2>
-    <p class="ssub">Setup is included on all plans. We do everything for you.</p>
-    <div class="urgency-pill" style="margin-top:1.5rem">Only 5 spots available this month — we limit onboarding so every setup is done properly</div>
+    <div class="section-underline"></div>
+    <p class="ssub" style="margin-top:1rem">Setup is included on all plans. We do everything for you.</p>
+    <div class="urgency-pill" style="display:block;margin-top:1.5rem;width:fit-content">Only 5 spots available this month — we limit onboarding so every setup is done properly</div>
     <div class="pricing-grid">
       <div class="plan">
         <div class="pn">Starter</div>
-        <div class="pr">&pound;197<span>/month</span></div>
+        <div class="pr">&pound;197<span>/mo</span></div>
         <div class="pd">Handle messages, bookings and reviews automatically</div>
         <ul class="pf">
-          <li><span class="tick">&#10003;</span> WhatsApp AI messaging</li>
-          <li><span class="tick">&#10003;</span> Google review responses</li>
-          <li><span class="tick">&#10003;</span> Booking confirmations</li>
-          <li><span class="tick">&#10003;</span> Business dashboard</li>
-          <li><span class="tick">&#10003;</span> Email &amp; chat support</li>
-          <li class="no"><span class="cross">&#215;</span> Social media calendar</li>
-          <li class="no"><span class="cross">&#215;</span> Online ordering</li>
+          <li><span class="tick">✓</span> WhatsApp AI messaging</li>
+          <li><span class="tick">✓</span> Google review responses</li>
+          <li><span class="tick">✓</span> Booking confirmations</li>
+          <li><span class="tick">✓</span> Business dashboard</li>
+          <li><span class="tick">✓</span> Email &amp; chat support</li>
+          <li class="no"><span class="cross">✕</span> Social media calendar</li>
+          <li class="no"><span class="cross">✕</span> Online ordering</li>
         </ul>
         <a href="#waitlist" onclick="setWaitlistPlan('Starter')" class="pb pb-f">Get started &rarr;</a>
       </div>
       <div class="plan featured">
         <div class="pp">Most popular</div>
         <div class="pn">Growth</div>
-        <div class="pr">&pound;297<span>/month</span></div>
+        <div class="pr">&pound;297<span>/mo</span></div>
         <div class="pd">Add social media and customer retention on top of everything in Starter</div>
         <ul class="pf">
-          <li><span class="tick">&#10003;</span> Everything in Starter</li>
-          <li><span class="tick">&#10003;</span> Social media content AI</li>
-          <li><span class="tick">&#10003;</span> 30-day content calendar</li>
-          <li><span class="tick">&#10003;</span> Bulk post generation</li>
-          <li><span class="tick">&#10003;</span> Customer loyalty programme</li>
-          <li><span class="tick">&#10003;</span> Priority support</li>
-          <li class="no"><span class="cross">&#215;</span> Online ordering system</li>
+          <li><span class="tick">✓</span> Everything in Starter</li>
+          <li><span class="tick">✓</span> Social media content AI</li>
+          <li><span class="tick">✓</span> 30-day content calendar</li>
+          <li><span class="tick">✓</span> Bulk post generation</li>
+          <li><span class="tick">✓</span> Customer loyalty programme</li>
+          <li><span class="tick">✓</span> Priority support</li>
+          <li class="no"><span class="cross">✕</span> Online ordering system</li>
         </ul>
         <a href="#waitlist" onclick="setWaitlistPlan('Growth')" class="pb pb-f">Get started &rarr;</a>
       </div>
       <div class="plan">
         <div class="pn">Pro</div>
-        <div class="pr">&pound;497<span>/month</span></div>
+        <div class="pr">&pound;497<span>/mo</span></div>
         <div class="pd">Full system with orders, payments and advanced automation</div>
         <ul class="pf">
-          <li><span class="tick">&#10003;</span> Everything in Growth</li>
-          <li><span class="tick">&#10003;</span> WhatsApp ordering system</li>
-          <li><span class="tick">&#10003;</span> Stripe online payments</li>
-          <li><span class="tick">&#10003;</span> Deposit management</li>
-          <li><span class="tick">&#10003;</span> Staff &amp; shift planner</li>
-          <li><span class="tick">&#10003;</span> Dedicated account manager</li>
-          <li><span class="tick">&#10003;</span> Custom AI workflows</li>
+          <li><span class="tick">✓</span> Everything in Growth</li>
+          <li><span class="tick">✓</span> WhatsApp ordering system</li>
+          <li><span class="tick">✓</span> Stripe online payments</li>
+          <li><span class="tick">✓</span> Deposit management</li>
+          <li><span class="tick">✓</span> Staff &amp; shift planner</li>
+          <li><span class="tick">✓</span> Dedicated account manager</li>
+          <li><span class="tick">✓</span> Custom AI workflows</li>
         </ul>
         <a href="#waitlist" onclick="setWaitlistPlan('Pro')" class="pb pb-f">Get started &rarr;</a>
       </div>
@@ -550,24 +555,24 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
   </div>
 </section>
 
-<!-- ══ WAITLIST CTA ═══════════════════════════════════════════════ -->
+<!-- ══ WAITLIST CTA ════════════════════════════════════════════════ -->
 <div class="waitlist-s" id="waitlist">
   <div class="container" style="max-width:580px">
-    <div class="urgency-pill">Limited spots. 5 businesses max this month</div>
+    <div class="urgency-pill" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.25)">Limited spots — 5 businesses max this month</div>
     <h2 class="cta-t">If you are still replying manually every day,<br/><em>you are doing work that should not exist anymore.</em></h2>
-    <p style="font-size:1rem;color:var(--muted);margin-bottom:2rem;line-height:1.7">Book a free 20-minute strategy call. I will show you exactly what can be automated in your business and what it looks like after. No pressure. Just clarity.</p>
+    <p class="cta-sub">Book a free 20-minute strategy call. I will show you exactly what can be automated in your business. No pressure. Just clarity.</p>
 
-    <form id="lead-form" style="display:flex;flex-direction:column;gap:0.85rem;text-align:left">
+    <form id="lead-form" class="lead-form">
       <input id="lead-plan" type="hidden" value="" />
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem">
+      <div class="hf-row">
         <input id="lead-name" type="text" placeholder="Your name *" required class="hf-input" />
         <input id="lead-email" type="email" placeholder="Email address *" required class="hf-input" />
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem">
+      <div class="hf-row">
         <input id="lead-phone" type="tel" placeholder="WhatsApp number" class="hf-input" />
         <input id="lead-business" type="text" placeholder="Business name" class="hf-input" />
       </div>
-      <select id="lead-type" class="hf-input" style="background:var(--s2);color:var(--muted)">
+      <select id="lead-type" class="hf-input">
         <option value="">Business type...</option>
         <option value="restaurant">Restaurant / Takeaway</option>
         <option value="barber">Barber Shop</option>
@@ -575,30 +580,28 @@ footer{padding:2.5rem 2rem;border-top:1px solid var(--border);display:flex;align
         <option value="cafe">Café / Coffee Shop</option>
         <option value="other">Other</option>
       </select>
-      <button type="submit" id="lead-btn" class="hf-submit" style="font-size:1rem;padding:1rem">Book your free strategy call &rarr;</button>
-      <div id="lead-msg" style="display:none;padding:0.75rem;font-size:0.88rem;text-align:center;border-radius:2px"></div>
+      <button type="submit" id="lead-btn" class="hf-submit">Book your free strategy call &rarr;</button>
+      <div id="lead-msg" style="display:none;padding:0.75rem;font-size:0.88rem;text-align:center;border-radius:0.6rem"></div>
     </form>
 
-    <p style="margin-top:1.2rem;font-size:0.78rem;color:var(--muted);text-align:center">
-      +44 7877 262518 &nbsp;&middot;&nbsp; akhyar@zevio.co.uk &nbsp;&middot;&nbsp; Based in the UK
-    </p>
+    <p class="form-contact">+44 7877 262518 &nbsp;&middot;&nbsp; akhyar@zevio.co.uk &nbsp;&middot;&nbsp; Based in the UK</p>
   </div>
 </div>
 
 <footer>
-  <div class="fb">Zevi<span>o</span></div>
-  <div class="fl">
-    <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="#waitlist">Get Started</a>
-    <a href="/app">Client Login</a>
+  <div class="footer-inner">
+    <div class="footer-brand">zevio</div>
+    <div class="fl">
+      <a href="#solution">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#waitlist">Get Started</a>
+      <a href="/app">Client Login</a>
+    </div>
+    <div class="fc">Built for UK local businesses who want to save time and grow.<br/>&copy; 2026 Zevio. All rights reserved. Registered in England &amp; Wales.</div>
   </div>
-  <div class="fc">Built for local businesses who want to save time, respond faster, and grow without burnout.<br/>&copy; 2026 Zevio. All rights reserved. Registered in England &amp; Wales.</div>
 </footer>
 
 <script>
-// Mobile nav
 function toggleNav(){
   document.getElementById('ham').classList.toggle('open')
   document.getElementById('mobile-nav').classList.toggle('open')
@@ -619,12 +622,11 @@ async function submitLead(name, email, phone, business_name, business_type, plan
   if (!res.ok) throw new Error()
 }
 
-// Pricing plan pre-fill
 function setWaitlistPlan(plan) {
   document.getElementById('lead-plan').value = plan
+  document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})
 }
 
-// Waitlist form
 document.getElementById('lead-form').addEventListener('submit', async function(e) {
   e.preventDefault()
   const btn = document.getElementById('lead-btn')
@@ -640,25 +642,17 @@ document.getElementById('lead-form').addEventListener('submit', async function(e
       document.getElementById('lead-type').value,
       document.getElementById('lead-plan').value || null
     )
-    msg.style.cssText = 'display:block;background:rgba(52,209,122,0.1);border:1px solid rgba(52,209,122,0.3);color:#34D17A'
+    msg.style.cssText = 'display:block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white'
     msg.textContent = "You're in! I'll be in touch within 24 hours. Check your email."
     document.getElementById('lead-form').reset()
   } catch {
-    msg.style.cssText = 'display:block;background:rgba(255,80,80,0.1);border:1px solid rgba(255,80,80,0.3);color:#ff5050'
+    msg.style.cssText = 'display:block;background:rgba(255,80,80,0.2);border:1px solid rgba(255,80,80,0.4);color:white'
     msg.textContent = 'Something went wrong. Please email akhyar@zevio.co.uk directly.'
   } finally {
-    btn.textContent = 'Book My Free Demo →'
+    btn.textContent = 'Book your free strategy call →'
     btn.disabled = false
   }
 })
-
-// FAQ accordion
-function toggleFaq(el) {
-  const item = el.parentElement
-  const isOpen = item.classList.contains('open')
-  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'))
-  if (!isOpen) item.classList.add('open')
-}
 </script>
 </body>
 </html>

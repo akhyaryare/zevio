@@ -1,25 +1,21 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html",   "use": "@vercel/static" },
-    { "src": "app.html",     "use": "@vercel/static" },
-    { "src": "me.html",      "use": "@vercel/static" },
-    { "src": "hub.html",     "use": "@vercel/static" },
-    { "src": "smart.html",   "use": "@vercel/static" },
-    { "src": "service.html", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "app.html",   "use": "@vercel/static" },
+    { "src": "me.html",    "use": "@vercel/static" },
+    { "src": "hub.html",   "use": "@vercel/static" },
+    { "src": "smart.html", "use": "@vercel/static" }
   ],
   "rewrites": [
     { "source": "/(.*)", "has": [{ "type": "host", "value": "hub.zevio.co.uk" }],   "destination": "/hub.html" },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "smart.zevio.co.uk" }], "destination": "/smart.html" }
-  ],
-  "routes": [
-    { "src": "/service",  "dest": "/service.html" },
-    { "src": "/me",       "dest": "/me.html" },
-    { "src": "/app",      "dest": "/app.html" },
-    { "src": "/app/(.*)", "dest": "/app.html" },
-    { "src": "/hub",      "dest": "/hub.html" },
-    { "src": "/smart",    "dest": "/smart.html" },
-    { "src": "/(.*)",     "dest": "/index.html" }
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "smart.zevio.co.uk" }], "destination": "/smart.html" },
+    { "source": "/me",       "destination": "/me.html" },
+    { "source": "/app",      "destination": "/app.html" },
+    { "source": "/app/(.*)", "destination": "/app.html" },
+    { "source": "/hub",      "destination": "/hub.html" },
+    { "source": "/smart",    "destination": "/smart.html" },
+    { "source": "/((?!index\\.html$).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

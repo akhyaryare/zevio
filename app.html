@@ -763,6 +763,7 @@ document.addEventListener('DOMContentLoaded', applyLogos);
         <div class="sb-mrr-sub">↑ vs last month</div>
       </div>
       <div class="sb-back" id="sb-back-btn" onclick="backToAdmin()">← Back to Admin</div>
+      <div class="sb-back" onclick="logout()" style="margin-top:0.5rem;color:var(--danger)">⎋ Sign Out</div>
     </div>
   </aside>
   <div class="dash-main">
@@ -2600,14 +2601,14 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-// Check existing Supabase session on load
+// Check existing Supabase session on load — use getUser() for fresh metadata
 try{
   const _sb=getSb();
-  if(_sb) _sb.auth.getSession().then(({data:{session}})=>{
-    if(session){
-      const meta=session.user.user_metadata||{};
+  if(_sb) _sb.auth.getUser().then(({data:{user}})=>{
+    if(user){
+      const meta=user.user_metadata||{};
       const role=meta.role||'client';
-      currentUser={email:session.user.email,id:session.user.id,role};
+      currentUser={email:user.email,id:user.id,role};
       if(role==='admin'){ showScreen('admin'); renderAdmin(); }
       else {
         const bizId=meta.business_id;

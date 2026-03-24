@@ -1576,14 +1576,9 @@ async function genGoogleRv(i,sentiment,encodedSummary){
   const card=document.getElementById('grv'+i);
   card.style.display='flex';
   el.textContent='Generating…';
-  const prompt=`Write a short, professional and warm Google review response for a ${currentBiz?.industry||'restaurant'}. The review sentiment is ${sentiment}. Review summary: "${summary}". Keep it under 60 words. Sign off as the ${currentBiz?.name||'team'} team.`;
-  try{
-    const sb=getSb();
-    const {data,error}=await sb.functions.invoke('ai-generate',{body:{prompt}});
-    el.textContent=data?.text||'Thank you so much for your kind review! We really appreciate your support and hope to see you again soon.';
-  }catch(e){
-    el.textContent='Thank you so much for taking the time to leave a review! We really appreciate your support.';
-  }
+  const tones={positive:'warm, grateful, encourage return visit',neutral:'appreciative, acknowledge feedback, invite back',negative:'sincerely apologetic, take responsibility, offer to resolve'};
+  const r=await ai('Google review response for '+currentBiz.name+' in '+currentBiz.city+'. Sentiment: '+sentiment+'. Review: "'+summary+'". Tone: '+(tones[sentiment]||tones.positive)+'. 3-4 sentences. Professional and warm. Sign off "'+currentBiz.name+' Team". No markdown.');
+  el.textContent=r;
 }
 
 let currentUser=null, currentBiz=null, cart=[], orderType='Delivery', payMethod='card';

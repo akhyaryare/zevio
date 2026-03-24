@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', applyLogos);
 <!-- ════════════════════════════
      LOGIN
 ════════════════════════════ -->
-<div class="screen active" id="scr-login">
+<div class="screen" id="scr-login">
   <div class="login-mesh"></div>
   <div class="login-grid"></div>
   <div class="login-rings">
@@ -2600,6 +2600,10 @@ document.addEventListener('keydown', function(e){
     doLogin();
   }
 });
+
+// Immediately lock down all screens — only show login until auth check completes
+document.querySelectorAll('.screen').forEach(s=>{ s.style.display='none'; s.classList.remove('active'); });
+showScreen('login');
 
 // Check existing Supabase session on load — use getUser() for fresh metadata
 try{

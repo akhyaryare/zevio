@@ -1536,8 +1536,6 @@ function setLoginMode(mode){
   document.getElementById('li-pass').value='';
 }
 
-const ADMIN_EMAIL = 'hello@zevio.co.uk';
-
 async function doLogin(){
   const email=document.getElementById('li-email').value.trim().toLowerCase();
   const pass=document.getElementById('li-pass').value;
@@ -1551,33 +1549,35 @@ async function doLogin(){
 
   if(error){errEl.style.display='block';errEl.textContent='Incorrect email or password.';return;}
 
-  const isAdmin = email===ADMIN_EMAIL;
+  const meta=data.user.user_metadata||{};
+  const role=meta.role||'client';
 
-  // Enforce mode: admin tab must be used for admin, client tab for clients
-  if(loginMode==='admin' && !isAdmin){
+  // Enforce mode matches role
+  if(loginMode==='admin' && role!=='admin'){
     errEl.style.display='block';
     errEl.textContent='Invalid admin credentials.';
     await getSb().auth.signOut();
     return;
   }
-  if(loginMode==='client' && isAdmin){
+  if(loginMode==='client' && role==='admin'){
     errEl.style.display='block';
     errEl.textContent='Use the Admin tab to sign in as admin.';
     await getSb().auth.signOut();
     return;
   }
 
-  currentUser={email:data.user.email,id:data.user.id,role:isAdmin?'admin':'client'};
+  currentUser={email:data.user.email,id:data.user.id,role};
 
-  if(isAdmin){
+  if(role==='admin'){
     showScreen('admin');renderAdmin();
   } else {
-    const biz=businesses.find(b=>b.email&&b.email.toLowerCase()===email);
+    const bizId=meta.business_id;
+    const biz=bizId?businesses.find(b=>b.id===bizId):null;
     if(biz){
       enterBiz(biz.id);
     } else {
       errEl.style.display='block';
-      errEl.textContent='No account found for this email. Contact Akhyar at akhyar@zevio.co.uk.';
+      errEl.textContent='No account found. Contact Akhyar at akhyar@zevio.co.uk.';
       await getSb().auth.signOut();
       currentUser=null;
     }
@@ -2594,12 +2594,13 @@ try{
   const _sb=getSb();
   if(_sb) _sb.auth.getSession().then(({data:{session}})=>{
     if(session){
-      const email=session.user.email.toLowerCase();
-      const isAdmin=email===ADMIN_EMAIL;
-      currentUser={email:session.user.email,id:session.user.id,role:isAdmin?'admin':'client'};
-      if(isAdmin){ showScreen('admin'); renderAdmin(); }
+      const meta=session.user.user_metadata||{};
+      const role=meta.role||'client';
+      currentUser={email:session.user.email,id:session.user.id,role};
+      if(role==='admin'){ showScreen('admin'); renderAdmin(); }
       else {
-        const biz=businesses.find(b=>b.email&&b.email.toLowerCase()===email);
+        const bizId=meta.business_id;
+        const biz=bizId?businesses.find(b=>b.id===bizId):null;
         if(biz){ enterBiz(biz.id); }
         else { _sb.auth.signOut(); currentUser=null; }
       }

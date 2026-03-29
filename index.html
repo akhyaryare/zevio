@@ -77,8 +77,8 @@ h1 em{font-style:normal;color:var(--primary-c)}
 .hero-sub{font-size:1.15rem;color:var(--on-surface-v);line-height:1.7;max-width:480px;margin-bottom:1rem;font-weight:400}
 .hero-note{font-size:0.9rem;color:var(--secondary);font-weight:600;margin-bottom:2rem}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
-.btn-secondary{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s;box-shadow:0 4px 20px rgba(83,49,207,0.35);display:inline-flex;align-items:center;gap:0.4rem}
-.btn-secondary:hover{opacity:0.92;transform:translateY(-1px)}
+.btn-secondary{background:var(--surface-high);color:var(--on-surface);font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s;display:inline-flex;align-items:center;gap:0.4rem}
+.btn-secondary:hover{background:var(--surface-highest);transform:translateY(-1px)}
 .btn-hero-p{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:0.85rem 2rem;border:none;cursor:pointer;text-decoration:none;border-radius:0.75rem;transition:all 0.15s;box-shadow:0 4px 20px rgba(83,49,207,0.35);display:inline-flex;align-items:center;gap:0.4rem}
 .btn-hero-p:hover{opacity:0.92;transform:translateY(-1px)}
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -166,8 +166,18 @@ h1 em{font-style:normal;color:var(--primary-c)}
 
 /* ── PRICING ── */
 .pricing-section{background:var(--surface)}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;align-items:start}
 .plan{background:linear-gradient(160deg,var(--primary) 0%,var(--primary-c) 100%);color:white;border-radius:1.25rem;padding:2rem;box-shadow:0 20px 40px rgba(83,49,207,0.35);display:flex;flex-direction:column}
+.plan-alt{background:var(--surface-lowest);color:var(--on-surface);border-radius:1.25rem;padding:2rem;box-shadow:var(--shadow);border:1.5px solid var(--outline);display:flex;flex-direction:column}
+.plan-alt .pn{color:var(--on-surface)}
+.plan-alt .pr{color:var(--primary)}
+.plan-alt .pr span{font-size:1rem;font-weight:400;color:var(--on-surface-v);opacity:1}
+.plan-alt .pd{color:var(--on-surface-v);border-bottom:1px solid var(--outline);margin-bottom:1.5rem;padding-bottom:1.5rem}
+.plan-alt .pf li{color:var(--on-surface);font-size:0.82rem;font-weight:500}
+.plan-alt .pf li.no{opacity:0.4}
+.plan-alt .tick{color:var(--secondary);font-weight:800}
+.plan-alt .cross{color:var(--on-surface-v)}
+.plan-alt .pb-f{background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;box-shadow:0 4px 14px rgba(83,49,207,0.3)}
 .pp{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.75rem}
 .pn{font-family:'Epilogue',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:0.5rem;color:white}
 .pr{font-family:'Epilogue',sans-serif;font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:0.25rem;color:white}
@@ -488,7 +498,7 @@ footer{background:var(--on-surface);padding:3rem 2rem}
     <p class="ssub" style="margin-top:1rem">Setup is included on all plans. We do everything for you.</p>
     <div class="urgency-pill" style="display:block;margin-top:1.5rem;width:fit-content">Only 5 spots available this month — we limit onboarding so every setup is done properly</div>
     <div class="pricing-grid">
-      <div class="plan">
+      <div class="plan-alt">
         <div class="pn">Starter</div>
         <div class="pr">&pound;197<span>/mo</span></div>
         <div class="pd">Handle messages, bookings and reviews automatically</div>
@@ -519,7 +529,7 @@ footer{background:var(--on-surface);padding:3rem 2rem}
         </ul>
         <a href="#waitlist" onclick="setWaitlistPlan('Growth')" class="pb pb-f">Get started &rarr;</a>
       </div>
-      <div class="plan">
+      <div class="plan-alt">
         <div class="pn">Pro</div>
         <div class="pr">&pound;497<span>/mo</span></div>
         <div class="pd">Full system with orders, payments and advanced automation</div>

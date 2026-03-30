@@ -6,6 +6,7 @@
 <title>Zevio — AI Automation for UK Restaurants & Local Businesses</title>
 <meta name="description" content="Zevio automates your WhatsApp messages, Google reviews, social media, bookings and online orders. Built for UK restaurants, barbers and salons.">
 <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6630575697274733" crossorigin="anonymous"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -261,6 +262,44 @@ footer{background:var(--on-surface);padding:3rem 2rem}
   .tgrid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
 }
+
+/* ── MATERIAL ICONS ── */
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:1.5rem;line-height:1;vertical-align:middle}
+.sc-icon-wrap .material-symbols-outlined{font-size:1.5rem;color:var(--primary)}
+.w-icon .material-symbols-outlined{font-size:1.8rem;color:var(--primary)}
+.p-icon .material-symbols-outlined{font-size:1.2rem;color:var(--primary)}
+
+/* ── GUIDE STRIP ── */
+.guide-strip{background:var(--surface-low);padding:4rem 2rem}
+.guide-strip-inner{max-width:700px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.guide-label{font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:0.6rem}
+.guide-title{font-family:'Epilogue',sans-serif;font-size:1.6rem;font-weight:800;color:var(--on-surface);letter-spacing:-0.02em;line-height:1.2;margin-bottom:0.75rem}
+.guide-sub{font-size:0.88rem;color:var(--on-surface-v);line-height:1.65;font-weight:400}
+.guide-form{display:flex;flex-direction:column;gap:0.65rem}
+.gf-input{background:white;border:1.5px solid var(--outline);color:var(--on-surface);padding:0.8rem 1rem;font-size:0.88rem;font-family:'Manrope',sans-serif;font-weight:500;outline:none;width:100%;transition:border-color 0.15s;border-radius:0.6rem}
+.gf-input:focus{border-color:var(--primary)}
+.gf-input::placeholder{color:var(--on-surface-v);opacity:0.65}
+.gf-submit{width:100%;background:linear-gradient(135deg,var(--primary),var(--primary-c));color:white;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.9rem;padding:0.85rem;border:none;cursor:pointer;border-radius:0.75rem;transition:all 0.15s;box-shadow:0 4px 14px rgba(83,49,207,0.3);letter-spacing:0.01em}
+.gf-submit:hover{opacity:0.92;transform:translateY(-1px)}
+.gf-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.gf-note{font-size:0.72rem;color:var(--on-surface-v);text-align:center;font-weight:500}
+@media(max-width:640px){.guide-strip-inner{grid-template-columns:1fr;gap:1.5rem}}
+
+/* ── COMPARISON TABLE ── */
+.cmp-table{width:100%;border-radius:1.25rem;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--outline);margin-top:3rem}
+.cmp-head{display:grid;grid-template-columns:1.5fr 1fr 1fr}
+.cmp-head div{padding:1.1rem 1.5rem;font-family:'Epilogue',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--on-surface-v);background:var(--surface-high)}
+.cmp-head .col-zevio{background:var(--primary);color:white}
+.cmp-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;border-top:1px solid var(--outline)}
+.cmp-row:nth-child(odd) div{background:var(--surface-lowest)}
+.cmp-row div{padding:1.1rem 1.5rem;font-size:0.88rem;font-weight:500;display:flex;align-items:center;gap:0.5rem;background:var(--surface)}
+.cmp-row .col-label{font-weight:700;color:var(--on-surface)}
+.cmp-row .col-before{color:var(--on-surface-v)}
+.cmp-row .col-zevio{color:var(--primary);font-weight:700;background:rgba(83,49,207,0.04)!important}
+@media(max-width:600px){
+  .cmp-head,.cmp-row{grid-template-columns:1fr 1fr}
+  .cmp-head div:first-child,.cmp-row .col-label{display:none}
+}
 </style>
 </head>
 <body>
@@ -367,11 +406,11 @@ footer{background:var(--on-surface);padding:3rem 2rem}
     <h2 class="stitle">Running a business today means <em>constant interruptions.</em></h2>
     <div class="section-underline"></div>
     <div class="pains">
-      <div class="pain"><div class="p-icon">💬</div>Messages coming in all day, every day</div>
-      <div class="pain"><div class="p-icon">🔁</div>Customers asking the same questions over and over</div>
-      <div class="pain"><div class="p-icon">📅</div>Missed bookings because you were too busy to respond</div>
-      <div class="pain"><div class="p-icon">⭐</div>Reviews not being collected or responded to</div>
-      <div class="pain"><div class="p-icon">📱</div>Social media left behind while competitors grow</div>
+      <div class="pain"><div class="p-icon"><span class="material-symbols-outlined">chat</span></div>Messages coming in all day, every day</div>
+      <div class="pain"><div class="p-icon"><span class="material-symbols-outlined">replay</span></div>Customers asking the same questions over and over</div>
+      <div class="pain"><div class="p-icon"><span class="material-symbols-outlined">event_busy</span></div>Missed bookings because you were too busy to respond</div>
+      <div class="pain"><div class="p-icon"><span class="material-symbols-outlined">star</span></div>Reviews not being collected or responded to</div>
+      <div class="pain"><div class="p-icon"><span class="material-symbols-outlined">smartphone</span></div>Social media left behind while competitors grow</div>
     </div>
     <div class="answer-box">
       <p>This is not just frustrating.<br/><em>It is costing you time, customers, and growth.</em></p>
@@ -397,22 +436,22 @@ footer{background:var(--on-surface);padding:3rem 2rem}
     <p class="ssub" style="margin-top:1rem">No complicated software. No staff needed. Just systems that run in the background while you focus on the business.</p>
     <div class="sg">
       <div class="sc">
-        <div class="sc-icon-wrap">💬</div>
+        <div class="sc-icon-wrap"><span class="material-symbols-outlined">chat_bubble</span></div>
         <div class="s-name">WhatsApp & Message Automation</div>
         <div class="s-desc">Your customers get instant replies around the clock. Bookings, questions, menu enquiries — all handled without you touching your phone.</div>
       </div>
       <div class="sc">
-        <div class="sc-icon-wrap">📅</div>
+        <div class="sc-icon-wrap"><span class="material-symbols-outlined">calendar_month</span></div>
         <div class="s-name">Booking System</div>
         <div class="s-desc">Clients book themselves automatically. Confirmations sent instantly. Reminders before appointments. No more back and forth.</div>
       </div>
       <div class="sc">
-        <div class="sc-icon-wrap">⭐</div>
+        <div class="sc-icon-wrap"><span class="material-symbols-outlined">star_rate</span></div>
         <div class="s-name">Review Collection & Responses</div>
         <div class="s-desc">Customers leave reviews without being chased. Every review gets a professional AI response. Your reputation builds on autopilot.</div>
       </div>
       <div class="sc">
-        <div class="sc-icon-wrap">🔄</div>
+        <div class="sc-icon-wrap"><span class="material-symbols-outlined">loyalty</span></div>
         <div class="s-name">Follow-ups & Loyalty</div>
         <div class="s-desc">Customers come back automatically. Loyalty messages, re-engagement and reminders keep them coming back without any effort.</div>
       </div>
@@ -426,10 +465,10 @@ footer{background:var(--on-surface);padding:3rem 2rem}
     <div class="stag">What changes</div>
     <h2 class="stitle">Here is what actually <em>changes.</em></h2>
     <div class="who-grid">
-      <div class="wc"><div class="w-icon">⏱</div><div class="w-name">More time back in your day</div></div>
-      <div class="wc"><div class="w-icon">⚡</div><div class="w-name">Faster responses to every customer</div></div>
-      <div class="wc"><div class="w-icon">📈</div><div class="w-name">More bookings without more effort</div></div>
-      <div class="wc"><div class="w-icon">✅</div><div class="w-name">A business that feels under control</div></div>
+      <div class="wc"><div class="w-icon"><span class="material-symbols-outlined">schedule</span></div><div class="w-name">More time back in your day</div></div>
+      <div class="wc"><div class="w-icon"><span class="material-symbols-outlined">bolt</span></div><div class="w-name">Faster responses to every customer</div></div>
+      <div class="wc"><div class="w-icon"><span class="material-symbols-outlined">trending_up</span></div><div class="w-name">More bookings without more effort</div></div>
+      <div class="wc"><div class="w-icon"><span class="material-symbols-outlined">check_circle</span></div><div class="w-name">A business that feels under control</div></div>
     </div>
   </div>
 </section>
@@ -484,6 +523,47 @@ footer{background:var(--on-surface);padding:3rem 2rem}
           <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Every review gets a professional response</div>
           <div class="ba-item ba-item-after"><span class="ba-icon" style="color:var(--secondary)">✓</span>Owner fully focused on the business</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPARISON TABLE ════════════════════════════════════════════ -->
+<section class="section cmp-section">
+  <div class="container">
+    <div class="stag">The difference</div>
+    <h2 class="stitle">Manual vs <em>automated.</em></h2>
+    <div class="section-underline"></div>
+    <div class="cmp-table">
+      <div class="cmp-head">
+        <div>Metric</div>
+        <div>Without Zevio</div>
+        <div class="col-zevio">With Zevio</div>
+      </div>
+      <div class="cmp-row">
+        <div class="col-label">Customer reply time</div>
+        <div class="col-before">2–6 hours (or missed)</div>
+        <div class="col-zevio">Under 1 minute, 24/7</div>
+      </div>
+      <div class="cmp-row">
+        <div class="col-label">Admin hours per week</div>
+        <div class="col-before">15–20 hours</div>
+        <div class="col-zevio">~1 hour (review only)</div>
+      </div>
+      <div class="cmp-row">
+        <div class="col-label">Booking completion</div>
+        <div class="col-before">45% drop-off</div>
+        <div class="col-zevio">Confirmed automatically</div>
+      </div>
+      <div class="cmp-row">
+        <div class="col-label">Google reviews</div>
+        <div class="col-before">Unanswered for weeks</div>
+        <div class="col-zevio">Responded within hours</div>
+      </div>
+      <div class="cmp-row">
+        <div class="col-label">Scalability</div>
+        <div class="col-before">Hire more staff</div>
+        <div class="col-zevio">Infinitely scalable</div>
       </div>
     </div>
   </div>
@@ -556,6 +636,26 @@ footer{background:var(--on-surface);padding:3rem 2rem}
   </div>
 </section>
 
+<!-- ══ GUIDE CAPTURE ═══════════════════════════════════════════════ -->
+<div class="guide-strip">
+  <div class="guide-strip-inner">
+    <div>
+      <div class="guide-label">Free guide</div>
+      <h2 class="guide-title">How UK restaurants save 10+ hours a week</h2>
+      <p class="guide-sub">A plain-English breakdown of the exact automations we set up — what they do, how they work, and what changes for you from day one. No signup needed to read it.</p>
+    </div>
+    <div>
+      <form id="guide-form" class="guide-form">
+        <input id="guide-name" type="text" placeholder="Your first name *" required class="gf-input" />
+        <input id="guide-email" type="email" placeholder="Email address *" required class="gf-input" />
+        <button type="submit" id="guide-btn" class="gf-submit">Send me the free guide &rarr;</button>
+        <div id="guide-msg" style="display:none;padding:0.65rem;font-size:0.82rem;text-align:center;border-radius:0.6rem"></div>
+        <p class="gf-note">No spam. One email with the guide, that's it.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- ══ WAITLIST CTA ════════════════════════════════════════════════ -->
 <div class="waitlist-s" id="waitlist">
   <div class="container" style="max-width:580px">
@@ -627,6 +727,30 @@ function setWaitlistPlan(plan) {
   document.getElementById('lead-plan').value = plan
   document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})
 }
+
+document.getElementById('guide-form').addEventListener('submit', async function(e) {
+  e.preventDefault()
+  const btn = document.getElementById('guide-btn')
+  const msg = document.getElementById('guide-msg')
+  btn.textContent = 'Sending...'
+  btn.disabled = true
+  try {
+    await submitLead(
+      document.getElementById('guide-name').value,
+      document.getElementById('guide-email').value,
+      '', '', 'guide', 'guide'
+    )
+    msg.style.cssText = 'display:block;background:rgba(83,49,207,0.08);border:1px solid rgba(83,49,207,0.2);color:var(--primary)'
+    msg.textContent = "Guide sent! Check your inbox in the next few minutes."
+    document.getElementById('guide-form').reset()
+  } catch {
+    msg.style.cssText = 'display:block;background:rgba(186,26,26,0.06);border:1px solid rgba(186,26,26,0.2);color:var(--danger)'
+    msg.textContent = 'Something went wrong. Email akhyar@zevio.co.uk directly.'
+  } finally {
+    btn.textContent = 'Send me the free guide →'
+    btn.disabled = false
+  }
+})
 
 document.getElementById('lead-form').addEventListener('submit', async function(e) {
   e.preventDefault()

@@ -190,16 +190,45 @@ Deno.serve(async (req) => {
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
     if (RESEND_API_KEY) {
       const first = name.split(' ')[0]
+      const isGuide = business_type === 'guide'
 
-      // Welcome email to the customer
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: 'Akhyar at Zevio <akhyar@zevio.co.uk>',
-          to: [email],
-          subject: `Thanks ${first} — I'll be in touch within 24 hours`,
-          html: `
+      const welcomeSubject = isGuide
+        ? `${first}, here's your free guide`
+        : `Thanks ${first} — I'll be in touch within 24 hours`
+
+      const welcomeHtml = isGuide ? `
+<div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111;padding:24px">
+  <h2 style="font-size:22px;margin-bottom:12px">Hi ${first}, here's your free guide.</h2>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-bottom:20px">
+    As promised — a plain-English breakdown of how UK restaurants and local businesses save 10+ hours a week using automation.
+  </p>
+  <div style="text-align:center;margin:28px 0">
+    <a href="https://d2xsxph8kpxj0f.cloudfront.net/310519663441971387/bNPBmJQSAsJk8e4oxFv6MX/5_hours_saved_guide_6cda5000.pdf"
+       style="display:inline-block;background:#5331cf;color:white;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:700;font-size:16px">
+      Download your free guide →
+    </a>
+  </div>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-bottom:12px"><strong>What's inside:</strong></p>
+  <ul style="font-size:15px;line-height:2;color:#444;padding-left:20px">
+    <li>The 5 automations that save the most time</li>
+    <li>How WhatsApp automation works (and what it replies)</li>
+    <li>How to stop losing bookings to slow responses</li>
+    <li>Real results from UK restaurants using these systems</li>
+  </ul>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-top:20px">
+    If you want to see it set up for your specific business — I do a free 20-minute walkthrough. No pressure, just clarity.
+  </p>
+  <a href="https://zevio.co.uk/#waitlist"
+     style="display:inline-block;background:#f2f3fc;color:#5331cf;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:700;font-size:14px;margin-top:8px;border:1.5px solid #c9beff">
+    Book a free walkthrough
+  </a>
+  <p style="font-size:15px;line-height:1.7;color:#444;margin-top:24px">
+    — Akhyar<br/>Founder, Zevio<br/>
+    <a href="tel:+447877262518">+44 7877 262518</a>
+  </p>
+  <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
+  <p style="font-size:12px;color:#999">Zevio · AI Automation for Local Businesses · <a href="https://zevio.co.uk">zevio.co.uk</a></p>
+</div>` : `
 <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111;padding:24px">
   <h2 style="font-size:22px;margin-bottom:12px">Hi ${first}, thanks for reaching out.</h2>
   <p style="font-size:15px;line-height:1.7;color:#444;margin-bottom:12px">
@@ -218,6 +247,16 @@ Deno.serve(async (req) => {
   <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
   <p style="font-size:12px;color:#999">Zevio · AI Automation for Local Businesses · <a href="https://zevio.co.uk">zevio.co.uk</a></p>
 </div>`
+
+      // Welcome / guide email to the customer
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: 'Akhyar at Zevio <akhyar@zevio.co.uk>',
+          to: [email],
+          subject: welcomeSubject,
+          html: welcomeHtml,
         })
       })
 
@@ -231,7 +270,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           from: 'Zevio <akhyar@zevio.co.uk>',
           to: ['abdisamadahmed114@gmail.com'],
-          subject: `🔥 New lead: ${name} — ${business_type || 'Unknown'} — ${plan || 'No plan'}`,
+          subject: isGuide ? `📥 Guide download: ${name} — ${email}` : `🔥 New lead: ${name} — ${business_type || 'Unknown'} — ${plan || 'No plan'}`,
           html: `
 <div style="font-family:sans-serif;padding:24px;max-width:560px">
   <h2 style="color:#5B3FD4">New lead from zevio.co.uk</h2>

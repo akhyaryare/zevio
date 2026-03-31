@@ -5,7 +5,9 @@
     { "src": "app.html",   "use": "@vercel/static" },
     { "src": "me.html",    "use": "@vercel/static" },
     { "src": "hub.html",   "use": "@vercel/static" },
-    { "src": "smart.html", "use": "@vercel/static" }
+    { "src": "smart.html", "use": "@vercel/static" },
+    { "src": "*.jpg",      "use": "@vercel/static" },
+    { "src": "*.png",      "use": "@vercel/static" }
   ],
   "rewrites": [
     { "source": "/(.*)", "has": [{ "type": "host", "value": "hub.zevio.co.uk" }],   "destination": "/hub.html" },

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zevio — AI Content Creation | Join Waitlist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #0f0f0f; --gray-600: #6b7280; --gray-400: #9ca3af; --gray-200: #e5e7eb; --gray-50: #f9fafb; --accent: #6366f1; --accent-dark: #4f46e5; --accent-light: #eef2ff; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); }
+    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--black); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    nav a.back { color: var(--gray-600); font-size: 0.875rem; text-decoration: none; }
+    nav a.back:hover { color: var(--accent); }
+    .hero { padding: 160px 5% 100px; text-align: center; max-width: 800px; margin: 0 auto; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.8rem; font-weight: 600; padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; color: var(--black); margin-bottom: 22px; }
+    h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: 1.15rem; color: var(--gray-600); max-width: 560px; margin: 0 auto 48px; font-weight: 400; line-height: 1.7; }
+    .waitlist-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto 16px; flex-wrap: wrap; justify-content: center; }
+    .waitlist-form input { flex: 1; min-width: 240px; padding: 14px 18px; border: 1.5px solid var(--gray-200); border-radius: 10px; font-family: inherit; font-size: 0.95rem; color: var(--black); background: var(--white); outline: none; transition: border-color 0.2s; }
+    .waitlist-form input:focus { border-color: var(--accent); }
+    .waitlist-form input::placeholder { color: var(--gray-400); }
+    .waitlist-form button { padding: 14px 28px; background: var(--accent); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; white-space: nowrap; }
+    .waitlist-form button:hover { background: var(--accent-dark); }
+    .waitlist-form button:active { transform: scale(0.98); }
+    .form-note { font-size: 0.8rem; color: var(--gray-400); }
+    .success-msg { display: none; background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #15803d; border-radius: 10px; padding: 14px 24px; font-size: 0.9rem; font-weight: 500; max-width: 480px; margin: 0 auto; text-align: center; }
+    .social-proof { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+    .avatars { display: flex; }
+    .avatar { width: 34px; height: 34px; border-radius: 50%; border: 2px solid white; margin-left: -8px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; color: white; }
+    .avatar:first-child { margin-left: 0; }
+    .av1 { background: #818cf8; } .av2 { background: #f472b6; } .av3 { background: #34d399; } .av4 { background: #fb923c; }
+    .social-text { font-size: 0.875rem; color: var(--gray-600); }
+    .social-text strong { color: var(--black); font-weight: 600; }
+    .stars { color: #facc15; letter-spacing: 1px; }
+    .divider { height: 1px; background: var(--gray-200); max-width: 1100px; margin: 0 auto; }
+    .section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; text-align: center; }
+    .section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; text-align: center; margin-bottom: 12px; color: var(--black); }
+    .section-sub { text-align: center; color: var(--gray-600); font-size: 1rem; max-width: 500px; margin: 0 auto 48px; line-height: 1.7; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .step { padding: 28px 24px; border: 1.5px solid var(--gray-200); border-radius: 14px; background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; }
+    .step:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(99,102,241,0.08); }
+    .step-num { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-light); color: var(--accent-dark); font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+    .step p { font-size: 0.875rem; color: var(--gray-600); line-height: 1.65; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .feature-card { display: flex; gap: 16px; padding: 24px; background: var(--gray-50); border-radius: 14px; border: 1.5px solid var(--gray-200); }
+    .feature-icon { font-size: 1.4rem; flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: var(--black); }
+    .feature-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.6; }
+    .cta-section { padding: 80px 5%; background: var(--gray-50); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 14px; color: var(--black); }
+    .cta-section p { color: var(--gray-600); margin-bottom: 36px; font-size: 1rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+    footer { padding: 32px 5%; text-align: center; color: var(--gray-400); font-size: 0.85rem; }
+    footer a { color: var(--gray-400); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) { .waitlist-form { flex-direction: column; } .waitlist-form input { min-width: unset; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">Zev<span>io</span></a>
+  <a href="/" class="back">&larr; Back to Zevio</a>
+</nav>
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span>Now accepting early access applications</div>
+  <h1>AI Content that<br><em>converts &amp; ranks</em></h1>
+  <p class="hero-sub">Zevio turns your ideas into high-quality blog posts, SEO articles, and social media content in seconds. Built for founders, marketers, and creators ready to grow.</p>
+  <div id="waitlist">
+    <form class="waitlist-form" id="waitlistForm" onsubmit="handleSubmit(event)">
+      <input type="email" id="emailInput" placeholder="Enter your email address" required />
+      <button type="submit">Get Early Access &rarr;</button>
+    </form>
+    <p class="form-note">Free to join &middot; No credit card required &middot; We respect your privacy</p>
+    <div class="success-msg" id="successMsg">You are on the list! We will be in touch soon.</div>
+  </div>
+  <div class="social-proof">
+    <div class="avatars"><div class="avatar av1">JK</div><div class="avatar av2">MR</div><div class="avatar av3">SA</div><div class="avatar av4">TL</div></div>
+    <div class="social-text"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br><strong>240+ people</strong> already on the waitlist</div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="section">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">From idea to publish-ready in 3 steps</h2>
+  <p class="section-sub">No writing experience needed. Zevio handles the heavy lifting so you can focus on growing your business.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Tell us your topic</h3><p>Paste a title, keyword, or rough idea. Zevio understands context and your brand voice automatically.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>AI drafts your content</h3><p>Our AI generates SEO-optimized articles, posts, or emails complete with headlines, structure, and calls to action.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Edit, export &amp; publish</h3><p>Tweak in our clean editor, then publish directly or export to your CMS, email tool, or social scheduler.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Track &amp; optimize</h3><p>See what drives traffic and conversions. Zevio learns your top performers and doubles down on what works.</p></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="section">
+  <p class="section-label">Features</p>
+  <h2 class="section-title">Everything you need to grow</h2>
+  <p class="section-sub">Zevio is your full AI content engine.</p>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">&#9998;</div><div><h3>Long-form blog posts</h3><p>Generate 1,500&ndash;3,000 word articles that rank on Google with proper H1/H2 structure and internal links.</p></div></div>
+    <div class="feature-card"><div class="feature-icon">&#128241;</div><div><h3>Social media copy</h3><p>Turn one idea into 10 platform-ready posts for LinkedIn, X, Instagram, and TikTok, all tailored per channel.</p></div></div>
+    <div class="feature-card"><div class="feature-icon">&#128269;</div><div><h3>SEO &amp; GSO optimization</h3><p>Built-in keyword research and Generative Search Optimization ensures your content gets found by humans and AI search engines.</p></div></div>
+    <div class="feature-card"><div class="feature-icon">&#128231;</div><div><h3>Email newsletters</h3><p>Write engaging newsletters in minutes. Personalize tone, length, and subject lines to maximize open rates.</p></div></div>
+    <div class="feature-card"><div class="feature-icon">&#127912;</div><div><h3>Brand voice engine</h3><p>Upload your existing content and Zevio learns your tone so every output sounds like you.</p></div></div>
+    <div class="feature-card"><div class="feature-icon">&#9889;</div><div><h3>Bulk generation</h3><p>Need 50 product descriptions or a month of social posts? Generate at scale without sacrificing quality.</p></div></div>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>Be first when we launch</h2>
+  <p>Join the waitlist today and get early access, founding member pricing, and a personal onboarding call.</p>
+  <form class="waitlist-form" id="waitlistForm2" onsubmit="handleSubmit2(event)" style="justify-content:center;">
+    <input type="email" id="emailInput2" placeholder="Enter your email address" required />
+    <button type="submit">Join the Waitlist &rarr;</button>
+  </form>
+  <p class="form-note" style="margin-top:12px;">Free to join &middot; Cancel anytime &middot; No spam, ever</p>
+  <div class="success-msg" id="successMsg2" style="margin-top:16px;"></div>
+</section>
+<footer>
+  <p style="font-weight:700;font-size:1rem;color:#0f0f0f;margin-bottom:6px;">Zev<span style="color:#6366f1;">io</span></p>
+  <p style="margin-bottom:10px;">AI-powered content creation for the modern web.</p>
+  <p>&copy; 2026 Zevio. All rights reserved. &middot; <a href="mailto:hello@zevio.co.uk">hello@zevio.co.uk</a> &middot; <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+  const FORMSPREE_URL = 'https://formspree.io/f/xjgprzzk';
+  async function submitEmail(email) {
+    const r = await fetch(FORMSPREE_URL, { method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({email, source:'Zevio Waitlist'}) });
+    return r.ok;
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value.trim();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Joining...'; btn.disabled = true;
+    const ok = await submitEmail(email);
+    document.getElementById('waitlistForm').style.display = 'none';
+    document.querySelector('.form-note').style.display = 'none';
+    const msg = document.getElementById('successMsg');
+    msg.textContent = ok ? 'You are on the list! We will be in touch soon.' : 'You are on the list!';
+    msg.style.display = 'block';
+  }
+  async function handleSubmit2(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput2').value.trim();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Joining...'; btn.disabled = true;
+    const ok = await submitEmail(email);
+    document.getElementById('waitlistForm2').style.display = 'none';
+    const msg = document.getElementById('successMsg2');
+    msg.textContent = ok ? 'You are on the list! We will be in touch soon.' : 'You are on the list!';
+    msg.style.display = 'block';
+  }
+</script>
+</body>
+</html>

@@ -269,6 +269,24 @@ footer{background:var(--on-surface);padding:3rem 2rem}
 .w-icon .material-symbols-outlined{font-size:1.8rem;color:var(--primary)}
 .p-icon .material-symbols-outlined{font-size:1.2rem;color:var(--primary)}
 
+/* ── FOUNDER ── */
+.founder-section{background:var(--surface-lowest);padding:5rem 2rem}
+.founder-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:center}
+.founder-photo{width:280px;height:320px;border-radius:1.25rem;object-fit:cover;object-position:top;box-shadow:var(--shadow-lg);display:block}
+.founder-photo-placeholder{width:280px;height:320px;border-radius:1.25rem;background:var(--surface-high);display:flex;align-items:center;justify-content:center;color:var(--on-surface-v);font-size:0.8rem;font-weight:600;text-align:center;padding:1rem}
+.founder-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:0.75rem}
+.founder-name{font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:900;color:var(--on-surface);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.25rem}
+.founder-bio{font-size:1rem;color:var(--on-surface-v);line-height:1.8;margin-bottom:1.5rem;font-weight:400}
+.founder-contact{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.founder-contact a{font-size:0.9rem;font-weight:600;color:var(--primary);text-decoration:none;display:flex;align-items:center;gap:0.4rem}
+.founder-contact a:hover{opacity:0.8}
+.founder-loc{font-size:0.9rem;font-weight:500;color:var(--on-surface-v)}
+@media(max-width:768px){
+  .founder-inner{grid-template-columns:1fr;gap:2rem;text-align:center}
+  .founder-photo,.founder-photo-placeholder{width:160px;height:180px;margin:0 auto}
+  .founder-contact{justify-content:center}
+}
+
 /* ── GUIDE STRIP ── */
 .guide-strip{background:var(--surface-low);padding:4rem 2rem}
 .guide-strip-inner{max-width:700px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
@@ -564,6 +582,26 @@ footer{background:var(--on-surface);padding:3rem 2rem}
         <div class="col-label">Scalability</div>
         <div class="col-before">Hire more staff</div>
         <div class="col-zevio">Infinitely scalable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOUNDER ════════════════════════════════════════════════════ -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div>
+      <img src="akhyar.jpg" alt="Ahmed, Founder of Zevio" class="founder-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="founder-photo-placeholder" style="display:none">Photo coming soon</div>
+    </div>
+    <div>
+      <div class="founder-tag">Who builds this</div>
+      <h2 class="founder-name">Hi, I'm Ahmed.</h2>
+      <p class="founder-bio">I build automation systems for UK restaurants, barbers, and salons. I started Zevio because I watched good businesses lose customers to slow replies and missed bookings. Not because they didn't care, but because they were already flat out. I set up everything for you. You don't touch any software. You just get your time back.</p>
+      <div class="founder-contact">
+        <span class="founder-loc">📍 Based in the UK</span>
+        <a href="tel:+447877262518">📞 +44 7877 262518</a>
+        <a href="mailto:akhyar@zevio.co.uk">✉ akhyar@zevio.co.uk</a>
       </div>
     </div>
   </div>

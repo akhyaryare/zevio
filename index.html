@@ -269,6 +269,32 @@ footer{background:var(--on-surface);padding:3rem 2rem}
 .w-icon .material-symbols-outlined{font-size:1.8rem;color:var(--primary)}
 .p-icon .material-symbols-outlined{font-size:1.2rem;color:var(--primary)}
 
+/* ── COST OF INACTION ── */
+.inaction-section{background:var(--on-surface);padding:5rem 2rem;text-align:center}
+.inaction-title{font-family:'Epilogue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:white;letter-spacing:-0.02em;margin-bottom:0.75rem}
+.inaction-title em{font-style:normal;color:#c9beff}
+.inaction-sub{font-size:1rem;color:rgba(255,255,255,0.6);margin-bottom:3rem;font-weight:400}
+.inaction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:860px;margin:0 auto 2.5rem}
+.inaction-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:1rem;padding:1.75rem 1.25rem}
+.inaction-val{font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:900;color:#f87171;line-height:1;margin-bottom:0.5rem}
+.inaction-lbl{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.5;font-weight:400}
+.inaction-vs{font-size:1rem;color:rgba(255,255,255,0.5);margin-bottom:1.5rem;font-weight:500}
+.inaction-vs strong{color:#79f7e3}
+@media(max-width:640px){.inaction-grid{grid-template-columns:1fr}}
+
+/* ── LOCAL TRUST ── */
+.local-trust{text-align:center;padding:0.75rem 2rem;background:var(--surface-low);border-bottom:1px solid var(--outline)}
+.local-trust p{font-size:0.82rem;color:var(--on-surface-v);font-weight:500}
+.local-trust strong{color:var(--on-surface)}
+
+/* ── FLOATING WHATSAPP ── */
+.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem}
+.wa-bubble{background:#25D366;color:white;border-radius:9999px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;text-decoration:none;transition:transform 0.2s}
+.wa-bubble:hover{transform:scale(1.08)}
+.wa-bubble svg{width:28px;height:28px;fill:white}
+.wa-tip{background:var(--on-surface);color:white;font-size:0.75rem;font-weight:600;padding:0.4rem 0.85rem;border-radius:9999px;white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.wa-float:hover .wa-tip{opacity:1}
+
 /* ── ROI + TRUST LOGOS ── */
 .roi-note{text-align:center;margin-top:1.75rem;font-size:0.9rem;font-weight:600;color:var(--secondary);background:rgba(0,107,95,0.06);border:1px solid rgba(0,107,95,0.15);padding:0.75rem 1.5rem;border-radius:0.75rem;display:inline-block;width:100%}
 .trust-logos{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.25rem 0 0.5rem;flex-wrap:wrap}
@@ -598,6 +624,34 @@ footer{background:var(--on-surface);padding:3rem 2rem}
   </div>
 </section>
 
+<!-- ══ COST OF INACTION ══════════════════════════════════════════ -->
+<section class="inaction-section">
+  <div class="container">
+    <h2 class="inaction-title">The cost of <em>doing nothing.</em></h2>
+    <p class="inaction-sub">Every week without automation is a week of silent losses.</p>
+    <div class="inaction-grid">
+      <div class="inaction-card">
+        <div class="inaction-val">£120</div>
+        <div class="inaction-lbl">Lost from one missed 4-person table booking per week</div>
+      </div>
+      <div class="inaction-card">
+        <div class="inaction-val">5+</div>
+        <div class="inaction-lbl">Customers lost every time a bad Google review goes unanswered</div>
+      </div>
+      <div class="inaction-card">
+        <div class="inaction-val">15h</div>
+        <div class="inaction-lbl">Wasted every week on messages, reviews and manual follow-ups</div>
+      </div>
+    </div>
+    <p class="inaction-vs">Zevio costs <strong>less than one dinner service per month.</strong><br/>The question is not whether you can afford it — it's how much longer you can afford not to.</p>
+  </div>
+</section>
+
+<!-- ══ LOCAL TRUST ════════════════════════════════════════════════ -->
+<div class="local-trust">
+  <p>🇬🇧 <strong>Serving businesses across the UK</strong> — London · Manchester · Birmingham · Leeds · Bristol and beyond</p>
+</div>
+
 <!-- ══ FOUNDER ════════════════════════════════════════════════════ -->
 <section class="founder-section">
   <div class="founder-inner">
@@ -639,7 +693,7 @@ footer{background:var(--on-surface);padding:3rem 2rem}
           <li class="no"><span class="cross">✕</span> Social media calendar</li>
           <li class="no"><span class="cross">✕</span> Online ordering</li>
         </ul>
-        <a href="#waitlist" onclick="setWaitlistPlan('Starter')" class="pb pb-f">Get started &rarr;</a>
+        <a href="#waitlist" onclick="setWaitlistPlan('Starter')" class="pb pb-f">Book my setup call &rarr;</a>
       </div>
       <div class="plan featured">
         <div class="pp">Most popular</div>
@@ -655,7 +709,7 @@ footer{background:var(--on-surface);padding:3rem 2rem}
           <li><span class="tick">✓</span> Priority support</li>
           <li class="no"><span class="cross">✕</span> Online ordering system</li>
         </ul>
-        <a href="#waitlist" onclick="setWaitlistPlan('Growth')" class="pb pb-f">Get started &rarr;</a>
+        <a href="#waitlist" onclick="setWaitlistPlan('Growth')" class="pb pb-f">Book my setup call &rarr;</a>
       </div>
       <div class="plan-alt">
         <div class="pn">Pro</div>
@@ -756,6 +810,14 @@ footer{background:var(--on-surface);padding:3rem 2rem}
     <div class="fc">Built for UK local businesses who want to save time and grow.<br/>&copy; 2026 Zevio. All rights reserved. Registered in England &amp; Wales.</div>
   </div>
 </footer>
+
+<!-- ══ FLOATING WHATSAPP ══════════════════════════════════════════ -->
+<div class="wa-float">
+  <span class="wa-tip">Try the AI demo live</span>
+  <a href="https://wa.me/447877262518?text=Hi%2C%20I%27d%20like%20to%20see%20a%20demo%20of%20Zevio" target="_blank" rel="noopener" class="wa-bubble" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
 
 <script>
 function toggleNav(){
